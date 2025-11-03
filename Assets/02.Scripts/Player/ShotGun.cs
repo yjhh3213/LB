@@ -4,6 +4,7 @@ using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class ShotGun : MonoBehaviour
 {
@@ -15,22 +16,28 @@ public class ShotGun : MonoBehaviour
     public GameObject[] EmptyPrefab;        // ÅºÇÇ
     public Transform FirePoint;             // ÃÑ±¸ À§Ä¡
     public Transform EmptyBullet;           // ÅºÇÇ ¹èÃâ
-    public Text BulletCount;                // Åº °¹¼ö
+    public GameObject[] BulletCount;        // Åº °¹¼ö
     private int MaxBulletCount = 6;         // ÃÖ´ñÄ¡ Åº °¹¼ö
-    public int NowBulletCount = 0;          // ÇöÀç Åº °¹¼ö
+    public int NowBulletCount = 6;          // ÇöÀç Åº °¹¼ö
     public float BulletSpeed = 10.0f;       // Åº ¼Óµµ
+    public int count = 0;                   // Åº ÀÌ¹ÌÁö¸¦ À§ÇÑ Ä«¿îÆ®
 
     // Start is called before the first frame update
     void Start()
     {
-        BulletCount.text = NowBulletCount.ToString()+ " "+ "/" + " " + MaxBulletCount.ToString();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Conmand();
-        BulletCount.text = NowBulletCount.ToString() + " " + "/" + " " + MaxBulletCount.ToString();
+
+        // Ä«¿îÆ®°¡ 0 ¹Ì¸¸ÀÏ ¶§ 0À¸·Î ´Ù½Ã Á¤¸³ÇÏ±â
+        if (count < 0)
+        {
+            count = 0;
+        }
     }
 
     public float EmptyBulletSpeed = 0.0f;
@@ -40,7 +47,7 @@ public class ShotGun : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             print("Left Click");
-            if(NowBulletCount >= 1) 
+            if (NowBulletCount >= 1)
             {
                 int BulletNumber = Random.Range(3, 9);
                 //print(BulletNumber);
@@ -61,17 +68,22 @@ public class ShotGun : MonoBehaviour
                     Quaternion EBrot = EmptyBullet.rotation * Quaternion.Euler(0, 0, -EmptyBulletSpeed);
                     GameObject EB = Instantiate(EmptyPrefab[0], EmptyBullet.position, EBrot);
                     Destroy(EB, 2.0f);
-                    NowBulletCount--;
+                    if (BulletCount != null)
+                    {
+                        NowBulletCount--;
+                        BulletCount[count].SetActive(false);
+                    }
+                    count++;
                 }
             }
-            else if(NowBulletCount <= 0)
+            else if (NowBulletCount <= 0)
             {
                 print("Bullet Empty");
             }
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if(NowBulletCount <= 0)
+            if (NowBulletCount <= 0)
             {
                 Reload();
                 print("Reload");
@@ -110,8 +122,8 @@ public class ShotGun : MonoBehaviour
         {
             float time = ReloadTime;
             bool IsSuccess = false;
-            
-            while(time > 0)
+
+            while (time > 0)
             {
                 if (Input.anyKeyDown)
                 {
@@ -121,16 +133,22 @@ public class ShotGun : MonoBehaviour
                     {
                         print("QTE ¼º°ø");
                         NowBulletCount += 2;
+                        for (int j = 0; j < 2; j++)
+                        {
+                            BulletCount[count-1].SetActive(true);
+                            count--;
+                            print(count);
+                        }
                         IsSuccess = true;
                         if (qte[i] == KeyCode.Q) QImage.SetActive(false);
                         else if (qte[i] == KeyCode.E) EImage.SetActive(false);
                         else if (qte[i] == KeyCode.R) RImage.SetActive(false);
                         break;
                     }
-                    
+
                     else
                     {
-                        foreach(KeyCode code in System.Enum.GetValues(typeof(KeyCode)))
+                        foreach (KeyCode code in System.Enum.GetValues(typeof(KeyCode)))
                         {
                             if (Input.GetKeyDown(code))
                             {
@@ -138,7 +156,7 @@ public class ShotGun : MonoBehaviour
                                     code >= KeyCode.A && code <= KeyCode.Z);
                                 if (isKeyBoardKey)
                                 {
-                                    if(code == KeyCode.Q || code == KeyCode.E || code == KeyCode.T)
+                                    if (code == KeyCode.Q || code == KeyCode.E)
                                     {
                                         print("QTE ½ÇÆÐ!");
                                         isReloading = false;
