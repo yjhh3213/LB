@@ -8,6 +8,8 @@ using Unity.VisualScripting;
 
 public class ShotGun : MonoBehaviour
 {
+    public Card card;                       // 카드 스크립트에 있는 변수를 얻어오기 위해 쓰임
+
     public GameObject QImage;               // 재장전 이미지
     public GameObject EImage;               // 재장전 이미지
     public GameObject RImage;               // 재장전 이미지
@@ -25,7 +27,6 @@ public class ShotGun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -44,18 +45,53 @@ public class ShotGun : MonoBehaviour
     void Conmand()
     {
         //탄약 발사
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && card.gameclick == false)
         {
-            print("Left Click");
+            int ShotGunCardLevel = card.ShotGunCard;
+            int barrelCardLevel = card.barrelCard;
+            //print("Left Click");
             if (NowBulletCount >= 1)
             {
-                int BulletNumber = Random.Range(3, 9);
-                //print(BulletNumber);
+                int BulletNumber = Random.Range(3, 6);
+                //print("더하기 전 : " + BulletNumber);
+                switch (ShotGunCardLevel)
+                {
+                    case 1:
+                        BulletNumber += 1;
+                        break;
+                    case 2:
+                        BulletNumber += 2;
+                        break;
+                    case 3:
+                        BulletNumber += 4;
+                        break;
+                    default:
+                        break;
+                }
+
+                float decreasebullet = 0.0f;
+
+                switch (barrelCardLevel)
+                {
+                    case 1:
+                        decreasebullet = 15f - (0.2f * 15f);
+                        break;
+                    case 2:
+                        decreasebullet = 15f - (0.4f * 15f);
+                        break;
+                    case 3:
+                        decreasebullet = 15f - (0.6f * 15f);
+                        break;
+                    default:
+                        decreasebullet = 15f;
+                        break;
+                }
+                //print(decreasebullet);
                 if (BulletPrefab != null)
                 {
                     for (int i = 0; i < BulletNumber; i++)
                     {
-                        float BulletSpread = Random.Range(-15f, 15f);
+                        float BulletSpread = Random.Range(-decreasebullet, decreasebullet);
                         Quaternion bulletRot = FirePoint.rotation * Quaternion.Euler(0, 0, BulletSpread);
 
                         GameObject Bullet = Instantiate(BulletPrefab[0], FirePoint.position, bulletRot);
@@ -137,7 +173,7 @@ public class ShotGun : MonoBehaviour
                         {
                             BulletCount[count-1].SetActive(true);
                             count--;
-                            print(count);
+                            //print(count);
                         }
                         IsSuccess = true;
                         if (qte[i] == KeyCode.Q) QImage.SetActive(false);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCtrl : MonoBehaviour
+public class PlayerCtrl : Card
 {
     [Header("Sprites")]
     public Sprite IdleSprite;           // Idle.png
@@ -21,7 +21,7 @@ public class PlayerCtrl : MonoBehaviour
     public int health = 1;              // 캐릭터 체력
     private bool dead = false;          // 캐릭터 사망 여부
     bool isDashing = false;
-    public float speed = 2.0f;         // 캐릭터 속도
+    public float speed;         // 캐릭터 속도
     public float Dash = 15.0f;          // 캐릭터 대쉬 속도
     public Text DashCoolDownText;       // 대쉬 쿨타임 텍스트
 
@@ -34,8 +34,6 @@ public class PlayerCtrl : MonoBehaviour
     Vector2 moveV;                      // 캐릭터 조작키
     Vector2 dashdir;
     Rigidbody2D rb;                     // 캐릭터 물리
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +62,11 @@ public class PlayerCtrl : MonoBehaviour
 
         DashCoolDownText.text = "대쉬 : " + ((int)dashTimer).ToString();
 
+        if (nimblestepsCard == 0) speed = 2.0f;
+        else if (nimblestepsCard == 1) speed = 3.0f;
+        else if (nimblestepsCard == 2) speed = 5.0f;
+        else if (nimblestepsCard >= 3) speed = 8.0f;
+        print(speed);
         if (!isDashing)
             ObjMove();
 
@@ -121,9 +124,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else
         {
-            {
-                rb.MovePosition(rb.position + moveV * Time.fixedDeltaTime);
-            }
+            rb.MovePosition(rb.position + moveV * Time.fixedDeltaTime);
         }
     }
     IEnumerator DashTimerCoroutine()
