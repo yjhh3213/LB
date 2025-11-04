@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: "\uC2A4\uCF08\uB808\uD1A4"
   hp: 10
-  speed: 3
+  speed: 2
