@@ -5,9 +5,10 @@ using System.Collections;
 public class EnemySpawn : MonoBehaviour
 {
     [Header("몬스터 설정")]
-    public GameObject monsterPrefabA; // 1~8라 전부
-    public GameObject monsterPrefabB; // 3~8라 
-    public GameObject monsterPrefabC; // 4~8라
+    public GameObject monsterPrefabA; // 1~8라 전부 (기본좀비)
+    public GameObject monsterPrefabB; // 3~8라 (좀비 멧돼지)
+    public GameObject monsterPrefabC; // 4~8라 (돌연변이)
+    public GameObject monsterPrefabD; // 2~8라 (스켈레톤)
 
     [Header("몬스터 스폰시간")]
     public float spawnDelay = 0.2f;
@@ -29,6 +30,11 @@ public class EnemySpawn : MonoBehaviour
     public int C_starWave = 4;
     public int C_starCount = 5;
     public int C_addperWave = 1;
+
+    [Header("스켈레톤 좀비 규칙")]
+    public int D_starWave = 2;
+    public int D_starCount = 5;
+    public int D_addPerWave = 2;
 
     [Header("맵 범위")]
     public float minX = -50f;
@@ -67,6 +73,7 @@ public class EnemySpawn : MonoBehaviour
         int aCount = A_startCount + (wave - 1) * A_addPerWave;
         int bCount = 0;
         int cCount = 0;
+        int dCount = 0;
 
         if (wave >= B_startWave && wave <= maxWave)
         {
@@ -83,12 +90,18 @@ public class EnemySpawn : MonoBehaviour
         {
             cCount = C_starCount + (wave - 4) * C_addperWave;
         }
-        Debug.Log($"[Wave {wave}] Spawn A: {aCount}, B: {bCount} C : {cCount}");
+
+        if(wave >= D_starWave && wave <= maxWave)
+        {
+            dCount = D_starCount + (wave - 2) * D_addPerWave;
+        }
+        Debug.Log($"[Wave {wave}] Spawn A: {aCount}, B: {bCount} C : {cCount} D : {dCount}" );
 
         List<GameObject> toSpawn = new List<GameObject>();
         for (int i = 0; i < aCount; i++) toSpawn.Add(monsterPrefabA);
         for (int i = 0; i < bCount; i++) toSpawn.Add(monsterPrefabB);
         for (int i = 0; i < cCount; i++) toSpawn.Add(monsterPrefabC);
+        for (int i = 0; i < dCount; i++) toSpawn.Add(monsterPrefabD);
 
         // ===== 리스트 섞기 (Fisher–Yates) =====
         for (int i = 0; i < toSpawn.Count; i++)
