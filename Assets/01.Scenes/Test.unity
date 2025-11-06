@@ -2616,6 +2616,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1662413100642505278, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1662413100709124660, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: m_SortingOrder
       value: 2

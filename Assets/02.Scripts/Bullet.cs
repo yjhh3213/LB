@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -29,6 +30,16 @@ public class Bullet : MonoBehaviour
             if (enemy != null )
             {
                 enemy.TakeDamage(Damage);
+            }
+
+            if (collision.collider.CompareTag("aa"))
+            {
+                if (hasHit) return;
+                Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
+                if (enemy_Skeleton != null)
+                {
+                    enemy_Skeleton.TakeDamage(Damage);
+                }
             }
 
             // bullet이 프리팹 상태이기에 Card 스크립트를 Instance화를 시켜 해당하는 값을 가져오기
