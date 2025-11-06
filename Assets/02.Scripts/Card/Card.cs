@@ -68,6 +68,7 @@ public class Card : MonoBehaviour
                 if (Arraynum.Count == 0)
                 {
                     Debug.Log("더 이상 선택할 카드 없음");
+                    NoSeeCard();
                     return;
                 }
 
