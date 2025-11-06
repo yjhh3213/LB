@@ -58,5 +58,15 @@ public class Bullet : MonoBehaviour
             }
         }
 
+        if (collision.collider.CompareTag("aa"))
+        {
+            if (hasHit) return;
+            Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
+            if (enemy_Skeleton != null)
+            {
+                enemy_Skeleton.TakeDamage(Damage);
+            }
+        }
+
     }
 }
