@@ -874,6 +874,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 729109758}
   smoothing: 5
+--- !u!1 &572370093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1662413100642505278, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
+  m_PrefabInstance: {fileID: 1662413100231359381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &584398505
 GameObject:
   m_ObjectHideFlags: 0
@@ -2194,11 +2199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9a7c6b58c73ee418342b0ba5be8a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameclick: 0
   SetCardobj:
   - {fileID: 461484766}
   - {fileID: 670243719}
   - {fileID: 62567325}
+  Player: {fileID: 572370093}
   CardImage:
   - {fileID: -1140806117, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   - {fileID: -2109041120, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
@@ -2207,6 +2212,7 @@ MonoBehaviour:
   - {fileID: -489342179, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   - {fileID: 1778373267, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   - {fileID: 1414616383, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
+  gameclick: 0
   ShotGunCard: 0
   BulletCard: 0
   barrelCard: 0

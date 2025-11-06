@@ -163,6 +163,7 @@ public class PlayerCtrl : MonoBehaviour
         speed = 0.0f;
         Dash = 0.0f;
         bodyRenderer.sprite = DeathSprite;
+        Time.timeScale = 0.0f;
     }
 
     void UpdateSprite()

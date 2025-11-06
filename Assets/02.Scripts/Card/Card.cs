@@ -10,9 +10,13 @@ public class Card : MonoBehaviour
 
     public static Card Instance;
 
-    public bool gameclick = false;      // 게임 클릭 되는 걸 방지
+    [Header("GameObjet")]
     public GameObject[] SetCardobj;     // 카드오브젝트
+    public GameObject Player;           // 플레이어
     public Sprite[] CardImage;          // 카드 이미지
+
+    [Header("CardStates")]
+    public bool gameclick = false;      // 게임 클릭 되는 걸 방지
     public int ShotGunCard = 0;         // 샷건개조
     public int BulletCard = 0;          // 총알개조
     public int barrelCard = 0;          // 총열개조
@@ -49,54 +53,54 @@ public class Card : MonoBehaviour
     void cardbuff()
     {
         Time.timeScale = 0.0f;
+        Player.SetActive(false);
         gameclick = true;
 
-        //Arraynum = new List<int> { 0, 1, 2, 3};
+        Arraynum = new List<int> { 0, 1, 2, 3};
+
+        if (ShotGunCard >= 3) Arraynum.Remove(0);
+        if (BulletCard >= 2) Arraynum.Remove(1);
+        if (barrelCard >= 3) Arraynum.Remove(2);
+        if (weaknessCard >= 3) Arraynum.Remove(3);
+        /*if (nimblestepsCard >= 1) Arraynum.Remove(4);
+        if (QuickstepCard >= 1) Arraynum.Remove(5);
+        if (fastdraw >= 1) Arraynum.Remove(6);*/
 
         if (CardImage != null && SetCardobj != null)
         {
             for(int i = 0; i < 3; i++)
             {
-                /*if (Arraynum.Count == 0)
+                if (Arraynum.Count == 0)
                 {
                     Debug.Log("더 이상 선택할 카드 없음");
                     NoSeeCard();
                     return;
-                }*/
+                }
 
-                int randIndex = Random.Range(0, 4);
-                //int num = Arraynum[randIndex];
-
-                //print(num);
+                int randIndex = Random.Range(0, Arraynum.Count);
+                int num = Arraynum[randIndex];
 
                 Image cardDisplay = SetCardobj[i].GetComponent<Image>();
-                if (cardDisplay != null) cardDisplay.sprite = CardImage[randIndex];
+                if (cardDisplay != null) cardDisplay.sprite = CardImage[num];
 
                 if(i == 0)
                 {
-                    Sect1 = randIndex;
+                    Sect1 = num;
                     print("Sect1 : "+ Sect1);
                 }
                 else if (i == 1)
                 {
-                    Sect2 = randIndex;
+                    Sect2 = num;
                     print("Sect2 : " + Sect2);
                 }
                 else if (i == 2)
                 {
-                    Sect3 = randIndex;
+                    Sect3 = num;
                     print("Sect3 : " + Sect3);
                 }
                 SetCardobj[i].SetActive(true);
             }
         }
-        /*if (ShotGunCard >= 3) Arraynum.Remove(0);
-        if (BulletCard >= 2) Arraynum.Remove(1);
-        if (barrelCard >= 3) Arraynum.Remove(2);
-        if (weaknessCard >= 3) Arraynum.Remove(3);*/
-        /*if (nimblestepsCard >= 1) Arraynum.Remove(4);
-        if (QuickstepCard >= 1) Arraynum.Remove(5);
-        if (fastdraw >= 1) Arraynum.Remove(6);*/
     }
 
     // 카드를 눌렀을 때 해당하는 카드의 능력치 올리기
@@ -131,6 +135,7 @@ public class Card : MonoBehaviour
         {
             SetCardobj[i].SetActive(false);
         }
+        Player.SetActive(true);
         gameclick = false;
         Time.timeScale = 1.0f;
     }
