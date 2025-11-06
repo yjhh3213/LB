@@ -166,10 +166,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1b6fb7a81ca394fb6a8da2fbe0dce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
+  monsterPrefabA: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
+  monsterPrefabB: {fileID: 0}
+  monsterPrefabC: {fileID: 0}
+  monsterPrefabD: {fileID: 0}
   spawnDelay: 0.2
-  baseMonsterCount: 20
-  addPerWave: 10
+  minWave: 1
+  maxWave: 8
+  A_startCount: 1
+  A_addPerWave: 1
+  B_startWave: 3
+  B_startCount: 5
+  B_addper2Wave: 2
+  C_starWave: 4
+  C_starCount: 5
+  C_addperWave: 1
+  D_starWave: 2
+  D_starCount: 5
+  D_addPerWave: 2
   minX: -50
   maxX: 50
   minZ: -50
