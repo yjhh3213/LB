@@ -41,6 +41,7 @@ public class EnemyStat : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        print(damage);
         EnemyHP -= damage;
         print("Enemy HP : " + EnemyHP);
 
