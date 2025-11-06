@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 
 public class ShotGun : MonoBehaviour
 {
-    public Card card;                       // 카드 스크립트에 있는 변수를 얻어오기 위해 쓰임
+    public static Card card;                       // 카드 스크립트에 있는 변수를 얻어오기 위해 쓰임
 
     public GameObject QImage;               // 재장전 이미지
     public GameObject EImage;               // 재장전 이미지

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCtrl : Card
+public class PlayerCtrl : MonoBehaviour
 {
     [Header("Sprites")]
     public Sprite IdleSprite;           // Idle.png
@@ -30,6 +30,10 @@ public class PlayerCtrl : Card
     public Transform foot;
     private SpriteRenderer bodyRenderer;
     private SpriteRenderer footRenderer;
+
+    public static Card card;
+
+    int nimblestepsCard = card.nimblestepsCard;
 
     Vector2 moveV;                      // 캐릭터 조작키
     Vector2 dashdir;
