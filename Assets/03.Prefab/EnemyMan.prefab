@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 8555694971948710545}
   - component: {fileID: 5035758870723534361}
   - component: {fileID: 3060583870581938943}
+  - component: {fileID: -570245256935292911}
   m_Layer: 0
   m_Name: EnemyMan
-  m_TagString: Enemy
+  m_TagString: aa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,14 +80,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6951215236074127801}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d1bef206473fac4881b238f2504b7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: ccad9b6283be61b46bf5193eb5e0a83b, type: 2}
+  data: {fileID: 11400000, guid: 08f4908e406c3e047a8770b956831d1a, type: 2}
   EnemySpeed: 0
   EnemyHP: 0
+--- !u!114 &-570245256935292911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951215236074127801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07750f341694e4793165d220fcea3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: ccad9b6283be61b46bf5193eb5e0a83b, type: 2}
+  EnemyHP: 0
+  player: {fileID: 0}
+  EnemySpeed: 0
+  reviveDelay: 2
 --- !u!1 &6951215236755274484
 GameObject:
   m_ObjectHideFlags: 0

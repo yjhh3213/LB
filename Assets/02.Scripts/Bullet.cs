@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float Damage = 2.0f;
-    
+    bool hasHit = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Enemy"))
@@ -18,5 +19,17 @@ public class Bullet : MonoBehaviour
 
             Destroy(gameObject);
         }
+        
+        if(collision.collider.CompareTag("aa"))
+        {
+            if (hasHit) return;
+            Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
+            if(enemy_Skeleton != null)
+            {
+                enemy_Skeleton.TakeDamage(Damage);
+            }
+        }
     }
+
 }
+
