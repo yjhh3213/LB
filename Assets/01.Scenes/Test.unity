@@ -376,9 +376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1b6fb7a81ca394fb6a8da2fbe0dce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabA: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
-  monsterPrefabB: {fileID: 0}
-  monsterPrefabC: {fileID: 0}
+  monsterPrefabA: {fileID: 7329163914390544668, guid: 0f1f3b4d3f2d9154e87daa0c72be57a5, type: 3}
+  monsterPrefabB: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
+  monsterPrefabC: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
   spawnDelay: 0.2
   minWave: 1
   maxWave: 8

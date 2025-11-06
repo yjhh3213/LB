@@ -17,6 +17,8 @@ public class Bullet : MonoBehaviour
         else if (weaknessCardLevel == 1) Damage = DamageIn1;
         else if (weaknessCardLevel == 2) Damage = DamageIn2;
         else if (weaknessCardLevel >= 3) Damage = DamageIn3;
+
+        //print(Damage);
     }
     int count = 0;
     private void OnCollisionEnter2D(Collision2D collision)

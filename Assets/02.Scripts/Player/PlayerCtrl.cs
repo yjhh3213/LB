@@ -10,7 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     public Sprite DashSprite;           // Dash.png
     public Sprite DeathSprite;          // Death.png
     public Sprite WalkSprite;           // Walk.png
-
+    
     public Sprite foot0;
     public Sprite foot1;
     public Sprite foot2;
@@ -31,13 +31,11 @@ public class PlayerCtrl : MonoBehaviour
     private SpriteRenderer bodyRenderer;
     private SpriteRenderer footRenderer;
 
-    public static Card card;
-
-    int nimblestepsCard = card.nimblestepsCard;
-
     Vector2 moveV;                      // 캐릭터 조작키
     Vector2 dashdir;
     Rigidbody2D rb;                     // 캐릭터 물리
+
+    //int nimblestepsCard = Card.Instance.nimblestepsCard;
 
     // Start is called before the first frame update
     void Start()
@@ -66,11 +64,12 @@ public class PlayerCtrl : MonoBehaviour
 
         DashCoolDownText.text = "대쉬 : " + ((int)dashTimer).ToString();
 
-        if (nimblestepsCard == 0) speed = 2.0f;
+        /*if (nimblestepsCard == 0) speed = 2.0f;
         else if (nimblestepsCard == 1) speed = 3.0f;
         else if (nimblestepsCard == 2) speed = 5.0f;
         else if (nimblestepsCard >= 3) speed = 8.0f;
-        print(speed);
+        print(speed);*/
+
         if (!isDashing)
             ObjMove();
 

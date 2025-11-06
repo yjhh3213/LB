@@ -52,7 +52,7 @@ public class Card : MonoBehaviour
         {
             for(int i = 0; i < 3; i++)
             {
-                int num = Random.Range(2, 3);
+                int num = Random.Range(4, 5);
                 Image cardDisplay = SetCardobj[i].GetComponent<Image>();
 
                 if(cardDisplay != null)
@@ -96,12 +96,12 @@ public class Card : MonoBehaviour
         else if (Sect1 == 2 || Sect2 == 2 || Sect3 == 2)
         {
             barrelCard++;
-            print("3번째카드 활성화!");
+            //print("3번째카드 활성화!");
         }
         else if (Sect1 == 3 || Sect2 == 3 || Sect3 == 3)
         {
             weaknessCard++;
-            print("4번째카드 활성화!");
+            //print("4번째카드 활성화!");
         }
         else if (Sect1 == 4 || Sect2 == 4 || Sect3 == 4)
         {

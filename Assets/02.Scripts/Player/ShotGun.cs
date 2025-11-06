@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 
 public class ShotGun : MonoBehaviour
 {
-    public static Card card;                       // 카드 스크립트에 있는 변수를 얻어오기 위해 쓰임
+    //public Card card;                       // 카드 스크립트에 있는 변수를 얻어오기 위해 쓰임
 
     public GameObject QImage;               // 재장전 이미지
     public GameObject EImage;               // 재장전 이미지
@@ -45,10 +45,10 @@ public class ShotGun : MonoBehaviour
     void Conmand()
     {
         //탄약 발사
-        if (Input.GetMouseButtonDown(0) && card.gameclick == false)
+        if (Input.GetMouseButtonDown(0) && Card.Instance.gameclick == false)
         {
-            int ShotGunCardLevel = card.ShotGunCard;
-            int barrelCardLevel = card.barrelCard;
+            int ShotGunCardLevel = Card.Instance.ShotGunCard;
+            int barrelCardLevel = Card.Instance.barrelCard;
             //print("Left Click");
             if (NowBulletCount >= 1)
             {
@@ -68,25 +68,29 @@ public class ShotGun : MonoBehaviour
                     default:
                         break;
                 }
+                //print("후 : " + BulletNumber);
+
 
                 float decreasebullet = 0.0f;
 
                 switch (barrelCardLevel)
                 {
                     case 1:
-                        decreasebullet = 15f - (0.2f * 15f);
+                        decreasebullet = 15.0f - (0.2f * 15.0f);
                         break;
                     case 2:
-                        decreasebullet = 15f - (0.4f * 15f);
+                        decreasebullet = 15.0f - (0.4f * 15.0f);
                         break;
                     case 3:
-                        decreasebullet = 15f - (0.6f * 15f);
+                        decreasebullet = 15.0f - (0.6f * 15.0f);
                         break;
                     default:
-                        decreasebullet = 15f;
+                        decreasebullet = 15.0f;
                         break;
                 }
+                
                 //print(decreasebullet);
+                
                 if (BulletPrefab != null)
                 {
                     for (int i = 0; i < BulletNumber; i++)
