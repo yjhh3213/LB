@@ -10,7 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     public Sprite DashSprite;           // Dash.png
     public Sprite DeathSprite;          // Death.png
     public Sprite WalkSprite;           // Walk.png
-
+    
     public Sprite foot0;
     public Sprite foot1;
     public Sprite foot2;
@@ -21,7 +21,7 @@ public class PlayerCtrl : MonoBehaviour
     public int health = 1;              // 캐릭터 체력
     private bool dead = false;          // 캐릭터 사망 여부
     bool isDashing = false;
-    public float speed = 2.0f;         // 캐릭터 속도
+    public float speed;         // 캐릭터 속도
     public float Dash = 15.0f;          // 캐릭터 대쉬 속도
     public Text DashCoolDownText;       // 대쉬 쿨타임 텍스트
 
@@ -35,7 +35,7 @@ public class PlayerCtrl : MonoBehaviour
     Vector2 dashdir;
     Rigidbody2D rb;                     // 캐릭터 물리
 
-
+    //int nimblestepsCard = Card.Instance.nimblestepsCard;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +63,12 @@ public class PlayerCtrl : MonoBehaviour
             dashTimer -= Time.deltaTime;
 
         DashCoolDownText.text = "대쉬 : " + ((int)dashTimer).ToString();
+
+        /*if (nimblestepsCard == 0) speed = 2.0f;
+        else if (nimblestepsCard == 1) speed = 3.0f;
+        else if (nimblestepsCard == 2) speed = 5.0f;
+        else if (nimblestepsCard >= 3) speed = 8.0f;
+        print(speed);*/
 
         if (!isDashing)
             ObjMove();
@@ -121,9 +127,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else
         {
-            {
-                rb.MovePosition(rb.position + moveV * Time.fixedDeltaTime);
-            }
+            rb.MovePosition(rb.position + moveV * Time.fixedDeltaTime);
         }
     }
     IEnumerator DashTimerCoroutine()
@@ -159,6 +163,7 @@ public class PlayerCtrl : MonoBehaviour
         speed = 0.0f;
         Dash = 0.0f;
         bodyRenderer.sprite = DeathSprite;
+        Time.timeScale = 0.0f;
     }
 
     void UpdateSprite()
