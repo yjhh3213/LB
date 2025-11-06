@@ -51,90 +51,76 @@ public class Card : MonoBehaviour
         Time.timeScale = 0.0f;
         gameclick = true;
 
-        Arraynum = new List<int> { 0, 1, 2, 3};
+        //Arraynum = new List<int> { 0, 1, 2, 3};
 
-        if (ShotGunCard >= 3) Arraynum.Remove(0);
-        if (BulletCard >= 2) Arraynum.Remove(1);
-        if (barrelCard >= 3) Arraynum.Remove(2);
-        if (weaknessCard >= 3) Arraynum.Remove(3);
-        /*if (nimblestepsCard >= 1) Arraynum.Remove(4);
-        if (QuickstepCard >= 1) Arraynum.Remove(5);
-        if (fastdraw >= 1) Arraynum.Remove(6);
-*/
         if (CardImage != null && SetCardobj != null)
         {
             for(int i = 0; i < 3; i++)
             {
-                if (Arraynum.Count == 0)
+                /*if (Arraynum.Count == 0)
                 {
                     Debug.Log("더 이상 선택할 카드 없음");
                     NoSeeCard();
                     return;
-                }
+                }*/
 
-                int randIndex = Random.Range(0, Arraynum.Count);
-                int num = Arraynum[randIndex];
+                int randIndex = Random.Range(0, 4);
+                //int num = Arraynum[randIndex];
+
+                //print(num);
+
                 Image cardDisplay = SetCardobj[i].GetComponent<Image>();
-                if (cardDisplay != null) cardDisplay.sprite = CardImage[num];
+                if (cardDisplay != null) cardDisplay.sprite = CardImage[randIndex];
 
                 if(i == 0)
                 {
-                    Sect1 = num;
-                    //print(Sect1);
+                    Sect1 = randIndex;
+                    print("Sect1 : "+ Sect1);
                 }
                 else if (i == 1)
                 {
-                    Sect2 = num;
-                    //print(Sect2);
+                    Sect2 = randIndex;
+                    print("Sect2 : " + Sect2);
                 }
                 else if (i == 2)
                 {
-                    Sect3 = num;
-                    //print(Sect3);
+                    Sect3 = randIndex;
+                    print("Sect3 : " + Sect3);
                 }
                 SetCardobj[i].SetActive(true);
             }
         }
+        /*if (ShotGunCard >= 3) Arraynum.Remove(0);
+        if (BulletCard >= 2) Arraynum.Remove(1);
+        if (barrelCard >= 3) Arraynum.Remove(2);
+        if (weaknessCard >= 3) Arraynum.Remove(3);*/
+        /*if (nimblestepsCard >= 1) Arraynum.Remove(4);
+        if (QuickstepCard >= 1) Arraynum.Remove(5);
+        if (fastdraw >= 1) Arraynum.Remove(6);*/
     }
 
     // 카드를 눌렀을 때 해당하는 카드의 능력치 올리기
-    public void Test()
+    public void SelectCard(int index)
     {
-        if(Sect1 == 0 || Sect2 == 0 || Sect3 == 0)
+        int cardType = 0;
+
+        if (index == 0) cardType = Sect1;
+        else if (index == 1) cardType = Sect2;
+        else if (index == 2) cardType = Sect3;
+
+        switch (cardType)
         {
-            ShotGunCard++;
-            print("1번째카드 활성화!");
+            case 0: ShotGunCard++; break;
+            case 1: BulletCard++; break;
+            case 2: barrelCard++; break;
+            case 3: weaknessCard++; break;
+            case 4: nimblestepsCard++; break;
+            case 5: QuickstepCard++; break;
+            case 6: fastdraw++; break;
         }
-        else if(Sect1 == 1 || Sect2 == 1 || Sect3 == 1)
-        {
-            BulletCard++;
-            print("2번째카드 활성화!");
-        }
-        else if (Sect1 == 2 || Sect2 == 2 || Sect3 == 2)
-        {
-            barrelCard++;
-            print("3번째카드 활성화!");
-        }
-        else if (Sect1 == 3 || Sect2 == 3 || Sect3 == 3)
-        {
-            weaknessCard++;
-            print("4번째카드 활성화!");
-        }
-        else if (Sect1 == 4 || Sect2 == 4 || Sect3 == 4)
-        {
-            nimblestepsCard++;
-            print("5번째카드 활성화!");
-        }
-        else if (Sect1 == 5 || Sect2 == 5 || Sect3 == 5)
-        {
-            QuickstepCard++;
-            print("6번째카드 활성화!");
-        }
-        else if (Sect1 == 6 || Sect2 == 6 || Sect3 == 6)
-        {
-            fastdraw++;
-            print("7번째카드 활성화!");
-        }
+
+        Debug.Log(cardType + " 번 카드 강화!");
+
         NoSeeCard();
     }
 

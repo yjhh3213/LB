@@ -206,14 +206,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1264265188}
+      - m_Target: {fileID: 2028168386}
         m_TargetAssemblyTypeName: Card, Assembly-CSharp
-        m_MethodName: Test
-        m_Mode: 1
+        m_MethodName: SelectCard
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -637,10 +637,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1264265188}
+      - m_Target: {fileID: 2028168386}
         m_TargetAssemblyTypeName: Card, Assembly-CSharp
-        m_MethodName: Test
-        m_Mode: 1
+        m_MethodName: SelectCard
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1182,14 +1182,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1264265188}
+      - m_Target: {fileID: 2028168386}
         m_TargetAssemblyTypeName: Card, Assembly-CSharp
-        m_MethodName: Test
-        m_Mode: 1
+        m_MethodName: SelectCard
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1537,70 +1537,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashCooldown: 5
   cooldownImage: {fileID: 1554401495}
---- !u!1 &1264265186
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1264265187}
-  - component: {fileID: 1264265188}
-  m_Layer: 0
-  m_Name: CardManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1264265187
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264265186}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1264265188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264265186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9a7c6b58c73ee418342b0ba5be8a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameclick: 0
-  SetCardobj:
-  - {fileID: 461484766}
-  - {fileID: 670243719}
-  - {fileID: 62567325}
-  CardImage:
-  - {fileID: -1140806117, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
-  - {fileID: -2109041120, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
-  - {fileID: -1260473792, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
-  - {fileID: 138589828, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
-  - {fileID: -489342179, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
-  - {fileID: 1778373267, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
-  - {fileID: 1414616383, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
-  ShotGunCard: 0
-  BulletCard: 0
-  barrelCard: 0
-  weaknessCard: 0
-  nimblestepsCard: 0
-  QuickstepCard: 0
-  fastdraw: 0
 --- !u!1 &1284063883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,6 +2165,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961087342}
   m_CullTransparentMesh: 1
+--- !u!1 &2028168385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2028168387}
+  - component: {fileID: 2028168386}
+  m_Layer: 0
+  m_Name: CardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2028168386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028168385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9a7c6b58c73ee418342b0ba5be8a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameclick: 0
+  SetCardobj:
+  - {fileID: 461484766}
+  - {fileID: 670243719}
+  - {fileID: 62567325}
+  CardImage:
+  - {fileID: -1140806117, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
+  - {fileID: -2109041120, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
+  - {fileID: -1260473792, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
+  - {fileID: 138589828, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
+  - {fileID: -489342179, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
+  - {fileID: 1778373267, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
+  - {fileID: 1414616383, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
+  ShotGunCard: 0
+  BulletCard: 0
+  barrelCard: 0
+  weaknessCard: 0
+  nimblestepsCard: 0
+  QuickstepCard: 0
+  fastdraw: 0
+--- !u!4 &2028168387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028168385}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045837688
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,7 +2395,7 @@ PrefabInstance:
     - target: {fileID: 1662413099879982463, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: card
       value: 
-      objectReference: {fileID: 1264265188}
+      objectReference: {fileID: 0}
     - target: {fileID: 1662413099879982463, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: EImage
       value: 
