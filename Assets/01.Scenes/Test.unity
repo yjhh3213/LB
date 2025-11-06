@@ -377,8 +377,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefabA: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
-  monsterPrefabB: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
-  monsterPrefabC: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
+  monsterPrefabB: {fileID: 0}
+  monsterPrefabC: {fileID: 0}
   monsterPrefabD: {fileID: 0}
   spawnDelay: 0.2
   minWave: 1
