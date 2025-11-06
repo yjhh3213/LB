@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a315ccce6707544bb7b7cb2ec3888c, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
+  name: "\uAE30\uBCF8"
   hp: 6
   speed: 2
-  wave: 1
