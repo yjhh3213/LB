@@ -21,7 +21,7 @@ public class PlayerCtrl : MonoBehaviour
     public int health = 1;              // 캐릭터 체력
     private bool dead = false;          // 캐릭터 사망 여부
     bool isDashing = false;
-    public float speed;         // 캐릭터 속도
+    public float speed;                 // 캐릭터 속도
     public float Dash = 15.0f;          // 캐릭터 대쉬 속도
     public Text DashCoolDownText;       // 대쉬 쿨타임 텍스트
 
@@ -35,7 +35,8 @@ public class PlayerCtrl : MonoBehaviour
     Vector2 dashdir;
     Rigidbody2D rb;                     // 캐릭터 물리
 
-    //int nimblestepsCard = Card.Instance.nimblestepsCard;
+    int nimblestepsCardLevel;                // 기민한걸음
+    int QuickstepCardLevel;                  // 퀵 스탭
 
     // Start is called before the first frame update
     void Start()
@@ -54,9 +55,13 @@ public class PlayerCtrl : MonoBehaviour
 
     public float dashCoolDown = 5.0f;           // 대쉬를 사용하기 위한 쿨타임
     float dashTimer = 0f;
+    public int dashcount = 1;                   // 대쉬 사용 횟수
     // Update is called once per frame
     void Update()
     {
+        nimblestepsCardLevel = Card.Instance.nimblestepsCard;        // 기민한 걸음 Level
+        QuickstepCardLevel = Card.Instance.QuickstepCard;            // 퀵 스탭     Level
+
         if (dead) return;                       // 죽었으면 입력 막기
 
         if (dashTimer > 0) 
@@ -64,11 +69,39 @@ public class PlayerCtrl : MonoBehaviour
 
         DashCoolDownText.text = "대쉬 : " + ((int)dashTimer).ToString();
 
-        /*if (nimblestepsCard == 0) speed = 2.0f;
-        else if (nimblestepsCard == 1) speed = 3.0f;
-        else if (nimblestepsCard == 2) speed = 5.0f;
-        else if (nimblestepsCard >= 3) speed = 8.0f;
-        print(speed);*/
+        switch (nimblestepsCardLevel)
+        {
+            case 1:
+                speed = 3.0f;
+                break;
+            case 2:
+                speed = 4.0f;
+                break;
+            case 3:
+                speed = 5.0f;
+                break;
+            default:
+                speed = 2.0f;
+                break;
+        }
+        print(speed);
+
+        switch (QuickstepCardLevel)
+        {
+            case 1:
+                dashCoolDown = 4.0f;
+                break;
+            case 2:
+                dashCoolDown = 3.0f;
+                break;
+            case 3:
+                dashCoolDown = 2.0f;
+                dashcount = 2;
+                break;
+            default:
+                dashCoolDown = 5.0f;
+                break;
+        }
 
         if (!isDashing)
             ObjMove();
@@ -102,17 +135,19 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
         // 순간이동 Dash
-        if (Input.GetMouseButtonDown(1) && dashTimer <= 0f)
+        if (Input.GetMouseButtonDown(1) && dashTimer <= 0f && dashcount != 0)
         {
             Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             if (dir != Vector2.zero) // 방향 입력이 있을 때만 순간이동
             {
+                dashcount--;
                 isDashing = true;
                 dashdir = dir.normalized;
                 dashTimer = dashCoolDown;
                 bodyRenderer.sprite = DashSprite;
                 print("Dash!");
+                print(dashcount);
                 StartCoroutine(DashTimerCoroutine());
                 StartCoroutine(ReturnIdle(0.15f));  // 짧게 Dash Sprite 유지s
             }
@@ -123,7 +158,7 @@ public class PlayerCtrl : MonoBehaviour
         if (dead) return;
         if (isDashing)
         {
-            rb.MovePosition(rb.position + dashdir * Dash * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + speed * dashdir * Dash * Time.fixedDeltaTime);
         }
         else
         {
@@ -137,13 +172,14 @@ public class PlayerCtrl : MonoBehaviour
 
         while (elapsed < dashDuration)
         {
-            /*rb.MovePosition(rb.position + dir * Dash * Time.fixedDeltaTime);*/
             elapsed += Time.fixedDeltaTime;
 
             // 잔상 생성 주기 조절
             StartCoroutine(CreateafterImage(0.25f, 3f));
             yield return new WaitForFixedUpdate();
         }
+        /*if (QuickstepCardLevel >= 3) dashcount = 2;
+        else dashcount = 1;*/
         isDashing = false;
     }
 

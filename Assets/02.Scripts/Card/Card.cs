@@ -56,15 +56,15 @@ public class Card : MonoBehaviour
         Player.SetActive(false);
         gameclick = true;
 
-        Arraynum = new List<int> { 0, 1, 2, 3};
+        Arraynum = new List<int> { 6};
 
         if (ShotGunCard >= 3) Arraynum.Remove(0);
         if (BulletCard >= 2) Arraynum.Remove(1);
         if (barrelCard >= 3) Arraynum.Remove(2);
         if (weaknessCard >= 3) Arraynum.Remove(3);
-        /*if (nimblestepsCard >= 1) Arraynum.Remove(4);
-        if (QuickstepCard >= 1) Arraynum.Remove(5);
-        if (fastdraw >= 1) Arraynum.Remove(6);*/
+        if (nimblestepsCard >= 3) Arraynum.Remove(4);
+        if (QuickstepCard >= 3) Arraynum.Remove(5);
+        if (fastdraw >= 3) Arraynum.Remove(6);
 
         if (CardImage != null && SetCardobj != null)
         {
