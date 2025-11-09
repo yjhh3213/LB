@@ -5,6 +5,9 @@ using Unity.VisualScripting;
 
 public class CountTimer : MonoBehaviour
 {
+    [Header("Card의 메서드 사용")]
+    public Card card;
+
     [Header("타이머 설정")]
     public int startTime = 60; // 시작 시간 (초)
     private int currentTime;
@@ -32,6 +35,12 @@ public class CountTimer : MonoBehaviour
             {
                 yield return new WaitForSeconds(1f);
                 currentTime--;
+
+                // 시간이 0이 되면 카드 선택할 수 있게 하기
+                if(currentTime == 0)
+                {
+                    card.cardbuff();
+                }
 
                 // 안전하게 음수 방지
                 if (currentTime < 0)

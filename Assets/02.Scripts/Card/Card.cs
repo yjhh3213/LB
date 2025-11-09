@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    CountTimer ct;
+    //public CountTimer ct;
 
     public static Card Instance;
 
@@ -34,10 +34,6 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            cardbuff();
-        }
     }
 
     private void Awake()
@@ -50,13 +46,13 @@ public class Card : MonoBehaviour
     int Sect3 = 0;      // SetCardobj2¹øÂ°
 
     List<int> Arraynum;
-    void cardbuff()
+    public void cardbuff()
     {
         Time.timeScale = 0.0f;
         Player.SetActive(false);
         gameclick = true;
 
-        Arraynum = new List<int> { 6};
+        Arraynum = new List<int> { 1};
 
         if (ShotGunCard >= 3) Arraynum.Remove(0);
         if (BulletCard >= 2) Arraynum.Remove(1);

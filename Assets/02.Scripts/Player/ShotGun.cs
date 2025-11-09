@@ -189,7 +189,6 @@ public class ShotGun : MonoBehaviour
 
         ReloadImage.SetActive(true);
 
-        bool allSuccess = true;
         int qteSteps = 3;
 
         for (int i = 0; i < qteSteps; i++)
@@ -207,6 +206,40 @@ public class ShotGun : MonoBehaviour
                 if (Input.GetKeyDown(targetKey))
                 {
                     IsSuccess = true;
+
+                    int bulletreload = 0;
+
+                    switch (fastdrawLevel)
+                    {
+                        case 1:
+                            bulletreload = 3;
+                            break;
+                        case 2:
+                            bulletreload = 6;
+                            break;
+                        default:
+                            bulletreload = 2;
+                            break;
+                    }
+                    int ReloadAmount = Mathf.Min(bulletreload, MaxBulletCount - NowBulletCount);
+
+                    if(ReloadAmount <= 0)
+                    {
+                        print("Full Bullet");
+                    }
+                    else
+                    {
+                        NowBulletCount += ReloadAmount;
+
+                        for (int j = 0; j < ReloadAmount; j++)
+                        {
+                            if (count > 0)
+                            {
+                                BulletCount[count - 1].SetActive(true);
+                                count--;
+                            }
+                        }
+                    }
                     break;
                 }
                 if (Input.anyKeyDown)
@@ -224,6 +257,8 @@ public class ShotGun : MonoBehaviour
                     }
                 }
 
+                if (isFailed) break;
+
                 time -= Time.deltaTime;
                 yield return null;
             }
@@ -235,7 +270,13 @@ public class ShotGun : MonoBehaviour
                 {
                     print("QTE TimeOver");
                 }
-                allSuccess = false;
+                print("Stop Reload");
+                break;
+            }
+
+            if(NowBulletCount >= MaxBulletCount)
+            {
+                print("Full Bullet");
                 break;
             }
 
@@ -243,43 +284,8 @@ public class ShotGun : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        if (allSuccess)
-        {
-            print("QTE all Success");
-            int bulletreload = 0;
-
-            switch (fastdrawLevel)
-            {
-                case 1:
-                    bulletreload = 3;
-                    break;
-                case 2:
-                    bulletreload = 6;
-                    break;
-                default:
-                    bulletreload = 2;
-                    break;
-            }
-            int ReloadAmount = Mathf.Min(bulletreload, MaxBulletCount - NowBulletCount);
-
-            NowBulletCount += ReloadAmount;
-
-            for(int j = 0; j < ReloadAmount; j++)
-            {
-                if(count > 0)
-                {
-                    BulletCount[count - 1].SetActive(true);
-                    count--;
-                }
-            }
-
-        }
-        else
-        {
-            print("QTE 시간초과!");
-            ReloadImage.SetActive(false);
-            qteText.gameObject.SetActive(false);
-        }
+        ReloadImage.SetActive(false);
+        qteText.gameObject.SetActive(false);
         isReloading = false;
     }
 }

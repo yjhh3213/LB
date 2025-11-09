@@ -23,7 +23,6 @@ public class PlayerCtrl : MonoBehaviour
     bool isDashing = false;
     public float speed;                 // 캐릭터 속도
     public float Dash = 15.0f;          // 캐릭터 대쉬 속도
-    public Text DashCoolDownText;       // 대쉬 쿨타임 텍스트
 
     [Header("Transform")]
     public Transform body;
@@ -49,8 +48,6 @@ public class PlayerCtrl : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         dead = false;
-
-        DashCoolDownText.text = "대쉬 : " + ((int)dashTimer).ToString();
     }
 
     public float dashCoolDown = 5.0f;           // 대쉬를 사용하기 위한 쿨타임
@@ -66,8 +63,6 @@ public class PlayerCtrl : MonoBehaviour
 
         if (dashTimer > 0) 
             dashTimer -= Time.deltaTime;
-
-        DashCoolDownText.text = "대쉬 : " + ((int)dashTimer).ToString();
 
         switch (nimblestepsCardLevel)
         {
@@ -135,7 +130,7 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
         // 순간이동 Dash
-        if (Input.GetMouseButtonDown(1) && dashTimer <= 0f && dashcount != 0)
+        if (Input.GetMouseButtonDown(1) && dashTimer <= 0f /*&& dashcount != 0*/)
         {
             Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 

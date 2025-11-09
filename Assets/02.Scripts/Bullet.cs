@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     float DamageIn1 = (2.0f * 0.2f) + 2.0f;         // 약점포착 level 1
     float DamageIn2 = (2.0f * 0.4f) + 2.0f;         // 약점포착 level 2
     float DamageIn3 = (2.0f * 0.5f) + 2.0f;         // 약점포착 level 3
+    int BulletCardLevel;                            // 총알개조 level
 
     private void Start()
     {
@@ -21,10 +22,12 @@ public class Bullet : MonoBehaviour
         //print(Damage);
     }
 
-    int count = 0;
+    int count = 0;                                    // 관통한 횟수 초기화
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        BulletCardLevel = Card.Instance.BulletCard;
+
         if (collision.collider.CompareTag("Enemy"))
         {
             EnemyStat enemy = collision.collider.GetComponent<EnemyStat>();
@@ -33,30 +36,7 @@ public class Bullet : MonoBehaviour
                 enemy.TakeDamage(Damage);
             }
 
-            // bullet이 프리팹 상태이기에 Card 스크립트를 Instance화를 시켜 해당하는 값을 가져오기
-            int BulletCardLevel = Card.Instance.BulletCard;
-            if (BulletCardLevel == 1)
-            {
-                if (count == 1)
-                {
-                    count = 0;
-                    Destroy(gameObject);
-                }
-                count++;
-            }
-            else if (BulletCardLevel == 2)
-            {
-                if (count == 2)
-                {
-                    count = 0;
-                    Destroy(gameObject);
-                }
-                count++;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            BCL(BulletCardLevel);
         }
 
         if (collision.collider.CompareTag("aa"))
@@ -68,12 +48,13 @@ public class Bullet : MonoBehaviour
                 enemy_Skeleton.TakeDamage(Damage);
             }
 
-            // bullet이 프리팹 상태이기에 Card 스크립트를 Instance화를 시켜 해당하는 값을 가져오기
-            //BCL(BulletCardLevel);
+            BCL(BulletCardLevel);
         }
     }
 
-    /*int BulletCardLevel = Card.Instance.BulletCard;
+    // 총알개조 Level에 따른 관통할 수 있는 코드
+    // 적을 추가할 때마다 메서드를 추가하면 됨
+
     void BCL(int level)
     {
         if (BulletCardLevel == 1)
@@ -98,7 +79,6 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }*/
-
+    }
 }
 
