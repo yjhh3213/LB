@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class PlayerCtrl : MonoBehaviour
 {
     [Header("Sprites")]
-    public Sprite IdleSprite;           // Idle.png
-    public Sprite DashSprite;           // Dash.png
-    public Sprite DeathSprite;          // Death.png
-    public Sprite WalkSprite;           // Walk.png
+    public Sprite IdleSprite;                   // Idle.png
+    public Sprite DashSprite;                   // Dash.png
+    public Sprite DeathSprite;                  // Death.png
+    public Sprite WalkSprite;                   // Walk.png
     
     public Sprite foot0;
     public Sprite foot1;
@@ -18,24 +18,24 @@ public class PlayerCtrl : MonoBehaviour
     public Sprite foot4;
 
     [Header("Stats")]
-    public int health = 1;              // 캐릭터 체력
-    private bool dead = false;          // 캐릭터 사망 여부
+    public int health = 1;                      // 캐릭터 체력
+    private bool dead = false;                  // 캐릭터 사망 여부
     bool isDashing = false;
-    public float speed;                 // 캐릭터 속도
-    public float Dash = 15.0f;          // 캐릭터 대쉬 속도
+    public float speed;                         // 캐릭터 속도
+    public float Dash = 15.0f;                  // 캐릭터 대쉬 속도
 
     [Header("Transform")]
     public Transform body;
     public Transform foot;
-    private SpriteRenderer bodyRenderer;
-    private SpriteRenderer footRenderer;
+    private SpriteRenderer bodyRenderer;        
+    private SpriteRenderer footRenderer;        
 
-    Vector2 moveV;                      // 캐릭터 조작키
+    Vector2 moveV;                              // 캐릭터 조작키
     Vector2 dashdir;
-    Rigidbody2D rb;                     // 캐릭터 물리
+    Rigidbody2D rb;                             // 캐릭터 물리
 
-    int nimblestepsCardLevel;                // 기민한걸음
-    int QuickstepCardLevel;                  // 퀵 스탭
+    int nimblestepsCardLevel;                   // 기민한걸음
+    int QuickstepCardLevel;                     // 퀵 스탭
 
     // Start is called before the first frame update
     void Start()
