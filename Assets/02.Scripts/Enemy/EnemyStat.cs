@@ -8,7 +8,8 @@ public class EnemyStat : MonoBehaviour
     private Transform player;
     public float EnemySpeed;
     public float EnemyHP;
-   
+    bool isDead = false;
+
     private void Start() {
         if (data == null)
         {
@@ -53,6 +54,12 @@ public class EnemyStat : MonoBehaviour
 
     void Die()
     {
+        if (isDead) return; // 두 번 실행 방지
+        isDead = true;
+        if (EnemySpawn.Instance != null)
+        {
+            EnemySpawn.Instance.OnEnemyDied();
+        }
         Destroy(gameObject);
     }
 }

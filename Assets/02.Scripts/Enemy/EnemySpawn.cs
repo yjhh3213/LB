@@ -4,6 +4,7 @@ using System.Collections;
 
 public class EnemySpawn : MonoBehaviour
 {
+    public static EnemySpawn Instance;
     [Header("몬스터 설정")]
     public GameObject monsterPrefabA; // 1~8라 전부 (기본좀비)
     public GameObject monsterPrefabB; // 3~8라 (좀비 멧돼지)
@@ -49,6 +50,20 @@ public class EnemySpawn : MonoBehaviour
 
     private bool spawning = false;
 
+    [Header("현재 필드 몬스터 수")]
+    public int FiledEnemy = 0;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;   // 🔥 EnemySpawn.Instance 로 접근 가능해짐
+        }
+        //else
+        //{
+        //    Destroy(gameObject); // 중복 EnemySpawn 제거
+        //}
+    }
     void Update()
     {
         if (countTimer == null) return;
@@ -91,11 +106,11 @@ public class EnemySpawn : MonoBehaviour
             cCount = C_starCount + (wave - 4) * C_addperWave;
         }
 
-        if(wave >= D_starWave && wave <= maxWave)
+        if (wave >= D_starWave && wave <= maxWave)
         {
             dCount = D_starCount + (wave - 2) * D_addPerWave;
         }
-        Debug.Log($"[Wave {wave}] Spawn A: {aCount}, B: {bCount} C : {cCount} D : {dCount}" );
+        Debug.Log($"[Wave {wave}] Spawn A: {aCount}, B: {bCount} C : {cCount} D : {dCount}");
 
         List<GameObject> toSpawn = new List<GameObject>();
         for (int i = 0; i < aCount; i++) toSpawn.Add(monsterPrefabA);
@@ -133,5 +148,20 @@ public class EnemySpawn : MonoBehaviour
         float randomY = Random.Range(minY, maxY);
         Instantiate(prefab, new Vector3(randomX, randomY, randomZ), Quaternion.identity);
 
+        FiledEnemy++;
+    }
+    public void OnEnemyDied()
+    {
+        FiledEnemy--;
+
+        if (FiledEnemy <= 0)
+        {
+            Debug.Log("필드 몬스터 전부 사망 → 웨이브 종료");
+            countTimer.EndWaveByEnemies();
+        }
+
+
     }
 }
+
+
