@@ -67,6 +67,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 08f4908e406c3e047a8770b956831d1a, type: 2}
   EnemySpeed: 0
   EnemyHP: 0
+  spriteRenderer: {fileID: 0}
 --- !u!114 &5955337699383881436
 MonoBehaviour:
   m_ObjectHideFlags: 0

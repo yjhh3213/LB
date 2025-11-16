@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyStat : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class EnemyStat : MonoBehaviour
     public float EnemySpeed;
     public float EnemyHP;
     bool isDead = false;
-
+    public SpriteRenderer spriteRenderer;
     private void Start() {
         if (data == null)
         {
@@ -28,6 +29,10 @@ public class EnemyStat : MonoBehaviour
         {
             Debug.LogWarning("Player가 연결되지 않았습니다");
         }
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
     }
 
     private void Update() {
@@ -37,7 +42,16 @@ public class EnemyStat : MonoBehaviour
 
         transform.position += dir * EnemySpeed * Time.deltaTime;
 
-        
+        // 몬스터가 플레이어 방향 바라보게 하는 코드 
+        float diffx = player.position.x - transform.position.x;
+        if(diffx > 0f)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if(diffx < 0f)
+        {
+            spriteRenderer.flipX = true;
+        }
     }
 
     public void TakeDamage(float damage)
