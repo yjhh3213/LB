@@ -10,7 +10,9 @@ public class EnemyStat : MonoBehaviour
     public float EnemySpeed;
     public float EnemyHP;
     bool isDead = false;
-    public SpriteRenderer spriteRenderer;
+    SpriteRenderer spriteRenderer;
+
+    public GameObject poisonCloundPrefab;
     private void Start() {
         if (data == null)
         {
@@ -70,6 +72,11 @@ public class EnemyStat : MonoBehaviour
     {
         if (isDead) return; // 두 번 실행 방지
         isDead = true;
+
+        if(poisonCloundPrefab != null)
+        {
+            Instantiate(poisonCloundPrefab, transform.position, Quaternion.identity);
+        }
         if (EnemySpawn.Instance != null)
         {
             EnemySpawn.Instance.OnEnemyDied();
