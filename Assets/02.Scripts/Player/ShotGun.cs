@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using TMPro;
+using UnityEditor.UIElements;
 
 public class ShotGun : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class ShotGun : MonoBehaviour
     public float BulletSpeed = 10.0f;       // 탄 속도
     public int count = 0;                   // 탄 이미지를 위한 카운트
     public float ReloadTime = 3.0f;         // QTE가 진행되는 동안 재장전 시간
+    public float WaitShoot = 1.0f;          // 다음 공격까지 걸리는 시간
+    public float WaitEmptyBullet = 0.5f;    // 빈 탄 나오기까지 걸리는 시간
+    bool WaitEmptySccess = false;
     bool isReloading = false;               // 재장전중인지
 
     // Start is called before the first frame update
@@ -53,9 +57,28 @@ public class ShotGun : MonoBehaviour
     public float EmptyBulletSpeed = 0.0f;
     void Conmand()
     {
-        //탄약 발사
-        if (Input.GetMouseButtonDown(0) && Card.Instance.gameclick == false)
+        // 공격대기
+        WaitShoot -= Time.deltaTime;
+        //print(WaitShoot);
+
+        if (WaitEmptySccess)
         {
+            WaitEmptyBullet -= Time.deltaTime;
+
+            if (WaitEmptyBullet <= 0.0f)
+            {
+                EmptyBulletSpeed += Time.deltaTime;
+                Quaternion EBrot = EmptyBullet.rotation * Quaternion.Euler(0, 0, -EmptyBulletSpeed);
+                GameObject EB = Instantiate(EmptyPrefab[0], EmptyBullet.position, EBrot);
+                Destroy(EB, 2.0f);
+                WaitEmptySccess = false;
+                WaitEmptyBullet = 0.5f;
+            }
+        }
+        //탄약 발사
+        if (Input.GetMouseButtonDown(0) && Card.Instance.gameclick == false && WaitShoot <=0.0f)
+        {
+            //print(WaitShoot);
             int ShotGunCardLevel = Card.Instance.ShotGunCard;           // 샷건개조 Level
             int barrelCardLevel = Card.Instance.barrelCard;             // 총열개조 Level
             //print("Left Click");
@@ -112,16 +135,17 @@ public class ShotGun : MonoBehaviour
                         Rigidbody2D rb = Bullet.GetComponent<Rigidbody2D>();
                         rb.velocity = bulletRot * Vector3.right * BulletSpeed;
                         Destroy(Bullet, 2.0f);
+
+                        WaitEmptySccess = true;
                     }
-                    EmptyBulletSpeed += Time.deltaTime;
-                    Quaternion EBrot = EmptyBullet.rotation * Quaternion.Euler(0, 0, -EmptyBulletSpeed);
-                    GameObject EB = Instantiate(EmptyPrefab[0], EmptyBullet.position, EBrot);
-                    Destroy(EB, 2.0f);
+              
                     if (BulletCount != null)
                     {
                         NowBulletCount--;
                         BulletCount[count].SetActive(false);
+                        WaitShoot = 1.0f;
                     }
+
                     count++;
                 }
             }

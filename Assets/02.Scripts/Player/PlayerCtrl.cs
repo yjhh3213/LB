@@ -181,7 +181,7 @@ public class PlayerCtrl : MonoBehaviour
     // collision Enemy
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.CompareTag("Enemy") && !dead)
+        if(collision.collider.CompareTag("aa") && !dead)
         {
             health--;
             Dead();
