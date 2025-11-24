@@ -100,8 +100,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f48882a95f404744bb2072d729984beb
-      internalID: 1877446803
+      spriteID: 05de99bf55fb4c5459a0b38db936d160
+      internalID: 962671391
       vertices: []
       indices: 
       edges: []
@@ -146,7 +146,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       DashParamiter_0: -1830826196
-      DashParamiter_1: 1877446803
+      DashParamiter_1: 962671391
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

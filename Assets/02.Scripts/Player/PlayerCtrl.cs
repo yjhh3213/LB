@@ -27,12 +27,14 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Transform")]
     public Transform body;
     public Transform foot;
+    public Transform DashGauge;                 // 대쉬 게이지 바
     private SpriteRenderer bodyRenderer;        
     private SpriteRenderer footRenderer;        
 
     Vector2 moveV;                              // 캐릭터 조작키
     Vector2 dashdir;
     Rigidbody2D rb;                             // 캐릭터 물리
+    bool DashUIOn = false;
 
     int nimblestepsCardLevel;                   // 기민한걸음
     int QuickstepCardLevel;                     // 퀵 스탭
@@ -51,7 +53,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     public float dashCoolDown = 5.0f;           // 대쉬를 사용하기 위한 쿨타임
-    float dashTimer = 0f;
+    public float dashTimer = 0f;                // 건들지 말 것
     public int dashcount = 1;                   // 대쉬 사용 횟수
     // Update is called once per frame
     void Update()
@@ -102,9 +104,38 @@ public class PlayerCtrl : MonoBehaviour
             ObjMove();
 
         UpdateSprite();
-
+        DashGaugeUI();
     }
 
+    float smoothY;
+
+    void DashGaugeUI()
+    {
+        if (DashUIOn)
+        {
+            float ratio = Mathf.Clamp01(dashTimer / dashCoolDown);
+            float current = DashGauge.localScale.y;
+            float reversed = 1.0f - ratio;
+            float target = reversed * 0.48f;
+            if (target < 0.03f)
+            {
+                target = 0.0f;
+            }
+
+            float newY = Mathf.SmoothDamp(current, target, ref smoothY, 0.1f);
+
+            print(newY);
+
+            DashGauge.localScale = new Vector3(0.4f, newY, 1.0f);
+
+            float originalHeight = 0.48f;
+            float offset = (originalHeight - newY) / 2f;
+            DashGauge.localPosition = new Vector3(DashGauge.localPosition.x, -offset, DashGauge.localPosition.z);
+        }
+        else {
+            DashGauge.localScale = new Vector3(0.4f, 0.0f, 1.0f);
+        }
+    }
     public float Walktime = 0.0f;
 
     void ObjMove()
@@ -136,6 +167,7 @@ public class PlayerCtrl : MonoBehaviour
 
             if (dir != Vector2.zero) // 방향 입력이 있을 때만 순간이동
             {
+                DashUIOn = true;
                 dashcount--;
                 isDashing = true;
                 dashdir = dir.normalized;
