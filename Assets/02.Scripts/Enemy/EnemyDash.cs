@@ -15,7 +15,15 @@ public class EnemyDash : MonoBehaviour
 
     private bool isCharging = false;
     private bool hasCharged = false;     // 돌진은 딱 1번만
+    SpriteRenderer spriteRenderer;
 
+    private void Start()
+    {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+    }
     void Update()
     {
         if (player == null) return;
@@ -38,6 +46,15 @@ public class EnemyDash : MonoBehaviour
             {
                 StartCoroutine(ChargeOnce());
             }
+        }
+        float diffx = player.position.x - transform.position.x;
+        if (diffx > 0f)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (diffx < 0f)
+        {
+            spriteRenderer.flipX = true;
         }
     }
 

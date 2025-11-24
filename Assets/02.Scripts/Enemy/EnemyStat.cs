@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
+
 public class EnemyStat : MonoBehaviour
 {
     public EnemyData data;
@@ -11,7 +12,8 @@ public class EnemyStat : MonoBehaviour
     public float EnemyHP;
     bool isDead = false;
     SpriteRenderer spriteRenderer;
-
+    Animator anim;
+    public float dieAnimTime = 0.7f;
     public GameObject poisonCloundPrefab;
     private void Start() {
         if (data == null)
@@ -34,6 +36,12 @@ public class EnemyStat : MonoBehaviour
         if (spriteRenderer == null)
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
+        anim = GetComponentInChildren<Animator>();
+        if (anim == null)
+        {
+            Debug.LogError("Animator를 찾지 못했습니다! Enemy 프리팹에 Animator 컴포넌트가 있는지 확인하세요.");
         }
     }
 
@@ -73,14 +81,28 @@ public class EnemyStat : MonoBehaviour
         if (isDead) return; // 두 번 실행 방지
         isDead = true;
 
+        EnemySpeed = 0;
         if(poisonCloundPrefab != null)
         {
             Instantiate(poisonCloundPrefab, transform.position, Quaternion.identity);
         }
+        if (anim != null)
+        {
+            anim.SetBool("Die" , true);
+        }
+
         if (EnemySpawn.Instance != null)
         {
             EnemySpawn.Instance.OnEnemyDied();
         }
-        Destroy(gameObject);
+
+        StartCoroutine(DieDestroyCoroutine());
+
+        IEnumerator DieDestroyCoroutine()
+        {
+            yield return new WaitForSeconds(dieAnimTime);
+            Destroy(gameObject);
+        }
+        
     }
 }
