@@ -5,10 +5,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     bool hasHit = false;
-    public float Damage = 2.0f;                     // ¾àÁ¡Æ÷Âø level 0
-    float DamageIn1 = (2.0f * 0.2f) + 2.0f;         // ¾àÁ¡Æ÷Âø level 1
-    float DamageIn2 = (2.0f * 0.4f) + 2.0f;         // ¾àÁ¡Æ÷Âø level 2
-    float DamageIn3 = (2.0f * 0.5f) + 2.0f;         // ¾àÁ¡Æ÷Âø level 3
+    public float Damage = 2.0f;                     // ì•½ì í¬ì°© level 0
+    float DamageIn1 = (2.0f * 0.2f) + 2.0f;         // ì•½ì í¬ì°© level 1
+    float DamageIn2 = (2.0f * 0.4f) + 2.0f;         // ì•½ì í¬ì°© level 2
+    float DamageIn3 = (2.0f * 0.5f) + 2.0f;         // ì•½ì í¬ì°© level 3
+    int BulletCardLevel;                            // ì´ì•Œê°œì¡° level
 
     private void Start()
     {
@@ -21,19 +22,21 @@ public class Bullet : MonoBehaviour
         //print(Damage);
     }
 
-    int count = 0;
+    int count = 0;                                    // ê´€í†µí•œ íšŸìˆ˜ ì´ˆê¸°í™”
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        BulletCardLevel = Card.Instance.BulletCard;
+
         if (collision.collider.CompareTag("Enemy"))
         {
             EnemyStat enemy = collision.collider.GetComponent<EnemyStat>();
-            if (enemy != null )
+            if (enemy != null)
             {
                 enemy.TakeDamage(Damage);
             }
 
-            // bulletÀÌ ÇÁ¸®ÆÕ »óÅÂÀÌ±â¿¡ Card ½ºÅ©¸³Æ®¸¦ InstanceÈ­¸¦ ½ÃÄÑ ÇØ´çÇÏ´Â °ªÀ» °¡Á®¿À±â
+            // bulletì´ í”„ë¦¬íŒ¹ ìƒíƒœì´ê¸°ì— Card ìŠ¤í¬ë¦½íŠ¸ë¥¼ Instanceí™”ë¥¼ ì‹œì¼œ í•´ë‹¹í•˜ëŠ” ê°’ì„ ê°€ì ¸ì˜¤ê¸°
             int BulletCardLevel = Card.Instance.BulletCard;
             if (BulletCardLevel == 1)
             {
@@ -63,17 +66,42 @@ public class Bullet : MonoBehaviour
         {
             if (hasHit) return;
             Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
-            if(enemy_Skeleton != null)
+            if (enemy_Skeleton != null)
             {
                 enemy_Skeleton.TakeDamage(Damage);
             }
 
-            // bulletÀÌ ÇÁ¸®ÆÕ »óÅÂÀÌ±â¿¡ Card ½ºÅ©¸³Æ®¸¦ InstanceÈ­¸¦ ½ÃÄÑ ÇØ´çÇÏ´Â °ªÀ» °¡Á®¿À±â
-            //BCL(BulletCardLevel);
+            BCL(BulletCardLevel);
         }
     }
 
-   
+    // ì´ì•Œê°œì¡° Levelì— ë”°ë¥¸ ê´€í†µí•  ìˆ˜ ìˆëŠ” ì½”ë“œ
+    // ì ì„ ì¶”ê°€í•  ë•Œë§ˆë‹¤ ë©”ì„œë“œë¥¼ ì¶”ê°€í•˜ë©´ ë¨
 
+    void BCL(int level)
+    {
+        if (BulletCardLevel == 1)
+        {
+            if (count == 1)
+            {
+                count = 0;
+                Destroy(gameObject);
+            }
+            count++;
+        }
+        else if (BulletCardLevel == 2)
+        {
+            if (count == 2)
+            {
+                count = 0;
+                Destroy(gameObject);
+            }
+            count++;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 
