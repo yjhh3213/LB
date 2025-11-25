@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9135703426ce85d4087f569e508cf119
+guid: da3e6d1bb9936f146bd7ee11f0ee06b3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: strip10_0
+      name: bc9388d2cea968db_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 0
-        width: 96
-        height: 95
+        x: 42
+        y: 2
+        width: 33
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a85a1c9a72cde44da503cc4c1d7e901
-      internalID: 787453961
+      spriteID: d5c611f779f241f429b8d84a9998a6c0
+      internalID: 58045933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: strip10_1
+      name: bc9388d2cea968db_1
       rect:
         serializedVersion: 2
-        x: 98
-        y: 0
-        width: 98
-        height: 94
+        x: 115
+        y: 2
+        width: 64
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8808311b6ebf8ff49961b7d72293fdd9
-      internalID: 1885302209
+      spriteID: b3b44302384004e4488f373ebc91348d
+      internalID: 371317347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: strip10_2
+      name: bc9388d2cea968db_2
       rect:
         serializedVersion: 2
-        x: 196
-        y: 0
-        width: 97
-        height: 94
+        x: 214
+        y: 2
+        width: 64
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2ecbb0cd6725ff4ead3cbb8fe6326bd
-      internalID: -733620131
+      spriteID: c038483e26fe03640b02c01bb78d2ecd
+      internalID: 1165522981
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: strip10_3
+      name: bc9388d2cea968db_3
       rect:
         serializedVersion: 2
-        x: 293
-        y: 0
-        width: 92
-        height: 95
+        x: 323
+        y: 3
+        width: 42
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,134 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b90bbca0836aa144ad8572876d74600
-      internalID: -2103408888
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: strip10_4
-      rect:
-        serializedVersion: 2
-        x: 386
-        y: 0
-        width: 98
-        height: 95
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 85db75750f0d2db48b8a1658b2b396f0
-      internalID: -501527493
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: strip10_5
-      rect:
-        serializedVersion: 2
-        x: 484
-        y: 0
-        width: 98
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 48ad53c881c710747891181f0e48b1d3
-      internalID: 1444941983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: strip10_6
-      rect:
-        serializedVersion: 2
-        x: 583
-        y: 0
-        width: 92
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f4c3cfea30e99664d9f267fe410e7f7a
-      internalID: -1068717587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: strip10_7
-      rect:
-        serializedVersion: 2
-        x: 676
-        y: 0
-        width: 92
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 53172ece28f105e4faed4f858d393d31
-      internalID: 1384957440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: strip10_8
-      rect:
-        serializedVersion: 2
-        x: 769
-        y: 0
-        width: 89
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 31846dc8bb79fd54f95ab8ec63fc602f
-      internalID: -895853999
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: strip10_9
-      rect:
-        serializedVersion: 2
-        x: 859
-        y: 0
-        width: 101
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5fc2898aba81ff042b26a23668bbbff3
-      internalID: 578549286
+      spriteID: 84533ab23e6751047865518a3940edbb
+      internalID: 952004283
       vertices: []
       indices: 
       edges: []
@@ -337,16 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      strip10_0: 787453961
-      strip10_1: 1885302209
-      strip10_2: -733620131
-      strip10_3: -2103408888
-      strip10_4: -501527493
-      strip10_5: 1444941983
-      strip10_6: -1068717587
-      strip10_7: 1384957440
-      strip10_8: -895853999
-      strip10_9: 578549286
+      bc9388d2cea968db_0: 58045933
+      bc9388d2cea968db_1: 371317347
+      bc9388d2cea968db_2: 1165522981
+      bc9388d2cea968db_3: 952004283
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
