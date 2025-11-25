@@ -491,6 +491,7 @@ MonoBehaviour:
   monsterPrefabB: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
   monsterPrefabC: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
   monsterPrefabD: {fileID: 0}
+  monsterPrefabE: {fileID: 0}
   spawnDelay: 0.2
   minWave: 1
   maxWave: 8
@@ -502,9 +503,12 @@ MonoBehaviour:
   C_startWave: 4
   C_startCount: 5
   C_addperWave: 1
-  D_starWave: 2
-  D_starCount: 5
+  D_startWave: 2
+  D_startCount: 5
   D_addPerWave: 2
+  E_startWave: 3
+  E_startCount: 1
+  E_addPerWave: 1
   minX: -50
   maxX: 50
   minZ: -50
@@ -3882,63 +3886,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045837688}
   m_CullTransparentMesh: 1
---- !u!1001 &380106115207097842
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.101
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3819411109961686651, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7316478179054845162, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
-      propertyPath: m_Name
-      value: zom3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c4f19f5899fc80a4288350c3a480f35a, type: 3}
 --- !u!1001 &1662413100231359381
 PrefabInstance:
   m_ObjectHideFlags: 0
