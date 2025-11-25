@@ -376,24 +376,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1b6fb7a81ca394fb6a8da2fbe0dce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabA: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
-  monsterPrefabB: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
-  monsterPrefabC: {fileID: 6951215236074127801, guid: 32e305f0fb9d65f41ab5a33d208ff214, type: 3}
+  monsterPrefabA: {fileID: 4207912783554916452, guid: bf902a024f72f4945b4515fe30a3a8b9, type: 3}
+  monsterPrefabB: {fileID: 0}
+  monsterPrefabC: {fileID: 0}
   monsterPrefabD: {fileID: 0}
+  monsterPrefabE: {fileID: 0}
   spawnDelay: 0.2
   minWave: 1
   maxWave: 8
-  A_startCount: 20
-  A_addPerWave: 10
+  A_startCount: 1
+  A_addPerWave: 1
   B_startWave: 3
   B_startCount: 5
   B_addper2Wave: 2
-  C_starWave: 4
-  C_starCount: 5
+  C_startWave: 4
+  C_startCount: 5
   C_addperWave: 1
-  D_starWave: 2
-  D_starCount: 5
+  D_startWave: 2
+  D_startCount: 5
   D_addPerWave: 2
+  E_startWave: 3
+  E_startCount: 1
+  E_addPerWave: 1
   minX: -50
   maxX: 50
   minZ: -50
@@ -401,6 +405,7 @@ MonoBehaviour:
   minY: -50
   maxY: 50
   countTimer: {fileID: 1241308346}
+  FiledEnemy: 0
 --- !u!1 &302264753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,7 +1722,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2477,6 +2482,10 @@ PrefabInstance:
     - target: {fileID: 1662413100642505253, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: Dash
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662413100642505253, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1662413100642505253, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: DashCoolDownText
