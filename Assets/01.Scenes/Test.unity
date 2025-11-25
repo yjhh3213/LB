@@ -494,13 +494,13 @@ MonoBehaviour:
   spawnDelay: 0.2
   minWave: 1
   maxWave: 8
-  A_startCount: 20
-  A_addPerWave: 10
+  A_startCount: 1
+  A_addPerWave: 1
   B_startWave: 3
   B_startCount: 5
   B_addper2Wave: 2
-  C_starWave: 4
-  C_starCount: 5
+  C_startWave: 4
+  C_startCount: 5
   C_addperWave: 1
   D_starWave: 2
   D_starCount: 5
@@ -512,6 +512,7 @@ MonoBehaviour:
   minY: -50
   maxY: 50
   countTimer: {fileID: 1241308346}
+  FiledEnemy: 0
 --- !u!1 &302264753
 GameObject:
   m_ObjectHideFlags: 0

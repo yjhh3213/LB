@@ -5,11 +5,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     bool hasHit = false;
-    public float Damage = 2.0f;                     // ¾àÁ¡Æ÷Âø level 0
-    float DamageIn1 = (2.0f * 0.2f) + 2.0f;         // ¾àÁ¡Æ÷Âø level 1
-    float DamageIn2 = (2.0f * 0.4f) + 2.0f;         // ¾àÁ¡Æ÷Âø level 2
-    float DamageIn3 = (2.0f * 0.5f) + 2.0f;         // ¾àÁ¡Æ÷Âø level 3
-    int BulletCardLevel;                            // ÃÑ¾Ë°³Á¶ level
+    public float Damage = 2.0f;                     // ì•½ì í¬ì°© level 0
+    float DamageIn1 = (2.0f * 0.2f) + 2.0f;         // ì•½ì í¬ì°© level 1
+    float DamageIn2 = (2.0f * 0.4f) + 2.0f;         // ì•½ì í¬ì°© level 2
+    float DamageIn3 = (2.0f * 0.5f) + 2.0f;         // ì•½ì í¬ì°© level 3
+    int BulletCardLevel;                            // ì´ì•Œê°œì¡° level
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         //print(Damage);
     }
 
-    int count = 0;                                    // °üÅëÇÑ È½¼ö ÃÊ±âÈ­
+    int count = 0;                                    // ê´€í†µí•œ íšŸìˆ˜ ì´ˆê¸°í™”
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -36,7 +36,30 @@ public class Bullet : MonoBehaviour
                 enemy.TakeDamage(Damage);
             }
 
-            BCL(BulletCardLevel);
+            // bulletì´ í”„ë¦¬íŒ¹ ìƒíƒœì´ê¸°ì— Card ìŠ¤í¬ë¦½íŠ¸ë¥¼ Instanceí™”ë¥¼ ì‹œì¼œ í•´ë‹¹í•˜ëŠ” ê°’ì„ ê°€ì ¸ì˜¤ê¸°
+            int BulletCardLevel = Card.Instance.BulletCard;
+            if (BulletCardLevel == 1)
+            {
+                if (count == 1)
+                {
+                    count = 0;
+                    Destroy(gameObject);
+                }
+                count++;
+            }
+            else if (BulletCardLevel == 2)
+            {
+                if (count == 2)
+                {
+                    count = 0;
+                    Destroy(gameObject);
+                }
+                count++;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (collision.collider.CompareTag("aa"))
@@ -52,8 +75,8 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    // ÃÑ¾Ë°³Á¶ Level¿¡ µû¸¥ °üÅëÇÒ ¼ö ÀÖ´Â ÄÚµå
-    // ÀûÀ» Ãß°¡ÇÒ ¶§¸¶´Ù ¸Ş¼­µå¸¦ Ãß°¡ÇÏ¸é µÊ
+    // ì´ì•Œê°œì¡° Levelì— ë”°ë¥¸ ê´€í†µí•  ìˆ˜ ìˆëŠ” ì½”ë“œ
+    // ì ì„ ì¶”ê°€í•  ë•Œë§ˆë‹¤ ë©”ì„œë“œë¥¼ ì¶”ê°€í•˜ë©´ ë¨
 
     void BCL(int level)
     {

@@ -18,26 +18,26 @@ public class PlayerCtrl : MonoBehaviour
     public Sprite foot4;
 
     [Header("Stats")]
-    public int health = 1;                      // Ä³¸¯ÅÍ Ã¼·Â
-    private bool dead = false;                  // Ä³¸¯ÅÍ »ç¸Á ¿©ºÎ
+    public int health = 1;                      // ìºë¦­í„° ì²´ë ¥
+    private bool dead = false;                  // ìºë¦­í„° ì‚¬ë§ ì—¬ë¶€
     bool isDashing = false;
-    public float speed;                         // Ä³¸¯ÅÍ ¼Óµµ
-    public float Dash = 15.0f;                  // Ä³¸¯ÅÍ ´ë½¬ ¼Óµµ
+    public float speed;                         // ìºë¦­í„° ì†ë„
+    public float Dash = 15.0f;                  // ìºë¦­í„° ëŒ€ì‰¬ ì†ë„
 
     [Header("Transform")]
     public Transform body;
     public Transform foot;
-    public Transform DashGauge;                 // ´ë½¬ °ÔÀÌÁö ¹Ù
+    public Transform DashGauge;                 // ëŒ€ì‰¬ ê²Œì´ì§€ ë°”
     private SpriteRenderer bodyRenderer;        
     private SpriteRenderer footRenderer;        
 
-    Vector2 moveV;                              // Ä³¸¯ÅÍ Á¶ÀÛÅ°
+    Vector2 moveV;                              // ìºë¦­í„° ì¡°ì‘í‚¤
     Vector2 dashdir;
-    Rigidbody2D rb;                             // Ä³¸¯ÅÍ ¹°¸®
+    Rigidbody2D rb;                             // ìºë¦­í„° ë¬¼ë¦¬
     bool DashUIOn = false;
 
-    int nimblestepsCardLevel;                   // ±â¹ÎÇÑ°ÉÀ½
-    int QuickstepCardLevel;                     // Äü ½ºÅÇ
+    int nimblestepsCardLevel;                   // ê¸°ë¯¼í•œê±¸ìŒ
+    int QuickstepCardLevel;                     // í€µ ìŠ¤íƒ­
 
     bool isSlowed = false;
 
@@ -54,16 +54,16 @@ public class PlayerCtrl : MonoBehaviour
         dead = false;
     }
 
-    public float dashCoolDown = 5.0f;           // ´ë½¬¸¦ »ç¿ëÇÏ±â À§ÇÑ ÄğÅ¸ÀÓ
-    public float dashTimer = 0f;                // °ÇµéÁö ¸» °Í
-    public int dashcount = 1;                   // ´ë½¬ »ç¿ë È½¼ö
+    public float dashCoolDown = 5.0f;           // ëŒ€ì‰¬ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•œ ì¿¨íƒ€ì„
+    public float dashTimer = 0f;                // ê±´ë“¤ì§€ ë§ ê²ƒ
+    public int dashcount = 1;                   // ëŒ€ì‰¬ ì‚¬ìš© íšŸìˆ˜
     // Update is called once per frame
     void Update()
     {
-        nimblestepsCardLevel = Card.Instance.nimblestepsCard;        // ±â¹ÎÇÑ °ÉÀ½ Level
-        QuickstepCardLevel = Card.Instance.QuickstepCard;            // Äü ½ºÅÇ     Level
+        nimblestepsCardLevel = Card.Instance.nimblestepsCard;        // ê¸°ë¯¼í•œ ê±¸ìŒ Level
+        QuickstepCardLevel = Card.Instance.QuickstepCard;            // í€µ ìŠ¤íƒ­     Level
 
-        if (dead) return;                       // Á×¾úÀ¸¸é ÀÔ·Â ¸·±â
+        if (dead) return;                       // ì£½ì—ˆìœ¼ë©´ ì…ë ¥ ë§‰ê¸°
 
         if (dashTimer > 0) 
             dashTimer -= Time.deltaTime;
@@ -111,7 +111,7 @@ public class PlayerCtrl : MonoBehaviour
 
 
     /// <summary>
-    /// ´ë½¬ °ÔÀÌÁö Ã¤¿ì±â
+    /// ëŒ€ì‰¬ ê²Œì´ì§€ ì±„ìš°ê¸°
     /// </summary>
     float smoothY;
 
@@ -134,7 +134,7 @@ public class PlayerCtrl : MonoBehaviour
 
             DashGauge.localScale = new Vector3(0.4f, newY, 1.0f);
 
-            // À§Ä¡ º¸Á¤
+            // ìœ„ì¹˜ ë³´ì •
             float originalHeight = 0.48f;
             float offset = (originalHeight - newY) / 2f;
             //print(offset);
@@ -146,7 +146,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     /// <summary>
-    /// ´ë½¬¿Í ¿òÁ÷ÀÌ±â
+    /// ëŒ€ì‰¬ì™€ ì›€ì§ì´ê¸°
     /// </summary>
     public float Walktime = 0.0f;
 
@@ -154,11 +154,11 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (!isDashing)
         {
-            //W, A, S, DÅ° ¹× »óÇÏÁÂ¿ìÅ° ÀÌµ¿ ÀÔ·Â¹Ş±â
+            //W, A, S, Dí‚¤ ë° ìƒí•˜ì¢Œìš°í‚¤ ì´ë™ ì…ë ¥ë°›ê¸°
             Vector2 Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             moveV = Move.normalized * speed;
 
-            // foot ¾Ö´Ï¸ŞÀÌ¼Ç Ã³¸®
+            // foot ì• ë‹ˆë©”ì´ì…˜ ì²˜ë¦¬
             if (Move.magnitude > 0)
             {
                 Walktime += Time.deltaTime;
@@ -172,12 +172,12 @@ public class PlayerCtrl : MonoBehaviour
                 Walktime = 0.0f;
             }
         }
-        // ¼ø°£ÀÌµ¿ Dash
+        // ìˆœê°„ì´ë™ Dash
         if (Input.GetMouseButtonDown(1) && dashTimer <= 0f /*&& dashcount != 0*/)
         {
             Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            if (dir != Vector2.zero) // ¹æÇâ ÀÔ·ÂÀÌ ÀÖÀ» ¶§¸¸ ¼ø°£ÀÌµ¿
+            if (dir != Vector2.zero) // ë°©í–¥ ì…ë ¥ì´ ìˆì„ ë•Œë§Œ ìˆœê°„ì´ë™
             {
                 DashUIOn = true;
                 dashcount--;
@@ -188,7 +188,7 @@ public class PlayerCtrl : MonoBehaviour
                 print("Dash!");
                 print(dashcount);
                 StartCoroutine(DashTimerCoroutine());
-                StartCoroutine(ReturnIdle(0.15f));  // Âª°Ô Dash Sprite À¯Áös
+                StartCoroutine(ReturnIdle(0.15f));  // ì§§ê²Œ Dash Sprite ìœ ì§€s
             }
         }
     }
@@ -206,7 +206,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     /// <summary>
-    /// ´ë½¬ Å¸ÀÌ¸Ó ÄÚ·çÆ¾
+    /// ëŒ€ì‰¬ íƒ€ì´ë¨¸ ì½”ë£¨í‹´
     /// </summary>
     /// <returns></returns>
     IEnumerator DashTimerCoroutine()
@@ -218,7 +218,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             elapsed += Time.fixedDeltaTime;
 
-            // ÀÜ»ó »ı¼º ÁÖ±â Á¶Àı
+            // ì”ìƒ ìƒì„± ì£¼ê¸° ì¡°ì ˆ
             StartCoroutine(CreateafterImage(0.25f, 3f));
             yield return new WaitForFixedUpdate();
         }
@@ -228,7 +228,7 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     /// <summary>
-    /// Àû°ú Ãæµ¹ÇßÀ» ¶§ °ÔÀÓ ¸ØÃß±â
+    /// ì ê³¼ ì¶©ëŒí–ˆì„ ë•Œ ê²Œì„ ë©ˆì¶”ê¸°
     /// </summary>
     /// <param name="collision"></param>
     // collision Enemy
@@ -272,12 +272,12 @@ public class PlayerCtrl : MonoBehaviour
 
 
     /// <summary>
-    /// ´ë½¬ ÀÜ»ó³²±â±â
+    /// ëŒ€ì‰¬ ì”ìƒë‚¨ê¸°ê¸°
     /// </summary>
     /// <param name="duration"></param>
     /// <param name="fadespeed"></param>
     /// <returns></returns>
-    // DashÇÒ ¶§ ÀÜ»ó³²±â±â(Áø»ó À¯Áö ½Ã°£, »ç¶óÁö´Â ¼Óµµ)
+    // Dashí•  ë•Œ ì”ìƒë‚¨ê¸°ê¸°(ì§„ìƒ ìœ ì§€ ì‹œê°„, ì‚¬ë¼ì§€ëŠ” ì†ë„)
     IEnumerator CreateafterImage(float duration, float fadespeed)
     {
         GameObject afterImage = new GameObject("AfterImage");
@@ -287,7 +287,7 @@ public class PlayerCtrl : MonoBehaviour
         sr.transform.position = body.position;
         sr.transform.localScale = body.localScale;
         sr.flipX = bodyRenderer.flipX;
-        sr.sortingOrder = bodyRenderer.sortingOrder - 1;        // º»Ã¼º¸´Ù µÚ¿¡ ¹èÄ¡
+        sr.sortingOrder = bodyRenderer.sortingOrder - 1;        // ë³¸ì²´ë³´ë‹¤ ë’¤ì— ë°°ì¹˜
 
         Color color = bodyRenderer.color;
         sr.color = new Color(color.r, color.g, color.b, 0.8f);
@@ -313,7 +313,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }*/
 
-    // 2025 - 11 - 23 º£³ğÁ»ºñ ÇÔ¼ö Ãß°¡ 
+    // 2025 - 11 - 23 ë² ë†ˆì¢€ë¹„ í•¨ìˆ˜ ì¶”ê°€ 
     Coroutine slowRoutine;
     public void ApplySlow(float amount, float duration)
     {
@@ -326,13 +326,36 @@ public class PlayerCtrl : MonoBehaviour
         if (isSlowed) yield break;
 
         speed -= amount;
-        Debug.Log("´À·ÁÁü! ÇöÀç ÀÌ¼Ó: " + speed);
+        Debug.Log("ëŠë ¤ì§! í˜„ì¬ ì´ì†: " + speed);
 
         yield return new WaitForSeconds(duration);
 
         speed += amount;
-        Debug.Log("½½·Î¿ì ÇØÁ¦! ÇöÀç ÀÌ¼Ó: " + speed);
+        Debug.Log("ìŠ¬ë¡œìš° í•´ì œ! í˜„ì¬ ì´ì†: " + speed);
 
         isSlowed = false;
     }
+    // 2025 - 11 - 23 ë² ë†ˆì¢€ë¹„ í•¨ìˆ˜ ì¶”ê°€ 
+    Coroutine slowRoutine;
+    public void ApplySlow(float amount, float duration)
+    {
+        if (slowRoutine != null) return;
+        slowRoutine = StartCoroutine(SlowCoroutine(amount, duration));
+    }
+
+    IEnumerator SlowCoroutine(float amount , float duration)
+    {
+        if (isSlowed) yield break;
+
+        speed -= amount;
+        Debug.Log("ëŠë ¤ì§! í˜„ì¬ ì´ì†: " + speed);
+
+        yield return new WaitForSeconds(duration);
+
+        speed += amount;
+        Debug.Log("ìŠ¬ë¡œìš° í•´ì œ! í˜„ì¬ ì´ì†: " + speed);
+
+        isSlowed = false;
+    }
+
 }
