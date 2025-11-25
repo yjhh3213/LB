@@ -107,6 +107,10 @@ public class PlayerCtrl : MonoBehaviour
         DashGaugeUI();
     }
 
+
+    /// <summary>
+    /// 대쉬 게이지 채우기
+    /// </summary>
     float smoothY;
 
     void DashGaugeUI()
@@ -124,18 +128,24 @@ public class PlayerCtrl : MonoBehaviour
 
             float newY = Mathf.SmoothDamp(current, target, ref smoothY, 0.1f);
 
-            print(newY);
+            //print(newY);
 
             DashGauge.localScale = new Vector3(0.4f, newY, 1.0f);
 
+            // 위치 보정
             float originalHeight = 0.48f;
             float offset = (originalHeight - newY) / 2f;
+            //print(offset);
             DashGauge.localPosition = new Vector3(DashGauge.localPosition.x, -offset, DashGauge.localPosition.z);
         }
         else {
             DashGauge.localScale = new Vector3(0.4f, 0.0f, 1.0f);
         }
     }
+
+    /// <summary>
+    /// 대쉬와 움직이기
+    /// </summary>
     public float Walktime = 0.0f;
 
     void ObjMove()
@@ -192,6 +202,11 @@ public class PlayerCtrl : MonoBehaviour
             rb.MovePosition(rb.position + moveV * Time.fixedDeltaTime);
         }
     }
+
+    /// <summary>
+    /// 대쉬 타이머 코루틴
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DashTimerCoroutine()
     {
         float dashDuration = 0.25f;
@@ -210,6 +225,10 @@ public class PlayerCtrl : MonoBehaviour
         isDashing = false;
     }
 
+    /// <summary>
+    /// 적과 충돌했을 때 게임 멈추기
+    /// </summary>
+    /// <param name="collision"></param>
     // collision Enemy
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -249,6 +268,13 @@ public class PlayerCtrl : MonoBehaviour
         if (!dead) bodyRenderer.sprite = IdleSprite;
     }
 
+
+    /// <summary>
+    /// 대쉬 잔상남기기
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <param name="fadespeed"></param>
+    /// <returns></returns>
     // Dash할 때 잔상남기기(진상 유지 시간, 사라지는 속도)
     IEnumerator CreateafterImage(float duration, float fadespeed)
     {
@@ -276,12 +302,12 @@ public class PlayerCtrl : MonoBehaviour
         Destroy(afterImage);
     }
 
-    IEnumerator SpwanImage()
+    /*IEnumerator SpwanImage()
     {
         for(int i = 0; i < 10; i++)
         {
             StartCoroutine(CreateafterImage(0.5f, 5f));
             yield return new WaitForSeconds(0.02f);
         }
-    }
+    }*/
 }

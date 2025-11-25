@@ -92,7 +92,7 @@ public class Card : MonoBehaviour
         Player.SetActive(false);
         gameclick = true;
 
-        Arraynum = new List<int> { 0, 1, 2, 3, 4, 5, 6};
+        Arraynum = new List<int> { 3};
 
         if (ShotGunCard >= 3) Arraynum.Remove(0);
         if (BulletCard >= 2) Arraynum.Remove(1);

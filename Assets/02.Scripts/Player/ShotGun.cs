@@ -12,13 +12,16 @@ public class ShotGun : MonoBehaviour
 {
     //public Card card;                     // 카드 스크립트에 있는 변수를 얻어오기 위해 쓰임
     int fastdrawLevel;                      // 패스트 드로우 Level
+    int weaknessCardLevel;                  // 약점 포착 Level
 
     [Header("GameObject")]
-    public GameObject ReloadImage;               // 재장전 이미지
+    public GameObject ReloadImage;          // 재장전 이미지
     public Text qteText;
     public GameObject[] BulletPrefab;       // 탄
     public GameObject[] EmptyPrefab;        // 탄피
     public GameObject[] BulletCount;        // 탄 갯수
+    public AudioClip[] ReloadSound;
+    public AudioClip ShootSound;
 
     [Header("Transform")]
     public Transform FirePoint;             // 총구 위치
@@ -35,9 +38,12 @@ public class ShotGun : MonoBehaviour
     bool WaitEmptySccess = false;
     bool isReloading = false;               // 재장전중인지
 
+    AudioSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -57,9 +63,14 @@ public class ShotGun : MonoBehaviour
     public float EmptyBulletSpeed = 0.0f;
     void Conmand()
     {
-        // 공격대기
-        WaitShoot -= Time.deltaTime;
-        //print(WaitShoot);
+        if (weaknessCardLevel >= 3)
+        {
+            float Delay = WaitShoot * 0.2f;
+            float WaitDelay = WaitShoot - Delay;
+            WaitDelay -= Time.deltaTime;
+            print("WaitDelay : " + WaitDelay);
+        }
+        else { WaitShoot -= Time.deltaTime; print("WaitShoot : " + WaitShoot); }
 
         if (WaitEmptySccess)
         {
@@ -67,6 +78,10 @@ public class ShotGun : MonoBehaviour
 
             if (WaitEmptyBullet <= 0.0f)
             {
+                if (ReloadSound == null) return;
+
+                int audioclipN = Random.Range(0, 2);
+                audio.PlayOneShot(ReloadSound[audioclipN]);
                 EmptyBulletSpeed += Time.deltaTime;
                 Quaternion EBrot = EmptyBullet.rotation * Quaternion.Euler(0, 0, -EmptyBulletSpeed);
                 GameObject EB = Instantiate(EmptyPrefab[0], EmptyBullet.position, EBrot);
@@ -145,7 +160,7 @@ public class ShotGun : MonoBehaviour
                         BulletCount[count].SetActive(false);
                         WaitShoot = 1.0f;
                     }
-
+                    audio.PlayOneShot(ShootSound);
                     count++;
                 }
             }
