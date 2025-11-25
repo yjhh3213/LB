@@ -5,6 +5,9 @@ using Unity.VisualScripting;
 
 public class CountTimer : MonoBehaviour
 {
+    [Header("Card의 메서드 사용")]
+    public Card card;
+
     [Header("타이머 설정")]
     public int startTime = 60; // 시작 시간 (초)
     private int currentTime;
@@ -28,10 +31,16 @@ public class CountTimer : MonoBehaviour
     {
         while (true)
         {
-            while (currentTime > 0)
+            while (currentTime > 0 && !WaveEnded)
             {
                 yield return new WaitForSeconds(1f);
                 currentTime--;
+
+                // 시간이 0이 되면 카드 선택할 수 있게 하기
+                if(currentTime == 0)
+                {
+                    card.cardbuff();
+                }
 
                 // 안전하게 음수 방지
                 if (currentTime < 0)
@@ -41,7 +50,10 @@ public class CountTimer : MonoBehaviour
             }
 
             // 0이 되면 웨이브 종료 처리
-            TimerEnd();
+            if(!WaveEnded && currentTime <= 0)
+            {
+                TimerEnd();
+            }
             yield return null;
         }
     }
@@ -63,18 +75,34 @@ public class CountTimer : MonoBehaviour
     void TimerEnd()
     {
         Debug.Log("웨이브 종료! 다음 웨이브 시작");
+        FinishWave();
+    }
+
+    public void EndWaveByEnemies()
+    {
+        if (WaveEnded) return;
+
+        FinishWave();
+    }
+
+    void FinishWave()
+    {
         WaveEnded = true;
 
         CurrentWave++;
         UpdateWaveUI();
 
-        currentTime = startTime; // 다음 웨이브 타이머 초기화
+        currentTime = startTime;
         UpdateTimerUI();
     }
-
     // 외부에서 WaveEnded 플래그 초기화 가능
     public void ResteWaveFlag()
     {
         WaveEnded = false;
+    }
+
+    public void ForceEndWave()
+    {
+        EndWaveByEnemies();
     }
 }

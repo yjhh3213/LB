@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    CountTimer ct;
+    //public CountTimer ct;
 
     public static Card Instance;
 
     [Header("GameObjet")]
     public GameObject[] SetCardobj;     // 카드오브젝트
     public GameObject Player;           // 플레이어
+    public Image[] CardColor;           // 카드 테두리 색깔
+    public GameObject[] CardColorobj;   // 카드 UI On/Off
     public Sprite[] CardImage;          // 카드 이미지
 
     [Header("CardStates")]
@@ -28,16 +29,12 @@ public class Card : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            cardbuff();
-        }
+        ChangeCardColor();
     }
 
     private void Awake()
@@ -45,26 +42,65 @@ public class Card : MonoBehaviour
         Instance = this;
     }
 
+    void ChangeCardColor()
+    {
+        // 해당 카드마다 해당 하는 레벨의 색깔 지정하기
+        if (ShotGunCard >= 3) CardColor[0].color = new Color(200, 0, 248);
+        else if (ShotGunCard == 2) CardColor[0].color = new Color(0, 144, 248);
+        else if (ShotGunCard == 1) CardColor[0].color = new Color(152, 248, 152);
+        else { CardColorobj[0].SetActive(false); }
+
+        if (BulletCard >= 3) CardColor[1].color = new Color(200, 0, 248);
+        else if (BulletCard == 2) CardColor[1].color = new Color(0, 144, 248);
+        else if (BulletCard == 1) CardColor[1].color = new Color(152, 248, 152);
+        else { CardColorobj[1].SetActive(false); }
+
+        if (barrelCard >= 3) CardColor[2].color = new Color(200, 0, 248);
+        else if (barrelCard == 2) CardColor[2].color = new Color(0, 144, 248);
+        else if (barrelCard == 1) CardColor[2].color = new Color(152, 248, 152);
+        else { CardColorobj[2].SetActive(false); }
+
+        if (weaknessCard >= 3) CardColor[3].color = new Color(200, 0, 248);
+        else if (weaknessCard == 2) CardColor[3].color = new Color(0, 144, 248);
+        else if (weaknessCard == 1) CardColor[3].color = new Color(152, 248, 152);
+        else { CardColorobj[3].SetActive(false); }
+
+        if (nimblestepsCard >= 3) CardColor[4].color = new Color(200, 0, 248);
+        else if (nimblestepsCard == 2) CardColor[4].color = new Color(0, 144, 248);
+        else if (nimblestepsCard == 1) CardColor[4].color = new Color(152, 248, 152);
+        else { CardColorobj[4].SetActive(false); }
+
+        if (QuickstepCard >= 3) CardColor[5].color = new Color(200, 0, 248);
+        else if (QuickstepCard == 2) CardColor[5].color = new Color(0, 144, 248);
+        else if (QuickstepCard == 1) CardColor[5].color = new Color(152, 248, 152);
+        else { CardColorobj[5].SetActive(false); }
+
+        if (fastdraw >= 3) CardColor[6].color = new Color(200, 0, 248);
+        else if (fastdraw == 2) CardColor[6].color = new Color(0, 144, 248);
+        else if (fastdraw == 1) CardColor[6].color = new Color(152, 248, 152);
+        else { CardColorobj[6].SetActive(false); }
+    }
+
     int Sect1 = 0;      // SetCardobj0번째
     int Sect2 = 0;      // SetCardobj1번째
     int Sect3 = 0;      // SetCardobj2번째
 
     List<int> Arraynum;
-    void cardbuff()
+    public void cardbuff()
     {
         Time.timeScale = 0.0f;
         Player.SetActive(false);
         gameclick = true;
 
-        Arraynum = new List<int> { 0, 1, 2, 3};
+        Arraynum = new List<int> { 3};
 
         if (ShotGunCard >= 3) Arraynum.Remove(0);
         if (BulletCard >= 2) Arraynum.Remove(1);
         if (barrelCard >= 3) Arraynum.Remove(2);
         if (weaknessCard >= 3) Arraynum.Remove(3);
-        /*if (nimblestepsCard >= 1) Arraynum.Remove(4);
-        if (QuickstepCard >= 1) Arraynum.Remove(5);
-        if (fastdraw >= 1) Arraynum.Remove(6);*/
+        if (nimblestepsCard >= 3) Arraynum.Remove(4);
+        if (QuickstepCard >= 3) Arraynum.Remove(5);
+        if (fastdraw >= 3) Arraynum.Remove(6);
 
         if (CardImage != null && SetCardobj != null)
         {
@@ -114,13 +150,13 @@ public class Card : MonoBehaviour
 
         switch (cardType)
         {
-            case 0: ShotGunCard++; break;
-            case 1: BulletCard++; break;
-            case 2: barrelCard++; break;
-            case 3: weaknessCard++; break;
-            case 4: nimblestepsCard++; break;
-            case 5: QuickstepCard++; break;
-            case 6: fastdraw++; break;
+            case 0: ShotGunCard++; CardColorobj[0].SetActive(true); break;
+            case 1: BulletCard++; CardColorobj[1].SetActive(true); break;
+            case 2: barrelCard++; CardColorobj[2].SetActive(true); break;
+            case 3: weaknessCard++; CardColorobj[3].SetActive(true); break;
+            case 4: nimblestepsCard++; CardColorobj[4].SetActive(true); break;
+            case 5: QuickstepCard++; CardColorobj[5].SetActive(true); break;
+            case 6: fastdraw++; CardColorobj[6].SetActive(true); break;
         }
 
         Debug.Log(cardType + " 번 카드 강화!");
