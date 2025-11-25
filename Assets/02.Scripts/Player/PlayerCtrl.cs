@@ -39,6 +39,8 @@ public class PlayerCtrl : MonoBehaviour
     int nimblestepsCardLevel;                   // 기민한걸음
     int QuickstepCardLevel;                     // 퀵 스탭
 
+    bool isSlowed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -310,4 +312,27 @@ public class PlayerCtrl : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         }
     }*/
+
+    // 2025 - 11 - 23 베놈좀비 함수 추가 
+    Coroutine slowRoutine;
+    public void ApplySlow(float amount, float duration)
+    {
+        if (slowRoutine != null) return;
+        slowRoutine = StartCoroutine(SlowCoroutine(amount, duration));
+    }
+
+    IEnumerator SlowCoroutine(float amount, float duration)
+    {
+        if (isSlowed) yield break;
+
+        speed -= amount;
+        Debug.Log("느려짐! 현재 이속: " + speed);
+
+        yield return new WaitForSeconds(duration);
+
+        speed += amount;
+        Debug.Log("슬로우 해제! 현재 이속: " + speed);
+
+        isSlowed = false;
+    }
 }
