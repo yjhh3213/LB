@@ -3,11 +3,7 @@ using UnityEngine;
 
 public class EnemyDash : MonoBehaviour
 {
-    public Transform player;
-
-    [Header("기본 이동")]
-    public float moveSpeed = 3f;
-
+    private Transform player;
     [Header("돌진 조건/파라미터")]
     public float triggerDistance = 8f;   // 이 거리 안에 들어오면 1회 돌진
     public float chargeSpeed = 18f;      // 돌진 속도
@@ -23,19 +19,20 @@ public class EnemyDash : MonoBehaviour
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
     void Update()
     {
         if (player == null) return;
 
         // 아직 돌진 중이 아니면 기본 이동
-        if (!isCharging)
+        if (!isCharging && !hasCharged)
         {
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                player.position,
-                moveSpeed * Time.deltaTime
-            );
+            float dist = Vector3.Distance(transform.position, player.position);
+            if (dist <= triggerDistance)
+            {
+                StartCoroutine(ChargeOnce());
+            }
         }
 
         // 트리거: 아직 돌진 안 했고, 거리 조건 만족 시 1회 돌진 시작
@@ -56,27 +53,28 @@ public class EnemyDash : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
+
+        
     }
 
     IEnumerator ChargeOnce()
     {
         isCharging = true;
 
-        // 돌진 시작 순간의 방향을 고정 (플레이어가 도중에 움직여도 방향은 변하지 않음)
-        Vector3 dir = player != null ? (player.position - transform.position) : transform.forward;
-        if (dir.sqrMagnitude < 0.0001f) dir = transform.forward;
+        Vector3 dir = player != null ? (player.position - transform.position) : transform.right;
+        if (dir.sqrMagnitude < 0.0001f) dir = transform.right;
         dir.Normalize();
 
         float t = 0f;
         while (t < chargeDuration)
         {
             transform.position += dir * chargeSpeed * Time.deltaTime;
-            t += Time.deltaTime;
+            t += Time.deltaTime;    
             yield return null;
         }
 
-        hasCharged = true;   // 재돌진 불가
         isCharging = false;
+        hasCharged = true;   // 다시는 ChargeOnce 안 들어감, 대신 추적만 계속
     }
 
 #if UNITY_EDITOR

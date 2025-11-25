@@ -2484,6 +2484,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1662413100642505253, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662413100642505253, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: DashCoolDownText
       value: 
       objectReference: {fileID: 628153131}
