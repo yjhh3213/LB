@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 220f4a71929901741a067f4b7e7de251
+guid: 582efe776002fc745a1ec421c3206f11
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -91,7 +91,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "\uBA67\uB3FC\uC9C0_\uC2DC\uCCB4_strip4_0"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39c3da9424845a54e8a1e625ca3fe597
+      internalID: 1506911519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uBA67\uB3FC\uC9C0_\uC2DC\uCCB4_strip4_1"
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95087826f2f786d4a8d4feae4b08df36
+      internalID: 750384956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uBA67\uB3FC\uC9C0_\uC2DC\uCCB4_strip4_2"
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8478e2089a533ff44a843a7f2f94c03a
+      internalID: 995426919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uBA67\uB3FC\uC9C0_\uC2DC\uCCB4_strip4_3"
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30946f84918f0024988aa042ad7dd66a
+      internalID: 314126393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -102,7 +186,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "\uBA67\uB3FC\uC9C0_\uC2DC\uCCB4_strip4_0": 1506911519
+      "\uBA67\uB3FC\uC9C0_\uC2DC\uCCB4_strip4_1": 750384956
+      "\uBA67\uB3FC\uC9C0_\uC2DC\uCCB4_strip4_2": 995426919
+      "\uBA67\uB3FC\uC9C0_\uC2DC\uCCB4_strip4_3": 314126393
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

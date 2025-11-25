@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da3e6d1bb9936f146bd7ee11f0ee06b3
+guid: f25285e7eb7a42341a90753af1b50a12
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -89,41 +89,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bc9388d2cea968db_0
+      name: Boar_Move_strip4_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 2
-        width: 33
-        height: 24
+        x: 0
+        y: 0
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +107,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5c611f779f241f429b8d84a9998a6c0
-      internalID: 58045933
+      spriteID: 55fc8c8fa28d764438889a1c98846958
+      internalID: -182861307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bc9388d2cea968db_1
+      name: Boar_Move_strip4_1
       rect:
         serializedVersion: 2
-        x: 115
-        y: 2
-        width: 64
-        height: 25
+        x: 160
+        y: 0
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +128,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3b44302384004e4488f373ebc91348d
-      internalID: 371317347
+      spriteID: cdf5c7f0c7a36654ca688f3de13a032c
+      internalID: -619798382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bc9388d2cea968db_2
+      name: Boar_Move_strip4_2
       rect:
         serializedVersion: 2
-        x: 214
-        y: 2
-        width: 64
-        height: 28
+        x: 320
+        y: 0
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c038483e26fe03640b02c01bb78d2ecd
-      internalID: 1165522981
+      spriteID: 5bde3ba5d3dd3cd4b80bc2acddece860
+      internalID: -1566427658
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bc9388d2cea968db_3
+      name: Boar_Move_strip4_3
       rect:
         serializedVersion: 2
-        x: 323
-        y: 3
-        width: 42
-        height: 27
+        x: 480
+        y: 0
+        width: 160
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,8 +170,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84533ab23e6751047865518a3940edbb
-      internalID: 952004283
+      spriteID: 4badebf7cab70ca41b857271bafe32da
+      internalID: -1891225170
       vertices: []
       indices: 
       edges: []
@@ -211,10 +187,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bc9388d2cea968db_0: 58045933
-      bc9388d2cea968db_1: 371317347
-      bc9388d2cea968db_2: 1165522981
-      bc9388d2cea968db_3: 952004283
+      Boar_Move_strip4_0: -182861307
+      Boar_Move_strip4_1: -619798382
+      Boar_Move_strip4_2: -1566427658
+      Boar_Move_strip4_3: -1891225170
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
