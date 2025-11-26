@@ -90,6 +90,7 @@ public class Card : MonoBehaviour
     {
         Time.timeScale = 0.0f;
         Player.SetActive(false);
+        FindObjectOfType<Aim>().aim_ch("마우스"); //에임 모양 변경
         gameclick = true;
 
         Arraynum = new List<int> { 3};
@@ -172,6 +173,7 @@ public class Card : MonoBehaviour
             SetCardobj[i].SetActive(false);
         }
         Player.SetActive(true);
+        FindObjectOfType<Aim>().aim_ch("일반"); //에임 모양 변경
         gameclick = false;
         Time.timeScale = 1.0f;
     }
