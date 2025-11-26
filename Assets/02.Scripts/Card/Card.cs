@@ -9,6 +9,9 @@ public class Card : MonoBehaviour
 
     public static Card Instance;
 
+    private float card_delay = 1f; //카드를 고른 순간 카드 시간 부과
+    private float card_cu_delay = 0f; // 카드를 고를땐 0이여야 고를 수 있음
+
     [Header("GameObjet")]
     public GameObject[] SetCardobj;     // 카드오브젝트
     public GameObject Player;           // 플레이어
@@ -34,6 +37,8 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("딜레이 :" + card_cu_delay);
+        if (card_cu_delay > 0) { card_cu_delay -= Time.unscaledDeltaTime; }
         ChangeCardColor();
     }
 
@@ -89,7 +94,7 @@ public class Card : MonoBehaviour
     public void cardbuff()
     {
         Time.timeScale = 0.0f;
-        Player.SetActive(false);
+        card_cu_delay = card_delay; //딜레이 넣기
         FindObjectOfType<Aim>().aim_ch("마우스"); //에임 모양 변경
         gameclick = true;
 
@@ -143,26 +148,29 @@ public class Card : MonoBehaviour
     // 카드를 눌렀을 때 해당하는 카드의 능력치 올리기
     public void SelectCard(int index)
     {
-        int cardType = 0;
-
-        if (index == 0) cardType = Sect1;
-        else if (index == 1) cardType = Sect2;
-        else if (index == 2) cardType = Sect3;
-
-        switch (cardType)
+        if (card_cu_delay <= 0)
         {
-            case 0: ShotGunCard++; CardColorobj[0].SetActive(true); break;
-            case 1: BulletCard++; CardColorobj[1].SetActive(true); break;
-            case 2: barrelCard++; CardColorobj[2].SetActive(true); break;
-            case 3: weaknessCard++; CardColorobj[3].SetActive(true); break;
-            case 4: nimblestepsCard++; CardColorobj[4].SetActive(true); break;
-            case 5: QuickstepCard++; CardColorobj[5].SetActive(true); break;
-            case 6: fastdraw++; CardColorobj[6].SetActive(true); break;
+            int cardType = 0;
+
+            if (index == 0) cardType = Sect1;
+            else if (index == 1) cardType = Sect2;
+            else if (index == 2) cardType = Sect3;
+
+            switch (cardType)
+            {
+                case 0: ShotGunCard++; CardColorobj[0].SetActive(true); break;
+                case 1: BulletCard++; CardColorobj[1].SetActive(true); break;
+                case 2: barrelCard++; CardColorobj[2].SetActive(true); break;
+                case 3: weaknessCard++; CardColorobj[3].SetActive(true); break;
+                case 4: nimblestepsCard++; CardColorobj[4].SetActive(true); break;
+                case 5: QuickstepCard++; CardColorobj[5].SetActive(true); break;
+                case 6: fastdraw++; CardColorobj[6].SetActive(true); break;
+            }
+
+            Debug.Log(cardType + " 번 카드 강화!");
+
+            NoSeeCard();
         }
-
-        Debug.Log(cardType + " 번 카드 강화!");
-
-        NoSeeCard();
     }
 
     // 카드 보이지 않게 하기
@@ -172,7 +180,7 @@ public class Card : MonoBehaviour
         {
             SetCardobj[i].SetActive(false);
         }
-        Player.SetActive(true);
+        card_cu_delay = card_delay; //딜레이 넣기
         FindObjectOfType<Aim>().aim_ch("일반"); //에임 모양 변경
         gameclick = false;
         Time.timeScale = 1.0f;

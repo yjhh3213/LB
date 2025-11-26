@@ -292,7 +292,6 @@ public class PlayerCtrl : MonoBehaviour
     {
         // 현재 플레이어 위치 가져오기
         Vector3 newPosition = transform.position;
-        print(Mathf.Clamp(newPosition.x, minX, maxX));
         // 화면 경계를 넘어가지 않도록 Clamp 적용
         newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
         newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
