@@ -36,30 +36,7 @@ public class Bullet : MonoBehaviour
                 enemy.TakeDamage(Damage);
             }
 
-            // bullet이 프리팹 상태이기에 Card 스크립트를 Instance화를 시켜 해당하는 값을 가져오기
-            int BulletCardLevel = Card.Instance.BulletCard;
-            if (BulletCardLevel == 1)
-            {
-                if (count == 1)
-                {
-                    count = 0;
-                    Destroy(gameObject);
-                }
-                count++;
-            }
-            else if (BulletCardLevel == 2)
-            {
-                if (count == 2)
-                {
-                    count = 0;
-                    Destroy(gameObject);
-                }
-                count++;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            BCL(BulletCardLevel);
         }
 
         if (collision.collider.CompareTag("aa"))

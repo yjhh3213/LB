@@ -41,9 +41,13 @@ public class PlayerCtrl : MonoBehaviour
 
     bool isSlowed = false;
 
+    private Camera mainCamera; //이동 제한용 카메라 불러오기
+    private float minX, maxX, minY, maxY;
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = Camera.main;
+        SetBounds();//카메라 못나가기 세팅
         bodyRenderer = transform.Find("body").GetComponent<SpriteRenderer>();
         bodyRenderer.sprite = IdleSprite;
 
@@ -60,6 +64,7 @@ public class PlayerCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         nimblestepsCardLevel = Card.Instance.nimblestepsCard;        // 기민한 걸음 Level
         QuickstepCardLevel = Card.Instance.QuickstepCard;            // 퀵 스탭     Level
 
@@ -83,7 +88,6 @@ public class PlayerCtrl : MonoBehaviour
                 speed = 2.0f;
                 break;
         }
-        print(speed);
 
         switch (QuickstepCardLevel)
         {
@@ -107,6 +111,7 @@ public class PlayerCtrl : MonoBehaviour
 
         UpdateSprite();
         DashGaugeUI();
+        RestrictMovement();//카메라 밖으로 못나감
     }
 
 
@@ -270,7 +275,30 @@ public class PlayerCtrl : MonoBehaviour
         if (!dead) bodyRenderer.sprite = IdleSprite;
     }
 
+    void SetBounds() // 카메라 밖으로 못나가게 세팅
+    {
+        // 카메라 화면의 좌측 하단과 우측 상단을 월드 좌표로 변환
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
+        Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
 
+        // X, Y 이동 범위 설정
+        minX = bottomLeft.x;
+        maxX = topRight.x;
+        minY = bottomLeft.y;
+        maxY = topRight.y;
+        minX -= 8f; maxX += 8f; minY -= 12f; maxY += 12f;//플레이어가 카메라 밖으로 못나가게 하기 위한 조치
+    }
+    void RestrictMovement() // 카메라 밖으로 못나가게
+    {
+        // 현재 플레이어 위치 가져오기
+        Vector3 newPosition = transform.position;
+        // 화면 경계를 넘어가지 않도록 Clamp 적용
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+        newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+
+        // 최종 위치 적용
+        transform.position = newPosition;
+    }
     /// <summary>
     /// 대쉬 잔상남기기
     /// </summary>

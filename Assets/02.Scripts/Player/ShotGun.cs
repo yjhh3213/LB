@@ -38,6 +38,8 @@ public class ShotGun : MonoBehaviour
     bool WaitEmptySccess = false;
     bool isReloading = false;               // 재장전중인지
 
+    
+
     AudioSource audio;
 
     // Start is called before the first frame update
@@ -70,7 +72,7 @@ public class ShotGun : MonoBehaviour
             WaitDelay -= Time.deltaTime;
             print("WaitDelay : " + WaitDelay);
         }
-        else { WaitShoot -= Time.deltaTime; print("WaitShoot : " + WaitShoot); }
+        else { WaitShoot -= Time.deltaTime; }
 
         if (WaitEmptySccess)
         {
@@ -171,22 +173,15 @@ public class ShotGun : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (NowBulletCount <= 0)
-            {
-                Reload();
-                print("Reload");
-            }
-            else
-            {
-                print("아직 탄이 남았습니다");
-            }
+            Reload();
+            print("Reload");
         }
     }
 
     void Reload()
     {
         if (isReloading) return;
-
+        FindObjectOfType<Aim>().aim_ch("장전"); //에임 모양 변경
         // 총 탄약 수에서 현재 탄약 수를 뺀 나머지 탄약 수를 재장전한다
         int reloadBullet = MaxBulletCount - NowBulletCount;
         StartCoroutine(ReloadC(reloadBullet));
@@ -210,6 +205,7 @@ public class ShotGun : MonoBehaviour
                 //print(count);
             }
             isReloading = false;
+            FindObjectOfType<Aim>().aim_ch("일반"); //에임 모양 변경
             yield break;
         }
 
@@ -230,9 +226,13 @@ public class ShotGun : MonoBehaviour
 
         int qteSteps = 3;
 
+        //전체에서 QERT만 사용하기
+        KeyCode[] QET = { KeyCode.Q, KeyCode.E, KeyCode.T};
+
         for (int i = 0; i < qteSteps; i++)
         {
-            KeyCode targetKey = (KeyCode)Random.Range((int)KeyCode.A, (int)KeyCode.Z + 1);
+            KeyCode targetKey = QET[Random.Range(0, QET.Length)];
+
             qteText.text = targetKey.ToString();
             print($"QTE {i + 1}/{qteSteps} : {targetKey} 키를 누르세요");
 
@@ -283,11 +283,9 @@ public class ShotGun : MonoBehaviour
                 }
                 if (Input.anyKeyDown)
                 {
-                    for (int keyIndex = (int)KeyCode.A; keyIndex <= (int)KeyCode.Z; keyIndex++)
+                    foreach(KeyCode key in QET)
                     {
-                        KeyCode currentKey = (KeyCode)keyIndex;
-
-                        if (currentKey != targetKey && Input.GetKeyDown(currentKey))
+                        if (key != targetKey && Input.GetKeyDown(key))
                         {
                             print("QTE 실패! (틀린 키 입력)");
                             isFailed = true; // 실패 처리
@@ -326,6 +324,7 @@ public class ShotGun : MonoBehaviour
         ReloadImage.SetActive(false);
         qteText.gameObject.SetActive(false);
         isReloading = false;
+        FindObjectOfType<Aim>().aim_ch("일반"); //에임 모양 변경
     }
 }
 

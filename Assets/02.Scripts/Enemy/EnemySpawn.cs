@@ -5,6 +5,9 @@ using System.Collections;
 public class EnemySpawn : MonoBehaviour
 {
     public static EnemySpawn Instance;
+    private float spawnDistance = 3; // 카메라의 거리
+    private Camera mainCamera;
+
     [Header("몬스터 설정")]
     public GameObject monsterPrefabA; // 1~8라 전부 (기본좀비)
     public GameObject monsterPrefabB; // 3~8라 (좀비 멧돼지)
@@ -43,14 +46,6 @@ public class EnemySpawn : MonoBehaviour
     public int E_startCount = 1; // 첫 등장수
     public int E_addPerWave = 1; // 웨이브 추가
 
-    [Header("맵 범위")]
-    public float minX = -50f;
-    public float maxX = 50f;
-    public float minZ = -50f;
-    public float maxZ = 50f;
-    public float minY = -50f;
-    public float maxY = 50f;
-
     [Header("참조")]
     public CountTimer countTimer;
 
@@ -65,6 +60,7 @@ public class EnemySpawn : MonoBehaviour
         {
             Instance = this;   // 🔥 EnemySpawn.Instance 로 접근 가능해짐
         }
+        mainCamera = Camera.main;
         //else
         //{
         //    Destroy(gameObject); // 중복 EnemySpawn 제거
@@ -156,10 +152,17 @@ public class EnemySpawn : MonoBehaviour
     void SpawnMonster(GameObject prefab)
     {
         if (prefab == null) return;
-        float randomX = Random.Range(minX, maxX);
-        float randomZ = Random.Range(minZ, maxZ);
-        float randomY = Random.Range(minY, maxY);
-        Instantiate(prefab, new Vector3(randomX, randomY, randomZ), Quaternion.identity);
+
+        // 카메라의 경계 구하기
+        Vector3 cameraPos = mainCamera.transform.position;
+        float height = 2f * mainCamera.orthographicSize;
+        float width = height * mainCamera.aspect;
+
+        // 카메라의 경계 바깥에서 생성될 위치 계산 (상하좌우 중 랜덤)
+        Vector3 spawnPos = cameraPos + GetRandomSpawnPosition(width, height);
+        spawnPos.z = 0; // Z축을 0으로 고정
+
+        Instantiate(prefab, spawnPos, Quaternion.identity);
 
         FiledEnemy++;
     }
@@ -172,8 +175,31 @@ public class EnemySpawn : MonoBehaviour
             Debug.Log("필드 몬스터 전부 사망 → 웨이브 종료");
             countTimer.EndWaveByEnemies();
         }
+    }
+    // 카메라 경계 바깥의 랜덤한 위치를 반환하는 함수
+    Vector3 GetRandomSpawnPosition(float width, float height)
+    {
+        int side;
+        side = Random.Range(0, 4); // 0: 위, 1: 아래, 2: 왼쪽, 3: 오른쪽
+        Vector3 offset = Vector3.zero;
 
+        switch (side)
+        {
+            case 0: // 위쪽
+                offset = new Vector3(Random.Range(-width / 2, width / 2), height / 2 + spawnDistance, 0);
+                break;
+            case 1: // 아래쪽
+                offset = new Vector3(Random.Range(-width / 2, width / 2), -height / 2 - spawnDistance, 0);
+                break;
+            case 2: // 왼쪽
+                offset = new Vector3(-width / 2 - spawnDistance, Random.Range(-height / 2, height / 2), 0);
+                break;
+            case 3: // 오른쪽
+                offset = new Vector3(width / 2 + spawnDistance, Random.Range(-height / 2, height / 2), 0);
+                break;
+        }
 
+        return offset;
     }
 }
 
