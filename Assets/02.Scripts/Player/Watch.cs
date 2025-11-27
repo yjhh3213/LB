@@ -16,12 +16,12 @@ public class Watch : MonoBehaviour
         if (mousePos.x < transform.position.x)
         {
             // 왼쪽을 볼 때 (Y축 180도 회전)
-            transform.rotation = Quaternion.Euler(0, 180f, angle);
+            transform.rotation = Quaternion.Euler(0, 180f, -angle);
         }
         else
         {
             // 오른쪽을 볼 때 (Y축 0도)
-            transform.rotation = Quaternion.Euler(0, 180f, angle);
+            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
 }
