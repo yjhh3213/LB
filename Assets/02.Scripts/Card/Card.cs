@@ -31,6 +31,15 @@ public class Card : MonoBehaviour
     public int QuickstepCard = 0;       // 퀵 스탭
     public int fastdraw = 0;            // 빠른 장전
 
+    // 중복된 카드가 안나오게 하는 변수
+    bool CheckShotCard = false;
+    bool CheckBulletCard = false;
+    bool CheckbarrelCard = false;
+    bool CheckweaknessCard = false;
+    bool ChecknimblestepsCard = false;
+    bool CheckQuickstepCard = false;
+    bool Checkfastdraw = false;
+
     string CardName;
     string CardDetail;
 
@@ -139,6 +148,49 @@ public class Card : MonoBehaviour
                 
         }
     }
+
+    /*void CheckCard(int num, int i)
+    {
+        switch (num)
+        {
+            case 0:
+                if(CheckShotCard)
+                break;
+            case 1:
+                if (BulletCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "총알개조 Level 2"; CardDetail = "적 두 명 관통"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "총알개조 Level 1"; CardDetail = "적 한 명 관통"; }
+                break;
+            case 2:
+                if (barrelCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "총열개조 Level 3"; CardDetail = "탄 퍼짐 60% 감소"; }
+                else if (barrelCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "총열개조 Level 2"; CardDetail = "탄 퍼짐 40% 감소"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "총열개조 Level 1"; CardDetail = "탄 퍼짐 20% 감소"; }
+                break;
+            case 3:
+                if (weaknessCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "약점포착 Level 3"; CardDetail = "총알 데미지 50% 증가\n공격속도 20% 증가"; }
+                else if (weaknessCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "약점포착 Level 2"; CardDetail = "총알 데미지 40% 증가"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "약점포착 Level 1"; CardDetail = "총알 데미지 20% 증가"; }
+                break;
+            case 4:
+                if (nimblestepsCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "기민한 걸음 Level 3"; CardDetail = "이동속도 +3 증가"; }
+                else if (nimblestepsCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "기민한 걸음 Level 2"; CardDetail = "이동속도 +2 증가"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "기민한 걸음 Level 1"; CardDetail = "이동속도 +1 증가"; }
+                break;
+            case 5:
+                if (QuickstepCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "퀵 스텝 Level 3"; CardDetail = "대쉬 쿨타임 3초 감소"; }
+                else if (QuickstepCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "퀵 스텝 Level 2"; CardDetail = "대쉬 쿨타임 2초 감소"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "퀵 스텝 Level 1"; CardDetail = "대쉬 쿨타임 1초 감소"; }
+                break;
+            case 6:
+                if (fastdraw == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "빠른 장전 Level 3"; CardDetail = "즉시 재장전"; }
+                else if (fastdraw == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "빠른 장전 Level 2"; CardDetail = "재장전시 입력해야 할 수 2개 감소"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "빠른 장전 Level 1"; CardDetail = "재장전시 입력해야 할 수 1개 감소"; }
+                break;
+            default:
+                CardName = "";
+                CardDetail = "";
+                break;
+        }
+    }*/
 
     int Sect1 = 0;      // SetCardobj0번째
     int Sect2 = 0;      // SetCardobj1번째
