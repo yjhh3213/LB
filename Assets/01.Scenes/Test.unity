@@ -487,8 +487,8 @@ MonoBehaviour:
   spawnDelay: 0.2
   minWave: 1
   maxWave: 8
-  A_startCount: 1
-  A_addPerWave: 1
+  A_startCount: 10
+  A_addPerWave: 20
   B_startWave: 3
   B_startCount: 5
   B_addper2Wave: 2
@@ -2237,7 +2237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 2028168386}
-  startTime: 5
+  startTime: 60
   timerText: {fileID: 302264755}
   waveText: {fileID: 786744223}
 --- !u!114 &1241308347

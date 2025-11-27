@@ -68,7 +68,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 08f4908e406c3e047a8770b956831d1a, type: 2}
   EnemySpeed: 0
   EnemyHP: 0
-  dieAnimTime: 0.7
+  dieAnimTime: 10
   poisonCloundPrefab: {fileID: 0}
 --- !u!114 &5955337699383881436
 MonoBehaviour:
@@ -235,7 +235,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6951215236908377896}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.25, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -305,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6951215236917918290}
   - component: {fileID: 6951215236917918291}
-  - component: {fileID: 5050421175261165710}
+  - component: {fileID: 4780162556203093667}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -382,7 +382,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5050421175261165710
+--- !u!95 &4780162556203093667
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -392,7 +392,7 @@ Animator:
   m_GameObject: {fileID: 6951215236917918317}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e26d310015f99c344ae682e99b625a58, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2864e241815d74b4896440ebc9ea1638, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
