@@ -227,11 +227,11 @@ public class ShotGun : MonoBehaviour
         int qteSteps = 3;
 
         //전체에서 QERT만 사용하기
-        KeyCode[] QERT = { KeyCode.Q, KeyCode.E, KeyCode.R, KeyCode.T };
+        KeyCode[] QET = { KeyCode.Q, KeyCode.E, KeyCode.T};
 
         for (int i = 0; i < qteSteps; i++)
         {
-            KeyCode targetKey = QERT[Random.Range(0, QERT.Length)];
+            KeyCode targetKey = QET[Random.Range(0, QET.Length)];
 
             qteText.text = targetKey.ToString();
             print($"QTE {i + 1}/{qteSteps} : {targetKey} 키를 누르세요");
@@ -283,7 +283,7 @@ public class ShotGun : MonoBehaviour
                 }
                 if (Input.anyKeyDown)
                 {
-                    foreach(KeyCode key in QERT)
+                    foreach(KeyCode key in QET)
                     {
                         if (key != targetKey && Input.GetKeyDown(key))
                         {
