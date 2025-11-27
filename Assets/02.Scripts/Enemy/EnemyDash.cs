@@ -12,6 +12,7 @@ public class EnemyDash : MonoBehaviour
     private bool isCharging = false;
     private bool hasCharged = false;     // 돌진은 딱 1번만
     SpriteRenderer spriteRenderer;
+    Animator animator;
 
     private void Start()
     {
@@ -20,6 +21,8 @@ public class EnemyDash : MonoBehaviour
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        animator = GetComponentInChildren<Animator>();
     }
     void Update()
     {
@@ -60,10 +63,15 @@ public class EnemyDash : MonoBehaviour
     IEnumerator ChargeOnce()
     {
         isCharging = true;
-
+        hasCharged = true;   // 다시는 ChargeOnce 안 들어감, 대신 추적만 계속
+        if (animator != null)
+        {
+            animator.SetBool("Attack", true);
+        }
         Vector3 dir = player != null ? (player.position - transform.position) : transform.right;
         if (dir.sqrMagnitude < 0.0001f) dir = transform.right;
         dir.Normalize();
+        
 
         float t = 0f;
         while (t < chargeDuration)
@@ -74,7 +82,11 @@ public class EnemyDash : MonoBehaviour
         }
 
         isCharging = false;
-        hasCharged = true;   // 다시는 ChargeOnce 안 들어감, 대신 추적만 계속
+        
+        if(animator != null)
+        {
+            animator.SetBool("Attack", false);
+        }
     }
 
 #if UNITY_EDITOR

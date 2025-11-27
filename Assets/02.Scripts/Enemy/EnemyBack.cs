@@ -45,4 +45,12 @@ public class EnemyBack : MonoBehaviour
 
         isKnockback = false;
     }
+
+    public void StopKnockback()
+    {
+        isKnockback = false;
+        StopAllCoroutines();
+        if (rb != null)
+            rb.velocity = Vector2.zero;
+    }
 }
