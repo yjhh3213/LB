@@ -9,8 +9,8 @@ public class Card : MonoBehaviour
 
     public static Card Instance;
 
-    private float card_delay = 1f; //카드를 고른 순간 카드 시간 부과
-    private float card_cu_delay = 0f; // 카드를 고를땐 0이여야 고를 수 있음
+    private float card_delay = 1f;      // 카드를 고른 순간 카드 시간 부과
+    private float card_cu_delay = 0f;   // 카드를 고를땐 0이여야 고를 수 있음
 
     [Header("GameObjet")]
     public GameObject[] SetCardobj;     // 카드오브젝트
@@ -28,6 +28,9 @@ public class Card : MonoBehaviour
     public int nimblestepsCard = 0;     // 기민한걸음
     public int QuickstepCard = 0;       // 퀵 스탭
     public int fastdraw = 0;            // 빠른 장전
+
+    string CardName;
+    string CardDetail;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +62,44 @@ public class Card : MonoBehaviour
         else if (BulletCard == 2) CardColor[1].color = new Color(0, 144, 248);
         else if (BulletCard == 1) CardColor[1].color = new Color(152, 248, 152);
         else { CardColorobj[1].SetActive(false); }
+
+        if (barrelCard >= 3) CardColor[2].color = new Color(200, 0, 248);
+        else if (barrelCard == 2) CardColor[2].color = new Color(0, 144, 248);
+        else if (barrelCard == 1) CardColor[2].color = new Color(152, 248, 152);
+        else { CardColorobj[2].SetActive(false); }
+
+        if (weaknessCard >= 3) CardColor[3].color = new Color(200, 0, 248);
+        else if (weaknessCard == 2) CardColor[3].color = new Color(0, 144, 248);
+        else if (weaknessCard == 1) CardColor[3].color = new Color(152, 248, 152);
+        else { CardColorobj[3].SetActive(false); }
+
+        if (nimblestepsCard >= 3) CardColor[4].color = new Color(200, 0, 248);
+        else if (nimblestepsCard == 2) CardColor[4].color = new Color(0, 144, 248);
+        else if (nimblestepsCard == 1) CardColor[4].color = new Color(152, 248, 152);
+        else { CardColorobj[4].SetActive(false); }
+
+        if (QuickstepCard >= 3) CardColor[5].color = new Color(200, 0, 248);
+        else if (QuickstepCard == 2) CardColor[5].color = new Color(0, 144, 248);
+        else if (QuickstepCard == 1) CardColor[5].color = new Color(152, 248, 152);
+        else { CardColorobj[5].SetActive(false); }
+
+        if (fastdraw >= 3) CardColor[6].color = new Color(200, 0, 248);
+        else if (fastdraw == 2) CardColor[6].color = new Color(0, 144, 248);
+        else if (fastdraw == 1) CardColor[6].color = new Color(152, 248, 152);
+        else { CardColorobj[6].SetActive(false); }
+    }
+
+    // 카드의 이름, 내용 소개
+    void CardNameAndDetail()
+    {
+        if (ShotGunCard == 2) { CardName = "샷건 개조 Level 3"; CardDetail = "기존 투사체에서 +4"; }
+        else if (ShotGunCard == 1) { CardName = "샷건 개조 Level 2"; CardDetail = "기존 투사체에서 +2"; }
+        else { CardName = "샷건 개조 Level 1"; CardDetail = "기존 투사체에서 +1"; }
+
+        if (BulletCard >= 3) CardColor[1].color = new Color(200, 0, 248);
+        else if (BulletCard == 2) CardColor[1].color = new Color(0, 144, 248);
+        else if (BulletCard == 1) CardColor[1].color = new Color(152, 248, 152);
+        else { CardName = "총알개조 Level 1"; CardDetail = "적 한 명 관통"; }
 
         if (barrelCard >= 3) CardColor[2].color = new Color(200, 0, 248);
         else if (barrelCard == 2) CardColor[2].color = new Color(0, 144, 248);
