@@ -101,8 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694f8dd2a6405994dae1aa2de31f84c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackSpeed: 3
-  knockbackTime: 0.2
 --- !u!114 &-3263972547416794224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +121,6 @@ MonoBehaviour:
   reviveHp: 30
   reviveFreeze: 1
   downedGrace: 0.05
-  dieAnimTime: 5
 --- !u!50 &-6956889091776205101
 Rigidbody2D:
   serializedVersion: 4
@@ -158,9 +155,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.01732254, y: 0}
   serializedVersion: 2
-  m_Radius: 0.48
+  m_Radius: 0.34334755
 --- !u!95 &-4352515927196754507
 Animator:
   serializedVersion: 5
