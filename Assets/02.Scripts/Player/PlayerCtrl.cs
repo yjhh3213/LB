@@ -173,8 +173,7 @@ public class PlayerCtrl : MonoBehaviour
                 isDashing = true;
                 dashdir = dir.normalized;
                 dashTimer = dashCoolDown;
-                print("Dash!");
-                print(dashcount);
+                SoundManager.Instance.Player_SFX(3);
                 StartCoroutine(DashTimerCoroutine());
                 anim.SetBool("Dash", true);
             }
