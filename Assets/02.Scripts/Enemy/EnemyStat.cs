@@ -83,7 +83,7 @@ public class EnemyStat : MonoBehaviour
         {
             EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
         }
-
+        SoundManager.Instance.Player_SFX(5);
 
         if (isDead) return; // 두 번 실행 방지
         isDead = true;
