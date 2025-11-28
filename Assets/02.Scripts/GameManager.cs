@@ -23,13 +23,6 @@ public class GameManager : MonoBehaviour
     public float playTime;
 
     private bool isGameOver = false;
-
-    PlayerCtrl pc;
-
-    private void Start()
-    {
-        pc = GetComponent<PlayerCtrl>();
-    }
     void Update()
     {
         if (!isGameOver)
@@ -39,7 +32,7 @@ public class GameManager : MonoBehaviour
     // 외부에서 GameOver() 호출만 하면 모든 연출이 자동 작동됨
     public void GameOver()
     {
-        if (pc.dead) return;  // 중복 방지
+        if (isGameOver) return;  // 중복 방지
         isGameOver = true;
 
         // 1. 기존 UI 비활성화
