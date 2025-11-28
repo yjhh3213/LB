@@ -82,8 +82,7 @@ public class ShotGun : MonoBehaviour
             {
                 if (ReloadSound == null) return;
 
-                int audioclipN = Random.Range(0, 2);
-                audio.PlayOneShot(ReloadSound[audioclipN]);
+                audio.PlayOneShot(ReloadSound[0]);
                 EmptyBulletSpeed += Time.deltaTime;
                 Quaternion EBrot = EmptyBullet.rotation * Quaternion.Euler(0, 0, -EmptyBulletSpeed);
                 GameObject EB = Instantiate(EmptyPrefab[0], EmptyBullet.position, EBrot);
@@ -137,9 +136,9 @@ public class ShotGun : MonoBehaviour
                         decreasebullet = 15.0f;
                         break;
                 }
-                
-                //print(decreasebullet);
-                
+
+                EffectManager.Instance.PlayAnimation("ÃÑ¿°", FirePoint.position, 1f, 0.25f, 0.1f); // ÀÌÆåÆ® »ý¼º
+                EffectManager.Instance.PlayAnimation("ÃÑ¿¬±â", transform.position + new Vector3(0,+0.5f,0), 1f, 0.5f, 0.25f); // ÀÌÆåÆ® »ý¼º
                 if (BulletPrefab != null)
                 {
                     for (int i = 0; i < BulletNumber; i++)
@@ -274,6 +273,7 @@ public class ShotGun : MonoBehaviour
                         {
                             if (count > 0)
                             {
+                                audio.PlayOneShot(ReloadSound[1]);
                                 BulletCount[count - 1].SetActive(true);
                                 count--;
                             }

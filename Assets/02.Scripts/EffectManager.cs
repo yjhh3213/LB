@@ -13,6 +13,9 @@ public class EffectManager : MonoBehaviour
     public GameObject animationEffectPrefab;
     public GameObject randomEffectPrefab;
 
+    [Header("애니메이션 컨트롤러 그룹")]
+    public AnimatorGroup[] animatorGroups;
+
     [Header("랜덤 스프라이트 그룹")]
     public SpriteGroup[] spriteGroups;
 
@@ -33,9 +36,49 @@ public class EffectManager : MonoBehaviour
     public GameObject PlayAnimation(string animationName, Vector3 position, float animSpeed = 1f,
         float destroyTime = 3f, float fadeStartTime = 1f)
     {
+        if (animationEffectPrefab == null)
+        {
+            Debug.LogError("animationEffectPrefab이 할당되지 않았습니다!");
+            return null;
+        }
+
+        // EffectManager에서 해당 이름의 애니메이션 컨트롤러 찾기
+        RuntimeAnimatorController selectedController = null;
+        foreach (var group in animatorGroups)
+        {
+            if (group.groupName == animationName)
+            {
+                selectedController = group.animatorController;
+                break;
+            }
+        }
+
+        if (selectedController == null)
+        {
+            Debug.LogWarning($"애니메이션 컨트롤러 '{animationName}'을 찾을 수 없습니다!");
+            return null;
+        }
+
         GameObject effect = Instantiate(animationEffectPrefab, position, Quaternion.identity);
-        AnimationEffect anim = effect.GetComponent<AnimationEffect>();
-        anim.Setup(animationName, animSpeed, destroyTime, fadeStartTime);
+
+        // 컴포넌트 가져오기
+        Animator animator = effect.GetComponent<Animator>();
+        SpriteRenderer spriteRenderer = effect.GetComponent<SpriteRenderer>();
+
+        if (animator == null || spriteRenderer == null)
+        {
+            Debug.LogError("Animator 또는 SpriteRenderer가 프리팹에 없습니다!");
+            Destroy(effect);
+            return null;
+        }
+
+        // 애니메이션 설정
+        animator.runtimeAnimatorController = selectedController;
+        animator.speed = animSpeed;
+
+        // 페이드 아웃 시작
+        StartCoroutine(AnimationEffectRoutine(effect, spriteRenderer, destroyTime, fadeStartTime));
+
         return effect;
     }
 
@@ -43,6 +86,12 @@ public class EffectManager : MonoBehaviour
     public GameObject PlayRandom(string spriteName, Vector3 position,
         float destroyTime = 2f, float fadeStartTime = 0.5f)
     {
+        if (randomEffectPrefab == null)
+        {
+            Debug.LogError("randomEffectPrefab이 할당되지 않았습니다!");
+            return null;
+        }
+
         // EffectManager에서 해당 이름의 스프라이트 그룹 찾기
         Sprite selectedSprite = null;
         foreach (var group in spriteGroups)
@@ -61,89 +110,32 @@ public class EffectManager : MonoBehaviour
         }
 
         GameObject effect = Instantiate(randomEffectPrefab, position, Quaternion.identity);
-        RandomEffect random = effect.GetComponent<RandomEffect>();
-        random.Setup(selectedSprite, destroyTime, fadeStartTime);
-        return effect;
-    }
-}
 
-// 애니메이션 이펙트
-public class AnimationEffect : MonoBehaviour
-{
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-    private float destroyTime;
-    private float fadeStartTime;
-    private float fadeDuration;
+        // 컴포넌트 가져오기
+        SpriteRenderer spriteRenderer = effect.GetComponent<SpriteRenderer>();
 
-    void Awake()
-    {
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    public void Setup(string animationName, float animSpeed, float destroyTime, float fadeStartTime)
-    {
-        this.destroyTime = destroyTime;
-        this.fadeStartTime = fadeStartTime;
-        this.fadeDuration = destroyTime - fadeStartTime;
-
-        // 애니메이션 설정
-        animator.speed = animSpeed;
-        animator.Play(animationName);
-
-        StartCoroutine(EffectRoutine());
-    }
-
-    IEnumerator EffectRoutine()
-    {
-        // 페이드 시작 전까지 대기
-        yield return new WaitForSeconds(fadeStartTime);
-
-        // 페이드 아웃
-        float elapsed = 0f;
-        Color color = spriteRenderer.color;
-
-        while (elapsed < fadeDuration)
+        if (spriteRenderer == null)
         {
-            elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
-            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
-            yield return null;
+            Debug.LogError("SpriteRenderer가 프리팹에 없습니다!");
+            Destroy(effect);
+            return null;
         }
-
-        // 제거
-        Destroy(gameObject);
-    }
-}
-
-// 랜덤 이펙트
-public class RandomEffect : MonoBehaviour
-{
-    private SpriteRenderer spriteRenderer;
-    private float destroyTime;
-    private float fadeStartTime;
-    private float fadeDuration;
-
-    void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    public void Setup(Sprite sprite, float destroyTime, float fadeStartTime)
-    {
-        this.destroyTime = destroyTime;
-        this.fadeStartTime = fadeStartTime;
-        this.fadeDuration = destroyTime - fadeStartTime;
 
         // 스프라이트 설정
-        spriteRenderer.sprite = sprite;
+        spriteRenderer.sprite = selectedSprite;
 
-        StartCoroutine(EffectRoutine());
+        // 페이드 아웃 시작
+        StartCoroutine(RandomEffectRoutine(effect, spriteRenderer, destroyTime, fadeStartTime));
+
+        return effect;
     }
 
-    IEnumerator EffectRoutine()
+    // 애니메이션 이펙트 처리 코루틴
+    IEnumerator AnimationEffectRoutine(GameObject effect, SpriteRenderer spriteRenderer,
+        float destroyTime, float fadeStartTime)
     {
+        float fadeDuration = destroyTime - fadeStartTime;
+
         // 페이드 시작 전까지 대기
         yield return new WaitForSeconds(fadeStartTime);
 
@@ -160,11 +152,44 @@ public class RandomEffect : MonoBehaviour
         }
 
         // 제거
-        Destroy(gameObject);
+        Destroy(effect);
+    }
+
+    // 랜덤 이펙트 처리 코루틴
+    IEnumerator RandomEffectRoutine(GameObject effect, SpriteRenderer spriteRenderer,
+        float destroyTime, float fadeStartTime)
+    {
+        float fadeDuration = destroyTime - fadeStartTime;
+
+        // 페이드 시작 전까지 대기
+        yield return new WaitForSeconds(fadeStartTime);
+
+        // 페이드 아웃
+        float elapsed = 0f;
+        Color color = spriteRenderer.color;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
+            yield return null;
+        }
+
+        // 제거
+        Destroy(effect);
     }
 }
 
-// 스프라이트 그룹 (Inspector에서 설정하기 쉽도록)
+// 애니메이션 컨트롤러 그룹 (Inspector에서 설정)
+[System.Serializable]
+public class AnimatorGroup
+{
+    public string groupName;
+    public RuntimeAnimatorController animatorController;
+}
+
+// 스프라이트 그룹 (Inspector에서 설정)
 [System.Serializable]
 public class SpriteGroup
 {

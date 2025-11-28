@@ -66,7 +66,7 @@ public class EnemyStat : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        print(damage);
+        EffectManager.Instance.PlayAnimation("피격피", transform.position, 1f, 0.25f, 0.1f); // 이펙트 생성
         EnemyHP -= damage;
         print("Enemy HP : " + EnemyHP);
 
