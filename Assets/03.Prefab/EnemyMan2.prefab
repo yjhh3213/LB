@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: -423236964552674086}
   - component: {fileID: -5358712276262254739}
   - component: {fileID: -1311635424606594271}
-  - component: {fileID: -4217301730478336799}
   m_Layer: 0
   m_Name: EnemyMan2
   m_TagString: Enemy
@@ -155,24 +154,3 @@ CircleCollider2D:
   m_Offset: {x: 0.003768921, y: 0}
   serializedVersion: 2
   m_Radius: 0.34053802
---- !u!95 &-4217301730478336799
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3724416127368717471}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2864e241815d74b4896440ebc9ea1638, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
