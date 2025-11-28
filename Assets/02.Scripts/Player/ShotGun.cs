@@ -100,7 +100,7 @@ public class ShotGun : MonoBehaviour
             //print("Left Click");
             if (NowBulletCount >= 1)
             {
-                int BulletNumber = 4;
+                int BulletNumber = Random.Range(3, 6);
                 //print("더하기 전 : " + BulletNumber);
                 switch (ShotGunCardLevel)
                 {
