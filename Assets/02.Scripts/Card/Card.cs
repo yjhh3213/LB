@@ -32,13 +32,13 @@ public class Card : MonoBehaviour
     public int fastdraw = 0;            // 빠른 장전
 
     // 중복된 카드가 안나오게 하는 변수
-    bool CheckShotCard = false;
+    /*bool CheckShotCard = false;
     bool CheckBulletCard = false;
     bool CheckbarrelCard = false;
     bool CheckweaknessCard = false;
     bool ChecknimblestepsCard = false;
     bool CheckQuickstepCard = false;
-    bool Checkfastdraw = false;
+    bool Checkfastdraw = false;*/
 
     string CardName;
     string CardDetail;
