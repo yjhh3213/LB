@@ -987,7 +987,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationEffectPrefab: {fileID: 820545882071805995, guid: c11b717a3da5de24d86f9f9bfe63fa5b, type: 3}
   randomEffectPrefab: {fileID: 820545882071805995, guid: de6bf579cd0d5e645ba3c7de800e759a, type: 3}
-  spriteGroups: []
+  animatorGroups:
+  - groupName: "\uCD1D\uC5FC"
+    animatorController: {fileID: 9100000, guid: 96298f198402b0b4a8cb1ab53a1f3aa2, type: 2}
+  - groupName: "\uCD1D\uC794\uC0C1"
+    animatorController: {fileID: 9100000, guid: 47b3425a470651146afa0c3a67cf04fb, type: 2}
+  - groupName: "\uCD1D\uC5F0\uAE30"
+    animatorController: {fileID: 9100000, guid: 2a65564e3c96de947b2d476abdf7afa1, type: 2}
+  - groupName: "\uD53C\uACA9\uD53C"
+    animatorController: {fileID: 9100000, guid: 7a6a04da1473c7c43a701b6238e5459d, type: 2}
+  spriteGroups:
+  - groupName: "\uD53C_1"
+    sprites:
+    - {fileID: 1507514632, guid: 7e313bbd3caf4fa48926c21d8fca5fb7, type: 3}
+    - {fileID: -1020147221, guid: 7e313bbd3caf4fa48926c21d8fca5fb7, type: 3}
+    - {fileID: -1658612383, guid: 7e313bbd3caf4fa48926c21d8fca5fb7, type: 3}
+    - {fileID: -1714875194, guid: 7e313bbd3caf4fa48926c21d8fca5fb7, type: 3}
+    - {fileID: 2025612345, guid: 7e313bbd3caf4fa48926c21d8fca5fb7, type: 3}
+    - {fileID: -885207875, guid: 7e313bbd3caf4fa48926c21d8fca5fb7, type: 3}
+    - {fileID: 975230170, guid: 7e313bbd3caf4fa48926c21d8fca5fb7, type: 3}
+    - {fileID: -630322749, guid: 7e313bbd3caf4fa48926c21d8fca5fb7, type: 3}
+  - groupName: "\uD53C_2"
+    sprites:
+    - {fileID: 228055190, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: 1682945611, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: -1644813719, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: -1326334366, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: 957051237, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: -1345364725, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: -460250486, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: -1147766697, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: 1362205180, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+    - {fileID: 721491568, guid: 4ce857835ec06f043ba88933706696b5, type: 3}
+  - groupName: "\uD53C_3"
+    sprites:
+    - {fileID: -1532316236, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: -1486721743, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: -213422031, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: 1739301158, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: 253951590, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: 1380023893, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: -681355222, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: 1818535458, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: -793333846, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: -1349864813, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: -1879144777, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: -792435439, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: 1635182657, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: -1011875946, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
+    - {fileID: 401077902, guid: 96d1cd8bf6976ca4dac27c143746a182, type: 3}
 --- !u!4 &426047090
 Transform:
   m_ObjectHideFlags: 0
