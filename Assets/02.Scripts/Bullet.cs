@@ -37,7 +37,10 @@ public class Bullet : MonoBehaviour
 
         EnemyStat enemy = collision.GetComponent<EnemyStat>();
         if (enemy != null)
+        {
+            if (enemy.isDead) return;
             enemy.TakeDamage(Damage);
+        }
 
         BCL(BulletCardLevel);
     }

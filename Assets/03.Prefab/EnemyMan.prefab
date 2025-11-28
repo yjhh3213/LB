@@ -68,8 +68,11 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 08f4908e406c3e047a8770b956831d1a, type: 2}
   EnemySpeed: 0
   EnemyHP: 0
+  isDead: 0
   dieAnimTime: 10
   poisonCloundPrefab: {fileID: 0}
+  Hand: {fileID: 6951215236908377896}
+  Feet: {fileID: 6951215236755274484}
 --- !u!114 &5955337699383881436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,8 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694f8dd2a6405994dae1aa2de31f84c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackSpeed: 2
-  knockbackTime: 1
 --- !u!50 &-3418092605765334442
 Rigidbody2D:
   serializedVersion: 4

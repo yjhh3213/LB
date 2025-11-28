@@ -224,6 +224,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy") && !dead)
         {
+            EnemyStat enemy = collision.gameObject.GetComponent<EnemyStat>();
+            if (enemy.isDead) return;
             dead = true;
             StartCoroutine(Dead());
 
