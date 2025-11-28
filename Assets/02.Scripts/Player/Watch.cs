@@ -12,16 +12,18 @@ public class Watch : MonoBehaviour
         // 마우스 방향의 각도 계산
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
         // 좌우 방향에 따라 Y축 회전과 각도 조정
         if (mousePos.x < transform.position.x)
         {
             // 왼쪽을 볼 때 (Y축 180도 회전)
-            transform.rotation = Quaternion.Euler(0, 180f, -angle);
+            transform.localScale = new Vector3(transform.localScale.x, -Mathf.Abs(transform.localScale.y), transform.localScale.z);
         }
         else
         {
             // 오른쪽을 볼 때 (Y축 0도)
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            transform.localScale = new Vector3(transform.localScale.x, Mathf.Abs(transform.localScale.y), transform.localScale.z);
         }
     }
 }
