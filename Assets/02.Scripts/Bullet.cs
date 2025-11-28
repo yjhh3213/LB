@@ -10,11 +10,9 @@ public class Bullet : MonoBehaviour
     float DamageIn2 = (2.0f * 0.4f) + 2.0f;         // 약점포착 level 2
     float DamageIn3 = (2.0f * 0.5f) + 2.0f;         // 약점포착 level 3
     int BulletCardLevel;                            // 총알개조 level
-    BoxCollider2D bc;                                 // 총알의 Trigger를 가지고 위함
 
     private void Start()
     {
-        bc = GetComponent<BoxCollider2D>();
         int weaknessCardLevel = Card.Instance.weaknessCard;
         if (weaknessCardLevel == 0) Damage = 2.0f;
         else if (weaknessCardLevel == 1) Damage = DamageIn1;
@@ -39,21 +37,19 @@ public class Bullet : MonoBehaviour
             }
 
             BCL(BulletCardLevel);
-            bc.isTrigger = false;
         }
 
-        if (collision.collider.CompareTag("aa"))
-        {
-            if (hasHit) return;
-            Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
-            if (enemy_Skeleton != null)
-            {
-                enemy_Skeleton.TakeDamage(Damage);
-            }
+        //if (collision.collider.CompareTag("aa"))
+        //{
+        //    if (hasHit) return;
+        //    Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
+        //    if (enemy_Skeleton != null)
+        //    {
+        //        enemy_Skeleton.TakeDamage(Damage);
+        //    }
 
-            BCL(BulletCardLevel);
-            bc.isTrigger = false;
-        }
+        //    BCL(BulletCardLevel);
+        //}
     }
 
     // 총알개조 Level에 따른 관통할 수 있는 코드
@@ -69,7 +65,6 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
             }
             count++;
-            bc.isTrigger = true;
         }
         else if (BulletCardLevel == 2)
         {
@@ -79,7 +74,6 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
             }
             count++;
-            bc.isTrigger = true;
         }
         else
         {

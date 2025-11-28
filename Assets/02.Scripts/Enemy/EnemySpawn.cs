@@ -86,6 +86,11 @@ public class EnemySpawn : MonoBehaviour
     {
         spawning = true;
 
+        // 🔥 GameManager에 현재 웨이브 전달
+        GameManager gm = FindObjectOfType<GameManager>();
+        if (gm != null)
+            gm.currentWave = countTimer.CurrentWave;
+
         int wave = countTimer.CurrentWave;
         int aCount = A_startCount + (wave - 1) * A_addPerWave;
         int bCount = 0;
@@ -147,6 +152,8 @@ public class EnemySpawn : MonoBehaviour
         }
 
         spawning = false;
+        // 🔥 WaveEnded 플래그 리셋은 모든 스폰이 끝난 뒤!
+        countTimer.ResteWaveFlag();
     }
 
     void SpawnMonster(GameObject prefab)

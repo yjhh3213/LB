@@ -7,7 +7,16 @@ public class PlayerCtrl : MonoBehaviour
 {
     [Header("Sprites")]
     public Sprite IdleSprite;                   // Idle.png
+    public Sprite DashSprite;                   // Dash.png
+    public Sprite DeathSprite;                  // Death.png
+    public Sprite WalkSprite;                   // Walk.png
     
+    public Sprite foot0;
+    public Sprite foot1;
+    public Sprite foot2;
+    public Sprite foot3;
+    public Sprite foot4;
+
     [Header("Stats")]
     public int health = 1;                      // 캐릭터 체력
     private bool dead = false;                  // 캐릭터 사망 여부
@@ -19,11 +28,11 @@ public class PlayerCtrl : MonoBehaviour
     public Transform body;
     public Transform foot;
     public Transform DashGauge;                 // 대쉬 게이지 바
-    private SpriteRenderer bodyRenderer;                
+    private SpriteRenderer bodyRenderer;        
+    private SpriteRenderer footRenderer;        
 
     Vector2 moveV;                              // 캐릭터 조작키
     Vector2 dashdir;
-    Animator anim;                              // Player 애니메이션
     Rigidbody2D rb;                             // 캐릭터 물리
     bool DashUIOn = false;
 
@@ -42,7 +51,9 @@ public class PlayerCtrl : MonoBehaviour
         bodyRenderer = transform.Find("body").GetComponent<SpriteRenderer>();
         bodyRenderer.sprite = IdleSprite;
 
-        anim = GetComponent<Animator>();
+        footRenderer = transform.Find("foot").GetComponent<SpriteRenderer>();
+        footRenderer.sprite = foot0;
+
         rb = GetComponent<Rigidbody2D>();
         dead = false;
     }
@@ -98,6 +109,7 @@ public class PlayerCtrl : MonoBehaviour
         if (!isDashing)
             ObjMove();
 
+        UpdateSprite();
         DashGaugeUI();
         RestrictMovement();//카메라 밖으로 못나감
     }
@@ -151,13 +163,18 @@ public class PlayerCtrl : MonoBehaviour
             Vector2 Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             moveV = Move.normalized * speed;
 
-            if(Move == Vector2.zero)
+            // foot 애니메이션 처리
+            if (Move.magnitude > 0)
             {
-                anim.SetBool("Walking", false);
+                Walktime += Time.deltaTime;
+                if(Walktime > 0.0f) footRenderer.sprite = foot1;
+                if (Walktime > 0.15f) footRenderer.sprite = foot2;
+                if (Walktime > 0.25f) { footRenderer.sprite = foot3; Walktime = 0.0f; }
             }
             else
             {
-                anim.SetBool("Walking", true);
+                footRenderer.sprite = foot0;
+                Walktime = 0.0f;
             }
         }
         // 순간이동 Dash
@@ -172,13 +189,13 @@ public class PlayerCtrl : MonoBehaviour
                 isDashing = true;
                 dashdir = dir.normalized;
                 dashTimer = dashCoolDown;
+                bodyRenderer.sprite = DashSprite;
                 print("Dash!");
                 print(dashcount);
                 StartCoroutine(DashTimerCoroutine());
-                anim.SetBool("Dash", true);         // 대쉬 애니메이션 적용
+                StartCoroutine(ReturnIdle(0.15f));  // 짧게 Dash Sprite 유지s
             }
         }
-        
     }
     private void FixedUpdate()
     {
@@ -212,7 +229,6 @@ public class PlayerCtrl : MonoBehaviour
         }
         /*if (QuickstepCardLevel >= 3) dashcount = 2;
         else dashcount = 1;*/
-        anim.SetBool("Dash", false);
         isDashing = false;
     }
 
@@ -223,21 +239,50 @@ public class PlayerCtrl : MonoBehaviour
     // collision Enemy
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.CompareTag("aa") && !dead)
+        if (collision.collider.CompareTag("Enemy") && !dead)
         {
-            anim.SetBool("Dead", true);
-            health--;
-            StartCoroutine(Dead());
+            dead = true;
+            Dead();
+
+            // GameManager의 GameOver() 실행
+            GameManager gm = FindObjectOfType<GameManager>();
+            if (gm != null)
+                gm.GameOver();
         }
+        //if(collision.collider.CompareTag("aa") && !dead)
+        //{
+        //    health--;
+        //    Dead();
+        //}
     }
 
-    IEnumerator Dead()
+    void Dead()
     {
         dead = true;
         speed = 0.0f;
         Dash = 0.0f;
-        yield return new WaitForSeconds(3.0f);
-        Time.timeScale = 0.0f;
+        bodyRenderer.sprite = DeathSprite;
+        //Time.timeScale = 0.0f;
+    }
+
+    void UpdateSprite()
+    {
+        if (dead) return;
+
+        if(moveV.magnitude > 0.1f)
+        {
+            bodyRenderer.sprite = WalkSprite;
+        }
+        else
+        {
+            bodyRenderer.sprite = IdleSprite;
+        }
+    }
+
+    IEnumerator ReturnIdle(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (!dead) bodyRenderer.sprite = IdleSprite;
     }
 
     void SetBounds() // 카메라 밖으로 못나가게 세팅
