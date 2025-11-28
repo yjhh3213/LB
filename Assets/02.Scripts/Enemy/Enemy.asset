@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   name: "\uAE30\uBCF8"
-  hp: 6
-  speed: 2
+  hp: 5
+  speed: 1

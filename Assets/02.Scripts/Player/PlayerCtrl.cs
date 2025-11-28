@@ -12,7 +12,7 @@ public class PlayerCtrl : MonoBehaviour
     public int health = 1;                      // 캐릭터 체력
     public bool dead = false;                  // 캐릭터 사망 여부
     bool isDashing = false;
-    public float speed;                         // 캐릭터 속도
+    private float speed;                         // 캐릭터 속도
     public float Dash = 15.0f;                  // 캐릭터 대쉬 속도
 
     [Header("Transform")]
@@ -66,16 +66,16 @@ public class PlayerCtrl : MonoBehaviour
         switch (nimblestepsCardLevel)
         {
             case 1:
-                speed = 3.0f;
+                speed = 3.3f;
                 break;
             case 2:
-                speed = 4.0f;
+                speed = 4.3f;
                 break;
             case 3:
-                speed = 5.0f;
+                speed = 5.3f;
                 break;
             default:
-                speed = 2.0f;
+                speed = 2.3f;
                 break;
         }
 
