@@ -39,17 +39,17 @@ public class Bullet : MonoBehaviour
             BCL(BulletCardLevel);
         }
 
-        if (collision.collider.CompareTag("aa"))
-        {
-            if (hasHit) return;
-            Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
-            if (enemy_Skeleton != null)
-            {
-                enemy_Skeleton.TakeDamage(Damage);
-            }
+        //if (collision.collider.CompareTag("aa"))
+        //{
+        //    if (hasHit) return;
+        //    Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
+        //    if (enemy_Skeleton != null)
+        //    {
+        //        enemy_Skeleton.TakeDamage(Damage);
+        //    }
 
-            BCL(BulletCardLevel);
-        }
+        //    BCL(BulletCardLevel);
+        //}
     }
 
     // 총알개조 Level에 따른 관통할 수 있는 코드
