@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyBack : MonoBehaviour
 {
-    public float knockbackSpeed = 3f;   // 밀리는 속도 (조절값)
-    public float knockbackTime = 0.2f;  // 넉백 유지 시간
+    private float knockbackSpeed = 20f;   // 밀리는 속도 (조절값)
+    private float knockbackTime = 0.075f;  // 넉백 유지 시간
 
     private Rigidbody2D rb;
     private bool isKnockback = false;
@@ -36,6 +36,7 @@ public class EnemyBack : MonoBehaviour
         while (timer < knockbackTime)
         {
             rb.velocity = dir * knockbackSpeed;
+            EffectManager.Instance.PlayRandom("피_3", transform.position, 5f, 4.5f); // 이펙트 생성
             timer += Time.deltaTime;
             yield return null;
         }
