@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,45 +13,44 @@ public class Bullet : MonoBehaviour
     float DamageIn3 = (2.0f * 0.5f) + 2.0f;         // 약점포착 level 3
     int BulletCardLevel;                            // 총알개조 level
 
+    BoxCollider2D bc;
     private void Start()
     {
+        bc = GetComponent<BoxCollider2D>();
+        BulletCardLevel = Card.Instance.BulletCard;
+
         int weaknessCardLevel = Card.Instance.weaknessCard;
         if (weaknessCardLevel == 0) Damage = 2.0f;
         else if (weaknessCardLevel == 1) Damage = DamageIn1;
         else if (weaknessCardLevel == 2) Damage = DamageIn2;
         else if (weaknessCardLevel >= 3) Damage = DamageIn3;
 
-        //print(Damage);
+        if (BulletCardLevel > 0) bc.isTrigger = true;
+        else bc.isTrigger = false;
     }
 
     int count = 0;                                    // 관통한 횟수 초기화
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Enemy")) return;
+
+        EnemyStat enemy = collision.GetComponent<EnemyStat>();
+        if (enemy != null)
+            enemy.TakeDamage(Damage);
+
+        BCL(BulletCardLevel);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        BulletCardLevel = Card.Instance.BulletCard;
+        if (!collision.collider.CompareTag("Enemy")) return;
 
-        if (collision.collider.CompareTag("Enemy"))
-        {
-            EnemyStat enemy = collision.collider.GetComponent<EnemyStat>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(Damage);
-            }
+        EnemyStat enemy = collision.collider.GetComponent<EnemyStat>();
+        if (enemy != null)
+            enemy.TakeDamage(Damage);
 
-            BCL(BulletCardLevel);
-        }
-
-        //if (collision.collider.CompareTag("aa"))
-        //{
-        //    if (hasHit) return;
-        //    Enemy_Skeleton enemy_Skeleton = collision.collider.GetComponent<Enemy_Skeleton>();
-        //    if (enemy_Skeleton != null)
-        //    {
-        //        enemy_Skeleton.TakeDamage(Damage);
-        //    }
-
-        //    BCL(BulletCardLevel);
-        //}
+        Destroy(gameObject); // 관통 없으면 즉시 파괴
     }
 
     // 총알개조 Level에 따른 관통할 수 있는 코드
