@@ -16,7 +16,7 @@ public class ShotGun : MonoBehaviour
 
     [Header("GameObject")]
     public GameObject ReloadImage;          // ÀçÀåÀü ÀÌ¹ÌÁö
-    public Text qteText;
+    public TMP_Text qteText;
     public GameObject[] BulletPrefab;       // Åº
     public GameObject[] EmptyPrefab;        // ÅºÇÇ
     public GameObject[] BulletCount;        // Åº °¹¼ö

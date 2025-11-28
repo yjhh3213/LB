@@ -81,6 +81,11 @@ public class EnemyStat : MonoBehaviour
         if (isDead) return; // 두 번 실행 방지
         isDead = true;
 
+        
+
+        EnemyBack back = GetComponent<EnemyBack>(); // 뒤로 밀리다가 죽으면 멈추게 
+        if (back != null)
+            back.StopKnockback();
         EnemySpeed = 0;
         if(poisonCloundPrefab != null)
         {
@@ -89,6 +94,7 @@ public class EnemyStat : MonoBehaviour
         if (anim != null)
         {
             anim.SetBool("Die" , true);
+            
         }
 
         if (EnemySpawn.Instance != null)
