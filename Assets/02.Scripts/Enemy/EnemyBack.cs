@@ -36,7 +36,7 @@ public class EnemyBack : MonoBehaviour
         while (timer < knockbackTime)
         {
             rb.velocity = dir * knockbackSpeed;
-            EffectManager.Instance.PlayRandom("피_3", transform.position, 5f, 4.5f); // 이펙트 생성
+            EffectManager.Instance.PlayRandom("피_3", transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f), 5f, 4.5f); // 이펙트 생성
             timer += Time.deltaTime;
             yield return null;
         }
