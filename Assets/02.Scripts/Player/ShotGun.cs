@@ -20,8 +20,6 @@ public class ShotGun : MonoBehaviour
     public GameObject[] BulletPrefab;       // Åº
     public GameObject[] EmptyPrefab;        // ÅºÇÇ
     public GameObject[] BulletCount;        // Åº °¹¼ö
-    public AudioClip[] ReloadSound;
-    public AudioClip ShootSound;
 
     [Header("Transform")]
     public Transform FirePoint;             // ÃÑ±¸ À§Ä¡
@@ -38,14 +36,10 @@ public class ShotGun : MonoBehaviour
     bool WaitEmptySccess = false;
     bool isReloading = false;               // ÀçÀåÀüÁßÀÎÁö
 
-    
-
-    AudioSource audio;
-
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -80,12 +74,19 @@ public class ShotGun : MonoBehaviour
 
             if (WaitEmptyBullet <= 0.0f)
             {
-                if (ReloadSound == null) return;
-
-                audio.PlayOneShot(ReloadSound[0]);
+                SoundManager.Instance.Player_SFX(1);
                 EmptyBulletSpeed += Time.deltaTime;
                 Quaternion EBrot = EmptyBullet.rotation * Quaternion.Euler(0, 0, -EmptyBulletSpeed);
                 GameObject EB = Instantiate(EmptyPrefab[0], EmptyBullet.position, EBrot);
+                // ÅºÇÇ¿¡ Èû Ãß°¡
+                Rigidbody2D rb = EB.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    Vector2 force = new Vector2(Random.Range(-2f, 1f), Random.Range(5f, 7f));// À§ÂÊ°ú ¾à°£ÀÇ ¿·¹æÇâ Èû
+                    rb.AddForce(force, ForceMode2D.Impulse);
+                    rb.AddTorque(Random.Range(-5f, 5f), ForceMode2D.Impulse);// È¸Àü·Â Ãß°¡ (´õ Çö½ÇÀûÀ¸·Î)
+                }
+                SoundManager.Instance.Player_SFX(7);
                 Destroy(EB, 2.0f);
                 WaitEmptySccess = false;
                 WaitEmptyBullet = 0.5f;
@@ -161,13 +162,13 @@ public class ShotGun : MonoBehaviour
                         BulletCount[count].SetActive(false);
                         WaitShoot = 1.0f;
                     }
-                    audio.PlayOneShot(ShootSound);
+                    SoundManager.Instance.Player_SFX(0);
                     count++;
                 }
             }
-            else if (NowBulletCount <= 0)
+            else if (NowBulletCount <= 0) //ÃÑ¾Ë ¾øÀ½
             {
-                print("Bullet Empty");
+                SoundManager.Instance.Player_SFX(6);
             }
         }
         if (Input.GetKeyDown(KeyCode.R))
@@ -273,7 +274,7 @@ public class ShotGun : MonoBehaviour
                         {
                             if (count > 0)
                             {
-                                audio.PlayOneShot(ReloadSound[1]);
+                                SoundManager.Instance.Player_SFX(2);
                                 BulletCount[count - 1].SetActive(true);
                                 count--;
                             }

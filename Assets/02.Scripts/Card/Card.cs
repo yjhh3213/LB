@@ -44,7 +44,6 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("딜레이 :" + card_cu_delay);
         if (card_cu_delay > 0) { card_cu_delay -= Time.unscaledDeltaTime; }
         ChangeCardColor();
     }
@@ -227,7 +226,7 @@ public class Card : MonoBehaviour
                 case 5: QuickstepCard++; CardColorobj[5].SetActive(true); break;
                 case 6: fastdraw++; CardColorobj[6].SetActive(true); break;
             }
-
+            SoundManager.Instance.Player_SFX(4);
             Debug.Log(cardType + " 번 카드 강화!");
 
             NoSeeCard();
