@@ -78,6 +78,14 @@ public class ShotGun : MonoBehaviour
                 EmptyBulletSpeed += Time.deltaTime;
                 Quaternion EBrot = EmptyBullet.rotation * Quaternion.Euler(0, 0, -EmptyBulletSpeed);
                 GameObject EB = Instantiate(EmptyPrefab[0], EmptyBullet.position, EBrot);
+                // 탄피에 힘 추가
+                Rigidbody2D rb = EB.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    Vector2 force = new Vector2(Random.Range(-2f, 1f), Random.Range(5f, 7f));// 위쪽과 약간의 옆방향 힘
+                    rb.AddForce(force, ForceMode2D.Impulse);
+                    rb.AddTorque(Random.Range(-5f, 5f), ForceMode2D.Impulse);// 회전력 추가 (더 현실적으로)
+                }
                 SoundManager.Instance.Player_SFX(7);
                 Destroy(EB, 2.0f);
                 WaitEmptySccess = false;

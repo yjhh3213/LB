@@ -14,7 +14,7 @@ public class EnemyStat : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator anim;
     Rigidbody2D rigidbody;
-    public float dieAnimTime = 0.7f;
+    public float dieAnimTime = 0.01f;
     public GameObject poisonCloundPrefab;
 
     private SpriteRenderer HandspriteRenderer;
@@ -112,39 +112,21 @@ public class EnemyStat : MonoBehaviour
     {
         if (isDead) return; // 두 번 실행 방지
         isDead = true;
-
-        if (EnemySpawn.Instance != null)
-        {
-            EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
-        }
-        SoundManager.Instance.Player_SFX(5);
-
-        EnemyBack back = GetComponent<EnemyBack>(); // 뒤로 밀리다가 죽으면 멈추게 
-        if (back != null)
-            back.StopKnockback();
-        if (rigidbody != null)
-        {
-            rigidbody.simulated = false; //리지드바디 비활성화
-        }
         EnemySpeed = 0;
-        if(poisonCloundPrefab != null)
-        {
-            Instantiate(poisonCloundPrefab, transform.position, Quaternion.identity);
-        }
-        if (anim != null)
-        {
-            anim.SetBool("Die" , true);
-        }
-        if (EnemySpawn.Instance != null)
-        {
-            EnemySpawn.Instance.OnEnemyDied();
-        }
+        EnemyBack back = GetComponent<EnemyBack>(); // 뒤로 밀리다가 죽으면 멈추게 
+        SoundManager.Instance.Player_SFX(5);
+        GameManager gm = FindObjectOfType<GameManager>(); //킬카운트 증가
+
+        if (EnemySpawn.Instance != null)    EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
+        if (rigidbody != null)              rigidbody.simulated = false; //리지드바디 비활성화
+        if (poisonCloundPrefab != null)     Instantiate(poisonCloundPrefab, transform.position, Quaternion.identity);
+        if (anim != null)                   anim.SetBool("Die" , true);
+        if (EnemySpawn.Instance != null)    EnemySpawn.Instance.OnEnemyDied();
+        if (back != null)                   back.StopKnockback();
+        if (gm != null) gm.killCount++;
+
         Destroy(Hand);
         Destroy(Feet);
-        // 🔥 GameManager KillCount 증가
-        GameManager gm = FindObjectOfType<GameManager>();
-        if (gm != null)
-            gm.killCount++;
 
         StartCoroutine(DieDestroyCoroutine());
 
