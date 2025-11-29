@@ -20,7 +20,7 @@ public class EnemyZombieSkin : MonoBehaviour
 
     void Start()
     {
-        ty=Random.Range(1, 4 + 1);
+        ty=Random.Range(0, 4);
         Body.sprite = Body_spr[ty];
         Hands.sprite = Hands_spr[ty];
 
