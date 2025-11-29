@@ -243,6 +243,8 @@ public class PlayerCtrl : MonoBehaviour
 
     IEnumerator Dead()
     {
+        for (int i = 0; i < Random.Range(15, 20); i++) EffectManager.Instance.PlayRandom("피_1", transform.position + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0f), 3f, 1f); // 이펙트 생성
+        for (int i = 0; i < Random.Range(10, 15); i++) EffectManager.Instance.PlayRandom("피_2", transform.position + new Vector3(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f), 0f), 5f, 1.5f); // 이펙트 생성
         dead = true;
         speed = 0.0f;
         Dash = 0.0f;
