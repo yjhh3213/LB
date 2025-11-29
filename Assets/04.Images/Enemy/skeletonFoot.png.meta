@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bc9388d2cea968db_0
+      name: skeletonFoot_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 2
-        width: 33
-        height: 24
+        x: 0
+        y: 0
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5c611f779f241f429b8d84a9998a6c0
-      internalID: 58045933
+      spriteID: 8e03d29879864d1428a85d7a2658272a
+      internalID: -1134385793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bc9388d2cea968db_1
+      name: skeletonFoot_1
       rect:
         serializedVersion: 2
-        x: 115
-        y: 2
-        width: 64
-        height: 25
+        x: 96
+        y: 0
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3b44302384004e4488f373ebc91348d
-      internalID: 371317347
+      spriteID: 2b286787e894f3545bb4948f806f6390
+      internalID: -2067649659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bc9388d2cea968db_2
+      name: skeletonFoot_2
       rect:
         serializedVersion: 2
-        x: 214
-        y: 2
-        width: 64
-        height: 28
+        x: 192
+        y: 0
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c038483e26fe03640b02c01bb78d2ecd
-      internalID: 1165522981
+      spriteID: 17116e1806cc25b4c955633282702121
+      internalID: -97925175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bc9388d2cea968db_3
+      name: skeletonFoot_3
       rect:
         serializedVersion: 2
-        x: 323
-        y: 3
-        width: 42
-        height: 27
+        x: 288
+        y: 0
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84533ab23e6751047865518a3940edbb
-      internalID: 952004283
+      spriteID: 304a12311ef622d4bbeaf3f38fd7a768
+      internalID: 1524787913
       vertices: []
       indices: 
       edges: []
@@ -211,10 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bc9388d2cea968db_0: 58045933
-      bc9388d2cea968db_1: 371317347
-      bc9388d2cea968db_2: 1165522981
-      bc9388d2cea968db_3: 952004283
+      skeletonFoot_0: -1134385793
+      skeletonFoot_1: -2067649659
+      skeletonFoot_2: -97925175
+      skeletonFoot_3: 1524787913
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
