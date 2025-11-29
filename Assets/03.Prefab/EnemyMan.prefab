@@ -135,15 +135,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 493ccf427861b0943b180b1d9787d658, type: 3}
   - {fileID: 21300000, guid: c9a9024e73722f04b9d26f75df7c2b8f, type: 3}
   tlcp_Controller:
-  - {fileID: 9100000, guid: 7e135cf8176541b40a8f124db4427208, type: 2}
-  - {fileID: 9100000, guid: 2864e241815d74b4896440ebc9ea1638, type: 2}
-  - {fileID: 9100000, guid: d4bc37ae7a8f7d8449f2448fc1b8f793, type: 2}
-  - {fileID: 9100000, guid: 6dd4e641894f63b4c88c1338b0fc923a, type: 2}
+  - {fileID: 9100000, guid: b2ad93695eb9b4940970078a94c20b3b, type: 2}
+  - {fileID: 9100000, guid: 250a3b52f63d1b647a270975005f4bf4, type: 2}
+  - {fileID: 9100000, guid: c177b8676c40e1d42b8a34972424f2b3, type: 2}
+  - {fileID: 9100000, guid: 583acc11e04a9de4c8cd4c977d57a7ec, type: 2}
   Feet_Controller:
-  - {fileID: 9100000, guid: d2aea7b3a0fcf2341aec4cf7ad93506b, type: 2}
-  - {fileID: 9100000, guid: 1e7d6bf8600826a4b8c1f1616252b524, type: 2}
-  - {fileID: 9100000, guid: 27c13a4a6eccbae4b871c3d3188d8da9, type: 2}
-  - {fileID: 9100000, guid: 80575d98922eace41a7a8bf092cf2dd0, type: 2}
+  - {fileID: 9100000, guid: 8c0360a6633c85a45a9e67db052c2c36, type: 2}
+  - {fileID: 9100000, guid: b5d77511f501a0c40b61bb32bba736f1, type: 2}
+  - {fileID: 9100000, guid: 182c764b7d194ea4fb9d7797b6d0855b, type: 2}
+  - {fileID: 9100000, guid: ebc0dc6d074cd1c45bf54a21dfc3f1b1, type: 2}
 --- !u!1 &6951215236755274484
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ Animator:
   m_GameObject: {fileID: 6951215236755274484}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d2aea7b3a0fcf2341aec4cf7ad93506b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8c0360a6633c85a45a9e67db052c2c36, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
