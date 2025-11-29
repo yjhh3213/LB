@@ -98,6 +98,8 @@ public class EnemyStat : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (isDead) return;
+        for (int i = 0; i < Random.Range(1, 3); i++) EffectManager.Instance.PlayRandom("피_2", transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0f), 3f, 1.5f); // 이펙트 생성
+        for (int i = 0; i < Random.Range(3, 5); i++) EffectManager.Instance.PlayRandom("피_3", transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f), 8f, 6.5f); // 이펙트 생성
         EffectManager.Instance.PlayAnimation("피격피", transform.position, 1f, 0.25f, 0.1f); // 이펙트 생성
         EnemyHP -= damage;
         print("Enemy HP : " + EnemyHP);
