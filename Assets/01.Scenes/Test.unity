@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1b6fb7a81ca394fb6a8da2fbe0dce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabA: {fileID: 3702106308257521989, guid: 35ba8adee701b624a84442a38e4494df, type: 3}
+  monsterPrefabA: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
   monsterPrefabB: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
   monsterPrefabC: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
   monsterPrefabD: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
@@ -487,7 +487,7 @@ MonoBehaviour:
   spawnDelay: 0.2
   minWave: 1
   maxWave: 8
-  A_startCount: 1
+  A_startCount: 10
   A_addPerWave: 20
   B_startWave: 3
   B_startCount: 5
@@ -2896,7 +2896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 2028168386}
-  startTime: 60
+  startTime: 5
   timerText: {fileID: 302264755}
   waveText: {fileID: 786744223}
 --- !u!114 &1241308347
