@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Enemy_Skeleton : MonoBehaviour
 {
@@ -7,8 +8,8 @@ public class Enemy_Skeleton : MonoBehaviour
     public EnemyData data;
 
     [Header("스탯")]
-    public float EnemyHP = 100f;      // 현재 HP
-    public float EnemySpeed = 3f;     // 이동 속도
+    public float EnemyHP = 1f;      // 현재 HP
+    public float EnemySpeed = 1f;     // 이동 속도
 
     [Header("참조")]
     public Transform player;
@@ -29,6 +30,15 @@ public class Enemy_Skeleton : MonoBehaviour
     Coroutine reviveCo;
     float freezeUntil = 0f;
 
+    private SpriteRenderer HandspriteRenderer;
+    private SpriteRenderer FeetspriteRenderer;
+    SpriteRenderer spriteRenderer;
+    public GameObject Hand; //손
+    public GameObject Feet; //발
+
+    public float dieAnimTime = 1.0f;
+
+    Animator anim;
     void Start()
     {
         if (data != null)
@@ -38,6 +48,13 @@ public class Enemy_Skeleton : MonoBehaviour
         }
         if (!player)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            HandspriteRenderer = Hand.GetComponentInChildren<SpriteRenderer>();
+            FeetspriteRenderer = Feet.GetComponentInChildren<SpriteRenderer>();
+        }
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -50,6 +67,33 @@ public class Enemy_Skeleton : MonoBehaviour
 
         Vector3 dir = (player.position - transform.position).normalized;
         transform.position += dir * EnemySpeed * Time.deltaTime;
+
+        float diffx = player.position.x - transform.position.x;
+
+        Vector3 handPosition = transform.position;
+
+        if (diffx > 0f) // 플레이어가 오른쪽에 있을 때 (몬스터가 오른쪽을 바라볼 때)
+        {
+            spriteRenderer.flipX = false;
+
+            handPosition.x += 0.25f;
+            handPosition.y -= 0.2f;
+            Hand.transform.position = handPosition;
+
+            HandspriteRenderer.flipY = false; // 90도 돌아가있음
+            FeetspriteRenderer.flipX = false;
+        }
+        else if (diffx < 0f) // 플레이어가 왼쪽에 있을 때 (몬스터가 왼쪽을 바라볼 때)
+        {
+            spriteRenderer.flipX = true;
+
+            handPosition.x -= 0.25f;
+            handPosition.y -= 0.2f;
+            Hand.transform.position = handPosition;
+
+            HandspriteRenderer.flipY = true; // 90도 돌아가있음
+            FeetspriteRenderer.flipX = true;
+        }
     }
 
     // 총알/무기에서 이 둘 중 하나 호출해도 됨
@@ -99,7 +143,7 @@ public class Enemy_Skeleton : MonoBehaviour
         // 다운 유지 중이라면 부활(마무리 타격을 못 받은 경우)
         if (state == State.Downed)
         {
-            transform.position = downPos;
+            //transform.position = downPos;
 
             // ★ 부활 HP 확실히 양수로
             EnemyHP = Mathf.Max(1f, reviveHp);
@@ -122,6 +166,15 @@ public class Enemy_Skeleton : MonoBehaviour
         if (reviveCo != null) StopCoroutine(reviveCo);
 
         Debug.Log("[Skeleton] DEAD (destroy)");
-        Destroy(gameObject);
+        if (anim != null) anim.SetBool("Die", true);
+        StartCoroutine(DieDestroyCoroutine());
+
+        IEnumerator DieDestroyCoroutine()
+        {
+            yield return new WaitForSeconds(dieAnimTime);
+            Destroy(gameObject);
+        }
+        Destroy(Hand);
+        Destroy(Feet);
     }
 }
