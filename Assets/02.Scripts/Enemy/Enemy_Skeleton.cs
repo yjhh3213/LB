@@ -39,6 +39,8 @@ public class Enemy_Skeleton : MonoBehaviour
     public float dieAnimTime = 1.0f;
 
     Animator anim;
+
+    public bool isDead = false;
     void Start()
     {
         if (data != null)
@@ -163,6 +165,8 @@ public class Enemy_Skeleton : MonoBehaviour
         if (state == State.Dead) return;
         state = State.Dead;
 
+        if (isDead) return; // 두 번 실행 방지
+        isDead = true;
         if (reviveCo != null) StopCoroutine(reviveCo);
 
         Debug.Log("[Skeleton] DEAD (destroy)");
@@ -176,5 +180,12 @@ public class Enemy_Skeleton : MonoBehaviour
         }
         Destroy(Hand);
         Destroy(Feet);
+    }
+    void OnDestroy()
+    {
+        if (!isDead) return; // 이미 Die() 처리되었으면 무시
+
+        if (EnemySpawn.Instance != null)
+            EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
     }
 }

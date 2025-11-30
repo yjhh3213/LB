@@ -33,6 +33,8 @@ public class PlayerCtrl : MonoBehaviour
 
     bool isSlowed = false;
 
+    float baseSpeed;
+    float slowAmount = 0f;
     private Camera mainCamera; //이동 제한용 카메라 불러오기
     private float minX, maxX, minY, maxY;
     // Start is called before the first frame update
@@ -66,19 +68,19 @@ public class PlayerCtrl : MonoBehaviour
         switch (nimblestepsCardLevel)
         {
             case 1:
-                speed = 3.0f;
+                baseSpeed = 3.0f;
                 break;
             case 2:
-                speed = 4.0f;
+                baseSpeed = 4.0f;
                 break;
             case 3:
-                speed = 5.0f;
+                baseSpeed = 5.0f;
                 break;
             default:
-                speed = 2.0f;
+                baseSpeed = 10.0f;
                 break;
         }
-
+        speed = baseSpeed - slowAmount; // 독구름 이동속도 감소 관련
         switch (QuickstepCardLevel)
         {
             case 1:
@@ -234,6 +236,18 @@ public class PlayerCtrl : MonoBehaviour
             if (gm != null)
                 gm.GameOver();
         }
+        if (collision.collider.CompareTag("Skeleton") && !dead) // 스켈레톤 2025 - 12 - 01
+        {
+            Enemy_Skeleton enemy_Skeleton = collision.gameObject.GetComponent<Enemy_Skeleton>();
+            if (enemy_Skeleton.isDead) return;
+            dead = true;
+            StartCoroutine(Dead());
+
+            // GameManager의 GameOver() 실행
+            GameManager gm = FindObjectOfType<GameManager>();
+            if (gm != null)
+                gm.GameOver();
+        }
         //if(collision.collider.CompareTag("aa") && !dead)
         //{
         //    health--;
@@ -330,15 +344,10 @@ public class PlayerCtrl : MonoBehaviour
     IEnumerator SlowCoroutine(float amount, float duration)
     {
         if (isSlowed) yield break;
-
-        speed -= amount;
-        Debug.Log("느려짐! 현재 이속: " + speed);
-
+        
+        slowAmount = amount;   // 여기서 1 넣으면 speed 1 줄어듦
         yield return new WaitForSeconds(duration);
-
-        speed += amount;
-        Debug.Log("슬로우 해제! 현재 이속: " + speed);
-
-        isSlowed = false;
+        slowAmount = 0f;
+        slowRoutine = null;
     }
 }

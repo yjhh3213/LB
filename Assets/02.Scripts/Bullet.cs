@@ -33,13 +33,24 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy")) return;
+        if (!collision.CompareTag("Enemy") && !collision.CompareTag("Skeleton")) return;
 
         EnemyStat enemy = collision.GetComponent<EnemyStat>();
+        Enemy_Skeleton enemy_Skeleton = collision.GetComponent<Enemy_Skeleton>();
+        Enemy_Boar enemy_Boar = collision.GetComponent<Enemy_Boar>();
         if (enemy != null)
         {
             if (enemy.isDead) return;
             enemy.TakeDamage(Damage);
+        }
+        if(enemy_Skeleton != null)
+        {   
+            enemy_Skeleton.TakeDamage(Damage);
+        }
+        if(enemy_Boar != null)
+        {   
+            if(enemy.isDead) return;
+            enemy_Boar.TakeDamage(Damage);
         }
 
         BCL(BulletCardLevel);
@@ -51,11 +62,16 @@ public class Bullet : MonoBehaviour
 
         EnemyStat enemy = collision.collider.GetComponent<EnemyStat>();
         Enemy_Skeleton enemy_Skeleton= collision.collider.GetComponent<Enemy_Skeleton>();
+        Enemy_Boar enemy_Boar = collision.collider.GetComponent <Enemy_Boar>();
         if (enemy != null)
             enemy.TakeDamage(Damage);
         if(enemy_Skeleton != null)
         {
             enemy_Skeleton.TakeDamage(Damage);
+        }
+        if(enemy_Boar != null)
+        {
+            enemy_Boar.TakeDamage(Damage);
         }
 
         Destroy(gameObject); // 관통 없으면 즉시 파괴

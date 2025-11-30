@@ -92,6 +92,7 @@ public class EnemyStat : MonoBehaviour
 
             HandspriteRenderer.flipY = true; // 90도 돌아가있음
             FeetspriteRenderer.flipX = true;
+
         }
     }
 
