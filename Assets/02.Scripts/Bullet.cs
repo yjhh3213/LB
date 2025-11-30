@@ -47,15 +47,20 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("Enemy")) return;
+        if (!collision.collider.CompareTag("Enemy") && !collision.collider.CompareTag("Skeleton")) return;
 
         EnemyStat enemy = collision.collider.GetComponent<EnemyStat>();
+        Enemy_Skeleton enemy_Skeleton= collision.collider.GetComponent<Enemy_Skeleton>();
         if (enemy != null)
             enemy.TakeDamage(Damage);
+        if(enemy_Skeleton != null)
+        {
+            enemy_Skeleton.TakeDamage(Damage);
+        }
 
         Destroy(gameObject); // 관통 없으면 즉시 파괴
     }
-
+    
     // 총알개조 Level에 따른 관통할 수 있는 코드
     // 적을 추가할 때마다 메서드를 추가하면 됨
 
