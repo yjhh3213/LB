@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -124,7 +124,7 @@ public class EnemyStat : MonoBehaviour
         if (rigidbody != null)              rigidbody.simulated = false; //리지드바디 비활성화
         if (poisonCloundPrefab != null)     Instantiate(poisonCloundPrefab, transform.position, Quaternion.identity);
         if (anim != null)                   anim.SetBool("Die" , true);
-        if (EnemySpawn.Instance != null)    EnemySpawn.Instance.OnEnemyDied();
+        //if (EnemySpawn.Instance != null)    EnemySpawn.Instance.OnEnemyDied();
         if (back != null)                   back.StopKnockback();
         if (gm != null) gm.killCount++;
 
