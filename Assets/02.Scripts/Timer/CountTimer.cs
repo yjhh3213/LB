@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using Unity.VisualScripting;
@@ -35,12 +35,6 @@ public class CountTimer : MonoBehaviour
             {
                 yield return new WaitForSeconds(1f);
                 currentTime--;
-
-                // 시간이 0이 되면 카드 선택할 수 있게 하기
-                if(currentTime == 0)
-                {
-                    card.cardbuff();
-                }
 
                 // 안전하게 음수 방지
                 if (currentTime < 0)
@@ -87,6 +81,9 @@ public class CountTimer : MonoBehaviour
 
     void FinishWave()
     {
+        // 웨이브가 끝나면 나오게 하기
+        card.cardbuff();
+
         WaveEnded = true;
 
         CurrentWave++;
