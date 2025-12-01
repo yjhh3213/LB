@@ -226,9 +226,9 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy") && !dead)
         {
-            EnemyStat enemy = collision.gameObject.GetComponent<EnemyStat>();
+            EnemyStat enemy = collision.gameObject.GetComponent<EnemyStat>();            
             if (enemy.isDead) return;
-            dead = true;
+                dead = true;
             StartCoroutine(Dead());
 
             // GameManager의 GameOver() 실행
@@ -236,6 +236,7 @@ public class PlayerCtrl : MonoBehaviour
             if (gm != null)
                 gm.GameOver();
         }
+        
         if (collision.collider.CompareTag("Skeleton") && !dead) // 스켈레톤 2025 - 12 - 01
         {
             Enemy_Skeleton enemy_Skeleton = collision.gameObject.GetComponent<Enemy_Skeleton>();
@@ -248,11 +249,7 @@ public class PlayerCtrl : MonoBehaviour
             if (gm != null)
                 gm.GameOver();
         }
-        //if(collision.collider.CompareTag("aa") && !dead)
-        //{
-        //    health--;
-        //    Dead();
-        //}
+        
     }
 
     IEnumerator Dead()
