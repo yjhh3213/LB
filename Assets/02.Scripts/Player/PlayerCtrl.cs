@@ -68,16 +68,16 @@ public class PlayerCtrl : MonoBehaviour
         switch (nimblestepsCardLevel)
         {
             case 1:
-                baseSpeed = 3.0f;
+                baseSpeed = 3.3f;
                 break;
             case 2:
-                baseSpeed = 4.0f;
+                baseSpeed = 4.3f;
                 break;
             case 3:
-                baseSpeed = 5.0f;
+                baseSpeed = 5.3f;
                 break;
             default:
-                baseSpeed = 10.0f;
+                baseSpeed = 2.3f;
                 break;
         }
         speed = baseSpeed - slowAmount; // 독구름 이동속도 감소 관련
