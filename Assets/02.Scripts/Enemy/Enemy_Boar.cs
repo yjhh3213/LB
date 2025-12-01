@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ public class Enemy_Boar : MonoBehaviour
     {
         if (data == null)
         {
-            Debug.LogWarning("¸ó½ºÅÍ µ¥ÀÌÅÍ°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù");
+            Debug.LogWarning("ëª¬ìŠ¤í„° ë°ì´í„°ê°€ ì—°ê²°ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤");
             return;
         }
         else if (data != null)
@@ -32,7 +32,7 @@ public class Enemy_Boar : MonoBehaviour
 
         if (player == null)
         {
-            Debug.LogWarning("Player°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù");
+            Debug.LogWarning("Playerê°€ ì—°ê²°ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤");
         }
         if (spriteRenderer == null)
         {
@@ -45,7 +45,7 @@ public class Enemy_Boar : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         if (anim == null)
         {
-            Debug.LogError("Animator¸¦ Ã£Áö ¸øÇß½À´Ï´Ù! Enemy ÇÁ¸®ÆÕ¿¡ Animator ÄÄÆ÷³ÍÆ®°¡ ÀÖ´ÂÁö È®ÀÎÇÏ¼¼¿ä.");
+            Debug.LogError("Animatorë¥¼ ì°¾ì§€ ëª»í–ˆìŠµë‹ˆë‹¤! Enemy í”„ë¦¬íŒ¹ì— Animator ì»´í¬ë„ŒíŠ¸ê°€ ìˆëŠ”ì§€ í™•ì¸í•˜ì„¸ìš”.");
         }
     }
 
@@ -58,16 +58,16 @@ public class Enemy_Boar : MonoBehaviour
 
         transform.position += dir * EnemySpeed * Time.deltaTime;
 
-        // ¸ó½ºÅÍ°¡ ÇÃ·¹ÀÌ¾î ¹æÇâ ¹Ù¶óº¸°Ô ÇÏ´Â ÄÚµå 
+        // ëª¬ìŠ¤í„°ê°€ í”Œë ˆì´ì–´ ë°©í–¥ ë°”ë¼ë³´ê²Œ í•˜ëŠ” ì½”ë“œ 
         float diffx = player.position.x - transform.position.x;
 
         Vector3 handPosition = transform.position;
 
-        if (diffx > 0f) // ÇÃ·¹ÀÌ¾î°¡ ¿À¸¥ÂÊ¿¡ ÀÖÀ» ¶§ (¸ó½ºÅÍ°¡ ¿À¸¥ÂÊÀ» ¹Ù¶óº¼ ¶§)
+        if (diffx > 0f) // í”Œë ˆì´ì–´ê°€ ì˜¤ë¥¸ìª½ì— ìˆì„ ë•Œ (ëª¬ìŠ¤í„°ê°€ ì˜¤ë¥¸ìª½ì„ ë°”ë¼ë³¼ ë•Œ)
         {
             spriteRenderer.flipX = false;          
         }
-        else if (diffx < 0f) // ÇÃ·¹ÀÌ¾î°¡ ¿ŞÂÊ¿¡ ÀÖÀ» ¶§ (¸ó½ºÅÍ°¡ ¿ŞÂÊÀ» ¹Ù¶óº¼ ¶§)
+        else if (diffx < 0f) // í”Œë ˆì´ì–´ê°€ ì™¼ìª½ì— ìˆì„ ë•Œ (ëª¬ìŠ¤í„°ê°€ ì™¼ìª½ì„ ë°”ë¼ë³¼ ë•Œ)
         {
             spriteRenderer.flipX = true;
         }
@@ -76,9 +76,9 @@ public class Enemy_Boar : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (isDead) return;
-        for (int i = 0; i < Random.Range(1, 3); i++) EffectManager.Instance.PlayRandom("ÇÇ_2", transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0f), 3f, 1.5f); // ÀÌÆåÆ® »ı¼º
-        for (int i = 0; i < Random.Range(3, 5); i++) EffectManager.Instance.PlayRandom("ÇÇ_3", transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f), 8f, 6.5f); // ÀÌÆåÆ® »ı¼º
-        EffectManager.Instance.PlayAnimation("ÇÇ°İÇÇ", transform.position, 1f, 0.25f, 0.1f); // ÀÌÆåÆ® »ı¼º
+        for (int i = 0; i < Random.Range(1, 3); i++) EffectManager.Instance.PlayRandom("í”¼_2", transform.position + new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0f), 3f, 1.5f); // ì´í™íŠ¸ ìƒì„±
+        for (int i = 0; i < Random.Range(3, 5); i++) EffectManager.Instance.PlayRandom("í”¼_3", transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f), 8f, 6.5f); // ì´í™íŠ¸ ìƒì„±
+        EffectManager.Instance.PlayAnimation("í”¼ê²©í”¼", transform.position, 1f, 0.25f, 0.1f); // ì´í™íŠ¸ ìƒì„±
         EnemyHP -= damage;
         print("Enemy HP : " + EnemyHP);
 
@@ -90,15 +90,14 @@ public class Enemy_Boar : MonoBehaviour
 
     void Die()
     {
-        if (isDead) return; // µÎ ¹ø ½ÇÇà ¹æÁö
+        if (isDead) return; // ë‘ ë²ˆ ì‹¤í–‰ ë°©ì§€
         isDead = true;
         EnemySpeed = 0;
-        EnemyBack back = GetComponent<EnemyBack>(); // µÚ·Î ¹Ğ¸®´Ù°¡ Á×À¸¸é ¸ØÃß°Ô 
+        EnemyBack back = GetComponent<EnemyBack>(); // ë’¤ë¡œ ë°€ë¦¬ë‹¤ê°€ ì£½ìœ¼ë©´ ë©ˆì¶”ê²Œ 
         SoundManager.Instance.Player_SFX(5);
-        GameManager gm = FindObjectOfType<GameManager>(); //Å³Ä«¿îÆ® Áõ°¡
+        GameManager gm = FindObjectOfType<GameManager>(); //í‚¬ì¹´ìš´íŠ¸ ì¦ê°€
 
-        if (EnemySpawn.Instance != null) EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
-        if (rigidbody != null) rigidbody.simulated = false; //¸®Áöµå¹Ùµğ ºñÈ°¼ºÈ­
+        if (rigidbody != null) rigidbody.simulated = false; //ë¦¬ì§€ë“œë°”ë”” ë¹„í™œì„±í™”
         if (poisonCloundPrefab != null) Instantiate(poisonCloundPrefab, transform.position, Quaternion.identity);
         if (anim != null) anim.SetBool("Die", true);
         if (EnemySpawn.Instance != null) EnemySpawn.Instance.OnEnemyDied();
@@ -117,9 +116,6 @@ public class Enemy_Boar : MonoBehaviour
 
     void OnDestroy()
     {
-        if (!isDead) return; // ÀÌ¹Ì Die() Ã³¸®µÇ¾úÀ¸¸é ¹«½Ã
-
-        if (EnemySpawn.Instance != null)
-            EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
+        if (!isDead) return; // ì´ë¯¸ Die() ì²˜ë¦¬ë˜ì—ˆìœ¼ë©´ ë¬´ì‹œ
     }
 }
