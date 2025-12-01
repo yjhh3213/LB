@@ -118,14 +118,35 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: ccad9b6283be61b46bf5193eb5e0a83b, type: 2}
   EnemyHP: 0
   EnemySpeed: 0
-  player: {fileID: 0}
   reviveDelay: 2
-  reviveHp: 30
+  reviveHp: 10
   reviveFreeze: 1
   downedGrace: 0.05
   Hand: {fileID: 8762064352583638796}
   Feet: {fileID: 4289121732194228277}
   tlcp: {fileID: 820545882071805995, guid: 1e0ce23f97a83a949b3a6605b5a7912e, type: 3}
+  r_sprites:
+  - {fileID: 787453961, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: 1885302209, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: -733620131, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: -2103408888, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: -501527493, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: 1444941983, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: -1068717587, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: 1384957440, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: -895853999, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  - {fileID: 578549286, guid: 9135703426ce85d4087f569e508cf119, type: 3}
+  headOnlySprites:
+  - {fileID: -1281319970, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: -950162459, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: -1853495832, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: 370871045, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: -446001356, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: -926838014, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: 1482624069, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: 1343811687, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: -1193694751, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
+  - {fileID: 1040760439, guid: 99ba2b36e72d6eb45b9afa0afbd55c6e, type: 3}
   skeletonDebrisSprites:
   - {fileID: 1864499808, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
   - {fileID: 285918576, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
@@ -148,6 +169,7 @@ MonoBehaviour:
   - {fileID: -342260322, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
   - {fileID: -1746810032, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
   - {fileID: 1505783546, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  foseja: 0
   dieAnimTime: 0.5
   isDead: 0
 --- !u!50 &-6956889091776205101

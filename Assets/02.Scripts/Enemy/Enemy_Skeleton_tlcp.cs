@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,81 +9,151 @@ public class Enemy_Skeleton_tlcp : MonoBehaviour
     [SerializeField] private float forceMax = 7f;
 
     [Header("Sprite Settings")]
-    [SerializeField] private Sprite[] debrisSprites; // Inspector¿¡¼­ ÇÒ´ç
-    [SerializeField] private int spriteIndex = 0; // »ı¼º ½Ã ¼³Á¤ÇÒ ÀÎµ¦½º
+    [SerializeField] private Sprite[] debrisSprites;
+    [SerializeField] private int spriteIndex = 0;
 
-    [Header("Lifetime")]
-    [SerializeField] private float lifetime = 2f;
+    [Header("Motion Settings")]
+    [SerializeField] private float explosionTime = 0.5f; // ë‚ ì•„ê°€ëŠ” ì‹œê°„
+    [SerializeField] private float returnTime = 1.5f; // ëª¨ì´ëŠ” ì‹œê°„
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    public GameObject qhscp;//ë³¸ì²´ ìœ„ì¹˜
+    private Vector3 spawnPosition; // ìƒì„± ìœ„ì¹˜ ê¸°ì–µ
+    private float initialRotation; // ì´ˆê¸° íšŒì „ê°’
+    private float currentRotation; // í˜„ì¬ íšŒì „ê°’
+    private bool isReturning = false;
+    private Coroutine returnCoroutine; // ì½”ë£¨í‹´ ì¶”ì 
 
     void Start()
     {
-        // ÄÄÆ÷³ÍÆ® ÃÊ±âÈ­
+        initialRotation = transform.rotation.eulerAngles.z;
+
+        // ì»´í¬ë„ŒíŠ¸ ì´ˆê¸°í™”
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Rigidbody2D°¡ ¾øÀ¸¸é Ãß°¡
         if (rb == null)
         {
             rb = gameObject.AddComponent<Rigidbody2D>();
         }
 
-        // SpriteRenderer°¡ ¾øÀ¸¸é Ãß°¡
         if (spriteRenderer == null)
         {
             spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         }
 
-        // Áß·Â È°¼ºÈ­
+        // ì¤‘ë ¥ í™œì„±í™”
         rb.gravityScale = 1f;
 
-        // ½ºÇÁ¶óÀÌÆ® ¼³Á¤
+        // ìŠ¤í”„ë¼ì´íŠ¸ ì„¤ì •
         if (debrisSprites != null && spriteIndex < debrisSprites.Length)
         {
             spriteRenderer.sprite = debrisSprites[spriteIndex];
         }
 
-        // ·£´ı Èû Àû¿ë
+        // ëœë¤ í˜ ì ìš©
         ApplyRandomForce();
 
-        // 2ÃÊ ÈÄ Á¦°Å
-        Destroy(gameObject, lifetime);
+        // 0.5ì´ˆ í›„ ì •ì§€í•˜ê³  ëŒì•„ê°€ê¸° ì‹œì‘
+        returnCoroutine = StartCoroutine(ExplosionSequence());
     }
-
+    private void Update()
+    {
+        // ìƒê°í•´ë³´ë‹ˆ ë„‰ë°±ë êº¼ë‹ˆê¹ ì‹¤ì‹œê°„ìœ¼ë¡œ ë°›ìœ¼ë©´ ë ë“¯
+        if (qhscp!) spawnPosition = qhscp.transform.position;
+    }
     void ApplyRandomForce()
     {
-        // 360µµ ·£´ı °¢µµ
         float randomAngle = Random.Range(0f, 360f);
-
-        // ·£´ı ÈûÀÇ ¼¼±â
         float forceMagnitude = Random.Range(forceMin, forceMax);
 
-        // °¢µµ¸¦ ¹æÇâ º¤ÅÍ·Î º¯È¯
         Vector2 forceDirection = new Vector2(
             Mathf.Cos(randomAngle * Mathf.Deg2Rad),
             Mathf.Sin(randomAngle * Mathf.Deg2Rad)
         );
 
-        // Èû Àû¿ë
         Vector2 force = forceDirection * forceMagnitude;
         rb.AddForce(force, ForceMode2D.Impulse);
 
-        // ·£´ı È¸Àü·Â Ãß°¡ (¼±ÅÃ»çÇ×)
         float randomTorque = Random.Range(-5f, 5f);
         rb.AddTorque(randomTorque, ForceMode2D.Impulse);
     }
 
-    // ½ºÇÁ¶óÀÌÆ® ÀÎµ¦½º ¼³Á¤ ¸Ş¼­µå
+    IEnumerator ExplosionSequence()
+    {
+        // 0.5ì´ˆ ë™ì•ˆ ë‚ ì•„ê°
+        yield return new WaitForSeconds(explosionTime);
+
+        // í˜„ì¬ íšŒì „ê°’ ì €ì¥
+        currentRotation = transform.rotation.eulerAngles.z;
+
+        // ì •ì§€
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.gravityScale = 0f; // ì¤‘ë ¥ ë„ê¸°
+        rb.isKinematic = true; // Kinematicìœ¼ë¡œ ì „í™˜
+
+        isReturning = true;
+
+        // 1.5ì´ˆ ë™ì•ˆ ì›ë˜ ìœ„ì¹˜ë¡œ ì´ë™
+        float elapsedTime = 0f;
+        Vector3 startPosition = transform.position;
+
+        while (elapsedTime < returnTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / returnTime;
+
+            // ë¶€ë“œëŸ¬ìš´ ì´ë™ì„ ìœ„í•œ easeInOut ê³¡ì„ 
+            t = t * t * (3f - 2f * t);
+
+            // ìœ„ì¹˜ ì´ë™
+            transform.position = Vector3.Lerp(startPosition, spawnPosition, t);
+
+            // ì—­íšŒì „ (í˜„ì¬ íšŒì „ì—ì„œ ì´ˆê¸° íšŒì „ìœ¼ë¡œ)
+            float rotation = Mathf.LerpAngle(currentRotation, initialRotation, t);
+            transform.rotation = Quaternion.Euler(0, 0, rotation);
+
+            yield return null;
+        }
+
+        // ì •í™•íˆ ì›ë˜ ìœ„ì¹˜ ë° íšŒì „ìœ¼ë¡œ
+        transform.position = spawnPosition;
+        transform.rotation = Quaternion.Euler(0, 0, initialRotation);
+
+        // ì˜¤ë¸Œì íŠ¸ ì œê±°
+        Destroy(gameObject);
+    }
+
     public void SetSpriteIndex(int index)
     {
         spriteIndex = index;
     }
 
-    // ½ºÇÁ¶óÀÌÆ® ¹è¿­ ¼³Á¤ ¸Ş¼­µå
     public void SetDebrisSprites(Sprite[] sprites)
     {
         debrisSprites = sprites;
+    }
+
+    // í•´ê³¨ì´ ì£½ì—ˆì„ ë•Œ í˜¸ì¶œ: ì •ì§€í•˜ê³  ì¤‘ë ¥ìœ¼ë¡œ ë–¨ì–´ëœ¨ë¦¼
+    public void StopAndFall()
+    {
+        // ì§„í–‰ ì¤‘ì¸ ì½”ë£¨í‹´ ì¤‘ë‹¨
+        if (returnCoroutine != null)
+        {
+            StopCoroutine(returnCoroutine);
+        }
+
+        // Rigidbodyë¥¼ ë‹¤ì‹œ í™œì„±í™”
+        rb.isKinematic = false;
+        rb.gravityScale = 1f;
+
+        // í˜„ì¬ ì†ë„ ì œê±° (ì´ë™ ì •ì§€)
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+
+        // 2ì´ˆ í›„ ì œê±°
+        Destroy(gameObject, 2f);
     }
 }
