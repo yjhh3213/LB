@@ -25,6 +25,7 @@ public class Card : MonoBehaviour
 
     [Header("CardStates")]
     public bool gameclick = false;      // 게임 클릭 되는 걸 방지
+    public bool keyboard = false;       // 카드 선택 시 재장전중일 때 키보드 입력 방지
     public int ShotGunCard = 0;         // 샷건개조
     public int BulletCard = 0;          // 총알개조
     public int barrelCard = 0;          // 총열개조
@@ -40,11 +41,13 @@ public class Card : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        keyboard = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        print(keyboard);
         if (!PlayerCtrl.dead)
         {
             if (card_cu_delay > 0) { card_cu_delay -= Time.unscaledDeltaTime; }
@@ -154,6 +157,7 @@ public class Card : MonoBehaviour
     {
         if (PlayerCtrl.dead) return; //플레이어 사망시 카드 안뜸
         Time.timeScale = 0.0f;
+        keyboard = true;
         card_cu_delay = card_delay; //딜레이 넣기
         FindObjectOfType<Aim>().aim_ch("마우스"); //에임 모양 변경
         gameclick = true;
@@ -192,17 +196,17 @@ public class Card : MonoBehaviour
                 if (i == 0)
                 {
                     Sect1 = num;
-                    print("Sect1 : "+ Sect1);
+                    //print("Sect1 : "+ Sect1);
                 }
                 else if (i == 1)
                 {
                     Sect2 = num;
-                    print("Sect2 : " + Sect2);
+                    //print("Sect2 : " + Sect2);
                 }
                 else if (i == 2)
                 {
                     Sect3 = num;
-                    print("Sect3 : " + Sect3);
+                    //print("Sect3 : " + Sect3);
                 }
                 SetCardobj[i].SetActive(true);
                 ButtonBGCobj[i].SetActive(true);
@@ -232,7 +236,7 @@ public class Card : MonoBehaviour
                 case 6: fastdraw++; CardColorobj[6].SetActive(true); break;
             }
             SoundManager.Instance.Player_SFX(4);
-            Debug.Log(cardType + " 번 카드 강화!");
+            //Debug.Log(cardType + " 번 카드 강화!");
 
             NoSeeCard();
         }
@@ -249,6 +253,7 @@ public class Card : MonoBehaviour
         card_cu_delay = card_delay; //딜레이 넣기
         FindObjectOfType<Aim>().aim_ch("일반"); //에임 모양 변경
         gameclick = false;
+        keyboard = false;
         Time.timeScale = 1.0f;
     }
 }

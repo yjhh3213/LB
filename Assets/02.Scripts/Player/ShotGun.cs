@@ -178,7 +178,7 @@ public class ShotGun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
-            print("Reload");
+            //print("Reload");
         }
     }
 
@@ -201,7 +201,7 @@ public class ShotGun : MonoBehaviour
             NowBulletCount += 6;
             for (int j = 0; j < 6; j++)
             {
-                if(count > 0)
+                if (count > 0)
                 {
                     BulletCount[count - 1].SetActive(true);
                     count--;
@@ -217,7 +217,7 @@ public class ShotGun : MonoBehaviour
 
         yield return null;
 
-        if(qteText != null)
+        if (qteText != null)
         {
             qteText.gameObject.SetActive(true);
         }
@@ -231,7 +231,7 @@ public class ShotGun : MonoBehaviour
         int qteSteps = 3;
 
         //전체에서 QERT만 사용하기
-        KeyCode[] QET = { KeyCode.Q, KeyCode.E, KeyCode.T};
+        KeyCode[] QET = { KeyCode.Q, KeyCode.E, KeyCode.T };
 
         for (int i = 0; i < qteSteps; i++)
         {
@@ -244,7 +244,8 @@ public class ShotGun : MonoBehaviour
             bool IsSuccess = false;
             bool isFailed = false;
 
-            while (time > 0 && !isFailed)
+            // !Card.Instance.keyboard를 추가하므로써 Q, E, T를 눌러도 장전안되게 만듦
+            while (time > 0 && !isFailed && !Card.Instance.keyboard)
             {
                 if (Input.GetKeyDown(targetKey))
                 {
@@ -266,7 +267,7 @@ public class ShotGun : MonoBehaviour
                     }
                     int ReloadAmount = Mathf.Min(bulletreload, MaxBulletCount - NowBulletCount);
 
-                    if(ReloadAmount <= 0)
+                    if (ReloadAmount <= 0)
                     {
                         print("Full Bullet");
                     }
@@ -288,7 +289,7 @@ public class ShotGun : MonoBehaviour
                 }
                 if (Input.anyKeyDown)
                 {
-                    foreach(KeyCode key in QET)
+                    foreach (KeyCode key in QET)
                     {
                         if (key != targetKey && Input.GetKeyDown(key))
                         {
@@ -306,7 +307,7 @@ public class ShotGun : MonoBehaviour
             }
 
             // 단일 QTE 결과 판정
-            if(isFailed || !IsSuccess)
+            if (isFailed || !IsSuccess)
             {
                 if (!isFailed)
                 {
@@ -316,7 +317,7 @@ public class ShotGun : MonoBehaviour
                 break;
             }
 
-            if(NowBulletCount >= MaxBulletCount)
+            if (NowBulletCount >= MaxBulletCount)
             {
                 print("Full Bullet");
                 break;
