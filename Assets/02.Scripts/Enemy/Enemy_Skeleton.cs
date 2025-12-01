@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -12,7 +13,7 @@ public class Enemy_Skeleton : MonoBehaviour
     public float EnemySpeed = 1f;     // 이동 속도
 
     [Header("참조")]
-    public Transform player;
+    private Transform player;
 
     [Header("다운/부활")]
     public float reviveDelay = 2f;    // 다운 유지 시간
@@ -36,12 +37,20 @@ public class Enemy_Skeleton : MonoBehaviour
     public GameObject Hand; //손
     public GameObject Feet; //발
     public GameObject tlcp; //시체
+    public Sprite[] r_sprites; //랜덤으로 금간 모습
+    public Sprite[] headOnlySprites; //머리만 남은 해골 스프라이트 배열
     public Sprite[] skeletonDebrisSprites;
+    public int foseja; //랜덤 결정
     public float dieAnimTime = 1.0f;
 
+    private Sprite originalSprite; // 원래 스프라이트 저장
+    private List<GameObject> activeDebris = new List<GameObject>(); // 생성된 파편 추적
+
     public bool isDead = false;
+
     void Start()
     {
+        foseja = Random.Range(0, r_sprites.Length);
         if (data != null)
         {
             EnemyHP = data.hp;
@@ -49,11 +58,13 @@ public class Enemy_Skeleton : MonoBehaviour
         }
         if (!player)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        if(spriteRenderer == null)
+        if (spriteRenderer == null)
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             HandspriteRenderer = Hand.GetComponentInChildren<SpriteRenderer>();
             FeetspriteRenderer = Feet.GetComponentInChildren<SpriteRenderer>();
+            originalSprite = r_sprites[foseja];
+            spriteRenderer.sprite = originalSprite;
         }
     }
 
@@ -130,6 +141,29 @@ public class Enemy_Skeleton : MonoBehaviour
         downPos = transform.position;
         downedAt = Time.time;  // ★ 그레이스 시작
 
+        // 손발 비활성화
+        Hand.SetActive(false);
+        Feet.SetActive(false);
+
+        // 머리만 남은 스프라이트로 변경
+        if (headOnlySprites != null && headOnlySprites.Length > 0)
+        {
+            spriteRenderer.sprite = headOnlySprites[foseja];
+        }
+
+        // 파편 생성
+        activeDebris.Clear();
+        for (int i = 0; i < skeletonDebrisSprites.Length; i++)
+        {
+            GameObject debris = Instantiate(tlcp, transform.position, Quaternion.identity);
+            Enemy_Skeleton_tlcp debrisScript = debris.GetComponent<Enemy_Skeleton_tlcp>();
+            debrisScript.qhscp = gameObject;
+            debrisScript.SetDebrisSprites(skeletonDebrisSprites);
+            debrisScript.SetSpriteIndex(i);
+
+            activeDebris.Add(debris); // 파편 추적
+        }
+
         Debug.Log($"[Skeleton] DOWNED at {downPos} (revive in {reviveDelay}s)");
 
         if (reviveCo != null) StopCoroutine(reviveCo);
@@ -143,7 +177,20 @@ public class Enemy_Skeleton : MonoBehaviour
         // 다운 유지 중이라면 부활(마무리 타격을 못 받은 경우)
         if (state == State.Downed)
         {
-            //transform.position = downPos;
+            // 파편 제거
+            foreach (GameObject debris in activeDebris)
+            {
+                if (debris != null)
+                    Destroy(debris);
+            }
+            activeDebris.Clear();
+
+            // 스프라이트 복구
+            spriteRenderer.sprite = originalSprite;
+
+            // 손발 활성화
+            Hand.SetActive(true);
+            Feet.SetActive(true);
 
             // ★ 부활 HP 확실히 양수로
             EnemyHP = Mathf.Max(1f, reviveHp);
@@ -165,18 +212,26 @@ public class Enemy_Skeleton : MonoBehaviour
 
         if (isDead) return; // 두 번 실행 방지
         isDead = true;
-        if (reviveCo != null) StopCoroutine(reviveCo);
-        for (int i = 0; i < skeletonDebrisSprites.Length; i++)
-        {
-            GameObject debris = Instantiate(tlcp, transform.position, Quaternion.identity);
-            Enemy_Skeleton_tlcp debrisScript = debris.GetComponent<Enemy_Skeleton_tlcp>();
-            
-            debrisScript.SetDebrisSprites(skeletonDebrisSprites);
-            debrisScript.SetSpriteIndex(i);
-        }
-        Destroy(gameObject);
 
+        if (reviveCo != null) StopCoroutine(reviveCo);
+
+        // 모이는 중인 파편들 정지 후 중력으로 떨어뜨리기
+        foreach (GameObject debris in activeDebris)
+        {
+            if (debris != null)
+            {
+                Enemy_Skeleton_tlcp debrisScript = debris.GetComponent<Enemy_Skeleton_tlcp>();
+                if (debrisScript != null)
+                {
+                    debrisScript.StopAndFall();
+                }
+            }
+        }
+        activeDebris.Clear();
+
+        Destroy(gameObject);
     }
+
     void OnDestroy()
     {
         if (!isDead) return; // 이미 Die() 처리되었으면 무시
