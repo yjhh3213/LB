@@ -4904,6 +4904,7 @@ MonoBehaviour:
   - {fileID: 1778373267, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   - {fileID: 1414616383, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   gameclick: 0
+  keyboard: 0
   ShotGunCard: 0
   BulletCard: 0
   barrelCard: 0
@@ -5019,7 +5020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2084668397
 RectTransform:
   m_ObjectHideFlags: 0
