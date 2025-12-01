@@ -5818,7 +5818,7 @@ MonoBehaviour:
   - {fileID: 1732503659}
   - {fileID: 59303380}
   Player: {fileID: 572370093}
-  PlayerCtrl: {fileID: 0}
+  PlayerCtrl: {fileID: 572370095}
   CardColor:
   - {fileID: 455956977}
   - {fileID: 887799255}
@@ -6085,6 +6085,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 12, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
+      propertyPath: playerCtrl
+      value: 
+      objectReference: {fileID: 572370095}
     - target: {fileID: 12, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: BulletCount.Array.data[0]
       value: 
