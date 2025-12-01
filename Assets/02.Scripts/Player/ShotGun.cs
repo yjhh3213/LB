@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,32 +10,32 @@ using UnityEditor.UIElements;
 
 public class ShotGun : MonoBehaviour
 {
-    //public Card card;                     // Ä«µå ½ºÅ©¸³Æ®¿¡ ÀÖ´Â º¯¼ö¸¦ ¾ò¾î¿À±â À§ÇØ ¾²ÀÓ
-    int fastdrawLevel;                      // ÆĞ½ºÆ® µå·Î¿ì Level
-    int weaknessCardLevel;                  // ¾àÁ¡ Æ÷Âø Level
+    //public Card card;                     // ì¹´ë“œ ìŠ¤í¬ë¦½íŠ¸ì— ìˆëŠ” ë³€ìˆ˜ë¥¼ ì–»ì–´ì˜¤ê¸° ìœ„í•´ ì“°ì„
+    int fastdrawLevel;                      // íŒ¨ìŠ¤íŠ¸ ë“œë¡œìš° Level
+    int weaknessCardLevel;                  // ì•½ì  í¬ì°© Level
 
     [Header("GameObject")]
-    public PlayerCtrl playerCtrl;           // ÇÃ·¹ÀÌ¾î
-    public GameObject ReloadImage;          // ÀçÀåÀü ÀÌ¹ÌÁö
+    public PlayerCtrl playerCtrl;           // í”Œë ˆì´ì–´
+    public GameObject ReloadImage;          // ì¬ì¥ì „ ì´ë¯¸ì§€
     public TMP_Text qteText;
-    public GameObject[] BulletPrefab;       // Åº
-    public GameObject[] EmptyPrefab;        // ÅºÇÇ
-    public GameObject[] BulletCount;        // Åº °¹¼ö
+    public GameObject[] BulletPrefab;       // íƒ„
+    public GameObject[] EmptyPrefab;        // íƒ„í”¼
+    public GameObject[] BulletCount;        // íƒ„ ê°¯ìˆ˜
 
     [Header("Transform")]
-    public Transform FirePoint;             // ÃÑ±¸ À§Ä¡
-    public Transform EmptyBullet;           // ÅºÇÇ ¹èÃâ
+    public Transform FirePoint;             // ì´êµ¬ ìœ„ì¹˜
+    public Transform EmptyBullet;           // íƒ„í”¼ ë°°ì¶œ
 
     [Header("States")]
-    private int MaxBulletCount = 6;         // ÃÖ´ñÄ¡ Åº °¹¼ö
-    public int NowBulletCount = 6;          // ÇöÀç Åº °¹¼ö
-    public float BulletSpeed = 10.0f;       // Åº ¼Óµµ
-    public int count = 0;                   // Åº ÀÌ¹ÌÁö¸¦ À§ÇÑ Ä«¿îÆ®
-    public float ReloadTime = 3.0f;         // QTE°¡ ÁøÇàµÇ´Â µ¿¾È ÀçÀåÀü ½Ã°£
-    public float WaitShoot = 1.0f;          // ´ÙÀ½ °ø°İ±îÁö °É¸®´Â ½Ã°£
-    public float WaitEmptyBullet = 0.5f;    // ºó Åº ³ª¿À±â±îÁö °É¸®´Â ½Ã°£
+    private int MaxBulletCount = 6;         // ìµœëŒ“ì¹˜ íƒ„ ê°¯ìˆ˜
+    public int NowBulletCount = 6;          // í˜„ì¬ íƒ„ ê°¯ìˆ˜
+    public float BulletSpeed = 10.0f;       // íƒ„ ì†ë„
+    public int count = 0;                   // íƒ„ ì´ë¯¸ì§€ë¥¼ ìœ„í•œ ì¹´ìš´íŠ¸
+    public float ReloadTime = 3.0f;         // QTEê°€ ì§„í–‰ë˜ëŠ” ë™ì•ˆ ì¬ì¥ì „ ì‹œê°„
+    public float WaitShoot = 1.0f;          // ë‹¤ìŒ ê³µê²©ê¹Œì§€ ê±¸ë¦¬ëŠ” ì‹œê°„
+    public float WaitEmptyBullet = 0.5f;    // ë¹ˆ íƒ„ ë‚˜ì˜¤ê¸°ê¹Œì§€ ê±¸ë¦¬ëŠ” ì‹œê°„
     bool WaitEmptySccess = false;
-    bool isReloading = false;               // ÀçÀåÀüÁßÀÎÁö
+    bool isReloading = false;               // ì¬ì¥ì „ì¤‘ì¸ì§€
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +52,7 @@ public class ShotGun : MonoBehaviour
 
             Conmand();
 
-            // Ä«¿îÆ®°¡ 0 ¹Ì¸¸ÀÏ ¶§ 0À¸·Î ´Ù½Ã Á¤¸³ÇÏ±â
+            // ì¹´ìš´íŠ¸ê°€ 0 ë¯¸ë§Œì¼ ë•Œ 0ìœ¼ë¡œ ë‹¤ì‹œ ì •ë¦½í•˜ê¸°
             if (count < 0)
             {
                 count = 0;
@@ -82,13 +82,13 @@ public class ShotGun : MonoBehaviour
                 EmptyBulletSpeed += Time.deltaTime;
                 Quaternion EBrot = EmptyBullet.rotation * Quaternion.Euler(0, 0, -EmptyBulletSpeed);
                 GameObject EB = Instantiate(EmptyPrefab[0], EmptyBullet.position, EBrot);
-                // ÅºÇÇ¿¡ Èû Ãß°¡
+                // íƒ„í”¼ì— í˜ ì¶”ê°€
                 Rigidbody2D rb = EB.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
-                    Vector2 force = new Vector2(Random.Range(-2f, 1f), Random.Range(5f, 7f));// À§ÂÊ°ú ¾à°£ÀÇ ¿·¹æÇâ Èû
+                    Vector2 force = new Vector2(Random.Range(-2f, 1f), Random.Range(5f, 7f));// ìœ„ìª½ê³¼ ì•½ê°„ì˜ ì˜†ë°©í–¥ í˜
                     rb.AddForce(force, ForceMode2D.Impulse);
-                    rb.AddTorque(Random.Range(-5f, 5f), ForceMode2D.Impulse);// È¸Àü·Â Ãß°¡ (´õ Çö½ÇÀûÀ¸·Î)
+                    rb.AddTorque(Random.Range(-5f, 5f), ForceMode2D.Impulse);// íšŒì „ë ¥ ì¶”ê°€ (ë” í˜„ì‹¤ì ìœ¼ë¡œ)
                 }
                 SoundManager.Instance.Player_SFX(7);
                 Destroy(EB, 2.0f);
@@ -96,17 +96,17 @@ public class ShotGun : MonoBehaviour
                 WaitEmptyBullet = 0.5f;
             }
         }
-        //Åº¾à ¹ß»ç
+        //íƒ„ì•½ ë°œì‚¬
         if (Input.GetMouseButtonDown(0) && Card.Instance.gameclick == false && WaitShoot <=0.0f)
         {
             //print(WaitShoot);
-            int ShotGunCardLevel = Card.Instance.ShotGunCard;           // ¼¦°Ç°³Á¶ Level
-            int barrelCardLevel = Card.Instance.barrelCard;             // ÃÑ¿­°³Á¶ Level
+            int ShotGunCardLevel = Card.Instance.ShotGunCard;           // ìƒ·ê±´ê°œì¡° Level
+            int barrelCardLevel = Card.Instance.barrelCard;             // ì´ì—´ê°œì¡° Level
             //print("Left Click");
             if (NowBulletCount >= 1)
             {
                 int BulletNumber = Random.Range(3, 6);
-                //print("´õÇÏ±â Àü : " + BulletNumber);
+                //print("ë”í•˜ê¸° ì „ : " + BulletNumber);
                 switch (ShotGunCardLevel)
                 {
                     case 1:
@@ -121,7 +121,7 @@ public class ShotGun : MonoBehaviour
                     default:
                         break;
                 }
-                //print("ÈÄ : " + BulletNumber);
+                //print("í›„ : " + BulletNumber);
 
 
                 float decreasebullet = 0.0f;
@@ -142,8 +142,8 @@ public class ShotGun : MonoBehaviour
                         break;
                 }
 
-                EffectManager.Instance.PlayAnimation("ÃÑ¿°", FirePoint.position, 1f, 0.25f, 0.1f); // ÀÌÆåÆ® »ı¼º
-                EffectManager.Instance.PlayAnimation("ÃÑ¿¬±â", transform.position + new Vector3(0,+0.5f,0), 1f, 0.5f, 0.25f); // ÀÌÆåÆ® »ı¼º
+                EffectManager.Instance.PlayAnimation("ì´ì—¼", FirePoint.position, 1f, 0.25f, 0.1f); // ì´í™íŠ¸ ìƒì„±
+                EffectManager.Instance.PlayAnimation("ì´ì—°ê¸°", transform.position + new Vector3(0,+0.5f,0), 1f, 0.5f, 0.25f); // ì´í™íŠ¸ ìƒì„±
                 if (BulletPrefab != null)
                 {
                     for (int i = 0; i < BulletNumber; i++)
@@ -170,7 +170,7 @@ public class ShotGun : MonoBehaviour
                     count++;
                 }
             }
-            else if (NowBulletCount <= 0) //ÃÑ¾Ë ¾øÀ½
+            else if (NowBulletCount <= 0) //ì´ì•Œ ì—†ìŒ
             {
                 SoundManager.Instance.Player_SFX(6);
             }
@@ -185,8 +185,8 @@ public class ShotGun : MonoBehaviour
     void Reload()
     {
         if (isReloading) return;
-        FindObjectOfType<Aim>().aim_ch("ÀåÀü"); //¿¡ÀÓ ¸ğ¾ç º¯°æ
-        // ÃÑ Åº¾à ¼ö¿¡¼­ ÇöÀç Åº¾à ¼ö¸¦ »« ³ª¸ÓÁö Åº¾à ¼ö¸¦ ÀçÀåÀüÇÑ´Ù
+        FindObjectOfType<Aim>().aim_ch("ì¥ì „"); //ì—ì„ ëª¨ì–‘ ë³€ê²½
+        // ì´ íƒ„ì•½ ìˆ˜ì—ì„œ í˜„ì¬ íƒ„ì•½ ìˆ˜ë¥¼ ëº€ ë‚˜ë¨¸ì§€ íƒ„ì•½ ìˆ˜ë¥¼ ì¬ì¥ì „í•œë‹¤
         int reloadBullet = MaxBulletCount - NowBulletCount;
         StartCoroutine(ReloadC(reloadBullet));
     }
@@ -195,7 +195,7 @@ public class ShotGun : MonoBehaviour
     {
         isReloading = true;
 
-        // LEVEL 3 ÀÌ»óÀÏ ¶§ Áï½Ã ÀçÀåÀü
+        // LEVEL 3 ì´ìƒì¼ ë•Œ ì¦‰ì‹œ ì¬ì¥ì „
         if (fastdrawLevel >= 3)
         {
             NowBulletCount += 6;
@@ -209,11 +209,11 @@ public class ShotGun : MonoBehaviour
                 //print(count);
             }
             isReloading = false;
-            FindObjectOfType<Aim>().aim_ch("ÀÏ¹İ"); //¿¡ÀÓ ¸ğ¾ç º¯°æ
+            FindObjectOfType<Aim>().aim_ch("ì¼ë°˜"); //ì—ì„ ëª¨ì–‘ ë³€ê²½
             yield break;
         }
 
-        // LEVEL 0~2 QTE Ã³¸®
+        // LEVEL 0~2 QTE ì²˜ë¦¬
 
         yield return null;
 
@@ -230,7 +230,7 @@ public class ShotGun : MonoBehaviour
 
         int qteSteps = 3;
 
-        //ÀüÃ¼¿¡¼­ QERT¸¸ »ç¿ëÇÏ±â
+        //ì „ì²´ì—ì„œ QERTë§Œ ì‚¬ìš©í•˜ê¸°
         KeyCode[] QET = { KeyCode.Q, KeyCode.E, KeyCode.T };
 
         for (int i = 0; i < qteSteps; i++)
@@ -238,13 +238,13 @@ public class ShotGun : MonoBehaviour
             KeyCode targetKey = QET[Random.Range(0, QET.Length)];
 
             qteText.text = targetKey.ToString();
-            print($"QTE {i + 1}/{qteSteps} : {targetKey} Å°¸¦ ´©¸£¼¼¿ä");
+            print($"QTE {i + 1}/{qteSteps} : {targetKey} í‚¤ë¥¼ ëˆ„ë¥´ì„¸ìš”");
 
-            float time = ReloadTime; // °¢ ´Ü°èº° ½Ã°£
+            float time = ReloadTime; // ê° ë‹¨ê³„ë³„ ì‹œê°„
             bool IsSuccess = false;
             bool isFailed = false;
 
-            // !Card.Instance.keyboard¸¦ Ãß°¡ÇÏ¹Ç·Î½á Q, E, T¸¦ ´­·¯µµ ÀåÀü¾ÈµÇ°Ô ¸¸µê
+            // !Card.Instance.keyboardë¥¼ ì¶”ê°€í•˜ë¯€ë¡œì¨ Q, E, Të¥¼ ëˆŒëŸ¬ë„ ì¥ì „ì•ˆë˜ê²Œ ë§Œë“¦
             while (time > 0 && !isFailed && !Card.Instance.keyboard)
             {
                 if (Input.GetKeyDown(targetKey))
@@ -293,9 +293,9 @@ public class ShotGun : MonoBehaviour
                     {
                         if (key != targetKey && Input.GetKeyDown(key))
                         {
-                            print("QTE ½ÇÆĞ! (Æ²¸° Å° ÀÔ·Â)");
-                            isFailed = true; // ½ÇÆĞ Ã³¸®
-                            break; // for ·çÇÁ Å»Ãâ
+                            print("QTE ì‹¤íŒ¨! (í‹€ë¦° í‚¤ ì…ë ¥)");
+                            isFailed = true; // ì‹¤íŒ¨ ì²˜ë¦¬
+                            break; // for ë£¨í”„ íƒˆì¶œ
                         }
                     }
                 }
@@ -306,7 +306,7 @@ public class ShotGun : MonoBehaviour
                 yield return null;
             }
 
-            // ´ÜÀÏ QTE °á°ú ÆÇÁ¤
+            // ë‹¨ì¼ QTE ê²°ê³¼ íŒì •
             if (isFailed || !IsSuccess)
             {
                 if (!isFailed)
@@ -323,13 +323,13 @@ public class ShotGun : MonoBehaviour
                 break;
             }
 
-            // ¼º°ø : ´ÙÀ½ ´Ü°è¸¦ À§ÇØ 0.1ÃÊ ´ë±â
+            // ì„±ê³µ : ë‹¤ìŒ ë‹¨ê³„ë¥¼ ìœ„í•´ 0.1ì´ˆ ëŒ€ê¸°
             yield return new WaitForSeconds(0.1f);
         }
 
         ReloadImage.SetActive(false);
         qteText.gameObject.SetActive(false);
         isReloading = false;
-        FindObjectOfType<Aim>().aim_ch("ÀÏ¹İ"); //¿¡ÀÓ ¸ğ¾ç º¯°æ
+        FindObjectOfType<Aim>().aim_ch("ì¼ë°˜"); //ì—ì„ ëª¨ì–‘ ë³€ê²½
     }
 }

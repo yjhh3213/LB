@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ public class Movefoot : MonoBehaviour
         RotateToMouse();
     }
 
-    // Ä³¸¯ÅÍ°¡ ¸¶¿ì½º¸¦ ¹Ù¶óº¸°Ô ÇÏ´Â ÄÚµå
+    // ìºë¦­í„°ê°€ ë§ˆìš°ìŠ¤ë¥¼ ë°”ë¼ë³´ê²Œ í•˜ëŠ” ì½”ë“œ
     void RotateToMouse()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

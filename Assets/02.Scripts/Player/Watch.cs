@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,21 +12,21 @@ public class Watch : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 dir = mousePos - transform.position;
 
-            // ¸¶¿ì½º ¹æÇâÀÇ °¢µµ °è»ê
+            // ë§ˆìš°ìŠ¤ ë°©í–¥ì˜ ê°ë„ ê³„ì‚°
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-            // ZÃà È¸Àü Àû¿ë
+            // Zì¶• íšŒì „ ì ìš©
             transform.rotation = Quaternion.Euler(0, 0, angle);
 
-            // ÁÂ¿ì ¹æÇâ¿¡ µû¶ó YÃà ½ºÄÉÀÏ Á¶Á¤ (»óÇÏ ¹İÀü)
+            // ì¢Œìš° ë°©í–¥ì— ë”°ë¼ Yì¶• ìŠ¤ì¼€ì¼ ì¡°ì • (ìƒí•˜ ë°˜ì „)
             if (mousePos.x < transform.position.x)
             {
-                // ¿ŞÂÊÀ» º¼ ¶§ - YÃà ½ºÄÉÀÏ ¹İÀü
+                // ì™¼ìª½ì„ ë³¼ ë•Œ - Yì¶• ìŠ¤ì¼€ì¼ ë°˜ì „
                 transform.localScale = new Vector3(transform.localScale.x, -Mathf.Abs(transform.localScale.y), transform.localScale.z);
             }
             else
             {
-                // ¿À¸¥ÂÊÀ» º¼ ¶§ - YÃà ½ºÄÉÀÏ Á¤»ó
+                // ì˜¤ë¥¸ìª½ì„ ë³¼ ë•Œ - Yì¶• ìŠ¤ì¼€ì¼ ì •ìƒ
                 transform.localScale = new Vector3(transform.localScale.x, Mathf.Abs(transform.localScale.y), transform.localScale.z);
             }
         }
