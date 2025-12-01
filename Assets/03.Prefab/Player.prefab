@@ -201,7 +201,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1662413100642505273}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
@@ -478,7 +478,7 @@ RectTransform:
   m_Children:
   - {fileID: 1112546071}
   m_Father: {fileID: 1662413100642505273}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -885,10 +885,10 @@ Transform:
   m_Children:
   - {fileID: 1662413100709124663}
   - {fileID: 1662413101546145031}
-  - {fileID: 1164017154507403469}
   - {fileID: 7662339436903769328}
   - {fileID: 519420032}
   - {fileID: 1542025591}
+  - {fileID: 1164017154507403469}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1059,6 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913ca3b944071d84d9606a7b843739b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCtrl: {fileID: 1662413100642505253}
 --- !u!58 &1300466514
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1287,7 +1288,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1662413100642505273}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4305082552209026361
 SpriteRenderer:
@@ -1437,7 +1438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3653797812623445945, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3653797812623445945, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
       propertyPath: m_LocalPosition.x

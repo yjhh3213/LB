@@ -15,6 +15,7 @@ public class ShotGun : MonoBehaviour
     int weaknessCardLevel;                  // 약점 포착 Level
 
     [Header("GameObject")]
+    public PlayerCtrl playerCtrl;           // 플레이어
     public GameObject ReloadImage;          // 재장전 이미지
     public TMP_Text qteText;
     public GameObject[] BulletPrefab;       // 탄
@@ -45,14 +46,17 @@ public class ShotGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fastdrawLevel = Card.Instance.fastdraw;
-
-        Conmand();
-
-        // 카운트가 0 미만일 때 0으로 다시 정립하기
-        if (count < 0)
+        if (!playerCtrl.dead)
         {
-            count = 0;
+            fastdrawLevel = Card.Instance.fastdraw;
+
+            Conmand();
+
+            // 카운트가 0 미만일 때 0으로 다시 정립하기
+            if (count < 0)
+            {
+                count = 0;
+            }
         }
     }
 
@@ -328,5 +332,3 @@ public class ShotGun : MonoBehaviour
         FindObjectOfType<Aim>().aim_ch("일반"); //에임 모양 변경
     }
 }
-
-
