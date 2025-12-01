@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
-    public Sprite[] sprite; // ±×³É Á¶ÁØ, ÀåÀü (¸¶¿ì½º Ä¿¼­´Â µû·Î)
+    public Sprite[] sprite; // ê·¸ëƒ¥ ì¡°ì¤€, ì¥ì „ (ë§ˆìš°ìŠ¤ ì»¤ì„œëŠ” ë”°ë¡œ)
     private SpriteRenderer spriteRenderer;
     private Camera mainCamera;
     private float minX, maxX, minY, maxY;
@@ -25,7 +25,7 @@ public class Aim : MonoBehaviour
         Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f;
 
-        // ºÎµå·´°Ô µû¶ó°¡±â
+        // ë¶€ë“œëŸ½ê²Œ ë”°ë¼ê°€ê¸°
         transform.position = Vector3.Lerp(transform.position, mousePos, Time.deltaTime * 20f);
     }
 
@@ -40,10 +40,10 @@ public class Aim : MonoBehaviour
         maxY = topRight.y + 12f;
     }
 
-    public void aim_ch(string image_st) //¿¡ÀÓ¸ğ¾ç ¹Ù²Ù±â
+    public void aim_ch(string image_st) //ì—ì„ëª¨ì–‘ ë°”ê¾¸ê¸°
     {
-        if (image_st == "¸¶¿ì½º") { Cursor.visible = true; spriteRenderer.sprite = null; }
-        if (image_st == "ÀÏ¹İ") { Cursor.visible = false; spriteRenderer.sprite = sprite[0]; }
-        if (image_st == "ÀåÀü") { Cursor.visible = false; spriteRenderer.sprite = sprite[1]; }
+        if (image_st == "ë§ˆìš°ìŠ¤") { Cursor.visible = true; spriteRenderer.sprite = null; }
+        if (image_st == "ì¼ë°˜") { Cursor.visible = false; spriteRenderer.sprite = sprite[0]; }
+        if (image_st == "ì¥ì „") { Cursor.visible = false; spriteRenderer.sprite = sprite[1]; }
     }
 }

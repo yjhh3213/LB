@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
@@ -10,28 +10,29 @@ public class Card : MonoBehaviour
 
     public static Card Instance;
 
-    private float card_delay = 1f;      // Ä«µå¸¦ °í¸¥ ¼ø°£ Ä«µå ½Ã°£ ºÎ°ú
-    private float card_cu_delay = 0f;   // Ä«µå¸¦ °í¸¦¶© 0ÀÌ¿©¾ß °í¸¦ ¼ö ÀÖÀ½
+    private float card_delay = 1f;      // ì¹´ë“œë¥¼ ê³ ë¥¸ ìˆœê°„ ì¹´ë“œ ì‹œê°„ ë¶€ê³¼
+    private float card_cu_delay = 0f;   // ì¹´ë“œë¥¼ ê³ ë¥¼ë• 0ì´ì—¬ì•¼ ê³ ë¥¼ ìˆ˜ ìˆìŒ
 
     [Header("GameObjet")]
-    public GameObject[] SetCardobj;     // Ä«µå¿ÀºêÁ§Æ®
-    public GameObject[] ButtonBGCobj;   // Ä«µåÅ×µÎ¸®¿ÀºêÁ§Æ®
-    public Image[] ButtonBGC;           // ¹öÆ° µÚ¿¡ »ö±ò Å×µÎ¸®
-    public GameObject Player;           // ÇÃ·¹ÀÌ¾î
-    public PlayerCtrl PlayerCtrl;       // ÇÃ·¹ÀÌ¾î ÄÚµå
-    public Image[] CardColor;           // Ä«µå Å×µÎ¸® »ö±ò
-    public GameObject[] CardColorobj;   // Ä«µå UI On/Off
-    public Sprite[] CardImage;          // Ä«µå ÀÌ¹ÌÁö
+    public GameObject[] SetCardobj;     // ì¹´ë“œì˜¤ë¸Œì íŠ¸
+    public GameObject[] ButtonBGCobj;   // ì¹´ë“œí…Œë‘ë¦¬ì˜¤ë¸Œì íŠ¸
+    public Image[] ButtonBGC;           // ë²„íŠ¼ ë’¤ì— ìƒ‰ê¹” í…Œë‘ë¦¬
+    public GameObject Player;           // í”Œë ˆì´ì–´
+    public PlayerCtrl PlayerCtrl;       // í”Œë ˆì´ì–´ ì½”ë“œ
+    public Image[] CardColor;           // ì¹´ë“œ í…Œë‘ë¦¬ ìƒ‰ê¹”
+    public GameObject[] CardColorobj;   // ì¹´ë“œ UI On/Off
+    public Sprite[] CardImage;          // ì¹´ë“œ ì´ë¯¸ì§€
 
     [Header("CardStates")]
-    public bool gameclick = false;      // °ÔÀÓ Å¬¸¯ µÇ´Â °É ¹æÁö
-    public int ShotGunCard = 0;         // ¼¦°Ç°³Á¶
-    public int BulletCard = 0;          // ÃÑ¾Ë°³Á¶
-    public int barrelCard = 0;          // ÃÑ¿­°³Á¶
-    public int weaknessCard = 0;        // ¾àÁ¡Æ÷Âø
-    public int nimblestepsCard = 0;     // ±â¹ÎÇÑ°ÉÀ½
-    public int QuickstepCard = 0;       // Äü ½ºÅÇ
-    public int fastdraw = 0;            // ºü¸¥ ÀåÀü
+    public bool gameclick = false;      // ê²Œì„ í´ë¦­ ë˜ëŠ” ê±¸ ë°©ì§€
+    public bool keyboard = false;       // ì¹´ë“œ ì„ íƒ ì‹œ ì¬ì¥ì „ì¤‘ì¼ ë•Œ í‚¤ë³´ë“œ ì…ë ¥ ë°©ì§€
+    public int ShotGunCard = 0;         // ìƒ·ê±´ê°œì¡°
+    public int BulletCard = 0;          // ì´ì•Œê°œì¡°
+    public int barrelCard = 0;          // ì´ì—´ê°œì¡°
+    public int weaknessCard = 0;        // ì•½ì í¬ì°©
+    public int nimblestepsCard = 0;     // ê¸°ë¯¼í•œê±¸ìŒ
+    public int QuickstepCard = 0;       // í€µ ìŠ¤íƒ­
+    public int fastdraw = 0;            // ë¹ ë¥¸ ì¥ì „
 
     
     string CardName;
@@ -40,11 +41,13 @@ public class Card : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        keyboard = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        print(keyboard);
         if (!PlayerCtrl.dead)
         {
             if (card_cu_delay > 0) { card_cu_delay -= Time.unscaledDeltaTime; }
@@ -59,7 +62,7 @@ public class Card : MonoBehaviour
 
     void ChangeCardColor()
     {
-        // ÇØ´ç Ä«µå¸¶´Ù ÇØ´ç ÇÏ´Â ·¹º§ÀÇ »ö±ò ÁöÁ¤ÇÏ±â
+        // í•´ë‹¹ ì¹´ë“œë§ˆë‹¤ í•´ë‹¹ í•˜ëŠ” ë ˆë²¨ì˜ ìƒ‰ê¹” ì§€ì •í•˜ê¸°
         if (ShotGunCard >= 3) CardColor[0].color = new Color(200, 0, 248);
         else if (ShotGunCard == 2) CardColor[0].color = new Color(0, 144, 248);
         else if (ShotGunCard == 1) CardColor[0].color = new Color(152, 248, 152);
@@ -97,44 +100,44 @@ public class Card : MonoBehaviour
     }
 
   
-    // Ä«µåÀÇ ÀÌ¸§, ³»¿ë ¼Ò°³
+    // ì¹´ë“œì˜ ì´ë¦„, ë‚´ìš© ì†Œê°œ
     void CardNameAndDetail(int num, int i)
     {
         switch (num)
         {
             case 0:
-                if (ShotGunCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "¼¦°Ç°³Á¶ Level 3"; CardDetail = "±âÁ¸ Åõ»çÃ¼¿¡¼­ +4"; }
-                else if (ShotGunCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248);  CardName = "¼¦°Ç°³Á¶ Level 2"; CardDetail = "±âÁ¸ Åõ»çÃ¼¿¡¼­ +2"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "¼¦°Ç°³Á¶ Level 1"; CardDetail = "±âÁ¸ Åõ»çÃ¼¿¡¼­ +1"; }
+                if (ShotGunCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "ìƒ·ê±´ê°œì¡° Level 3"; CardDetail = "ê¸°ì¡´ íˆ¬ì‚¬ì²´ì—ì„œ +4"; }
+                else if (ShotGunCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248);  CardName = "ìƒ·ê±´ê°œì¡° Level 2"; CardDetail = "ê¸°ì¡´ íˆ¬ì‚¬ì²´ì—ì„œ +2"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ìƒ·ê±´ê°œì¡° Level 1"; CardDetail = "ê¸°ì¡´ íˆ¬ì‚¬ì²´ì—ì„œ +1"; }
                 break;
             case 1:
-                if (BulletCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "ÃÑ¾Ë°³Á¶ Level 2"; CardDetail = "Àû µÎ ¸í °üÅë"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ÃÑ¾Ë°³Á¶ Level 1"; CardDetail = "Àû ÇÑ ¸í °üÅë"; }
+                if (BulletCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "ì´ì•Œê°œì¡° Level 2"; CardDetail = "ì  ë‘ ëª… ê´€í†µ"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ì´ì•Œê°œì¡° Level 1"; CardDetail = "ì  í•œ ëª… ê´€í†µ"; }
                 break;
             case 2:
-                if (barrelCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "ÃÑ¿­°³Á¶ Level 3"; CardDetail = "Åº ÆÛÁü 60% °¨¼Ò"; }
-                else if (barrelCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "ÃÑ¿­°³Á¶ Level 2"; CardDetail = "Åº ÆÛÁü 40% °¨¼Ò"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ÃÑ¿­°³Á¶ Level 1"; CardDetail = "Åº ÆÛÁü 20% °¨¼Ò"; }
+                if (barrelCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "ì´ì—´ê°œì¡° Level 3"; CardDetail = "íƒ„ í¼ì§ 60% ê°ì†Œ"; }
+                else if (barrelCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "ì´ì—´ê°œì¡° Level 2"; CardDetail = "íƒ„ í¼ì§ 40% ê°ì†Œ"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ì´ì—´ê°œì¡° Level 1"; CardDetail = "íƒ„ í¼ì§ 20% ê°ì†Œ"; }
                 break;
             case 3:
-                if (weaknessCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "¾àÁ¡Æ÷Âø Level 3"; CardDetail = "ÃÑ¾Ë µ¥¹ÌÁö 50% Áõ°¡\n°ø°İ¼Óµµ 20% Áõ°¡"; }
-                else if (weaknessCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "¾àÁ¡Æ÷Âø Level 2"; CardDetail = "ÃÑ¾Ë µ¥¹ÌÁö 40% Áõ°¡"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "¾àÁ¡Æ÷Âø Level 1"; CardDetail = "ÃÑ¾Ë µ¥¹ÌÁö 20% Áõ°¡"; }
+                if (weaknessCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "ì•½ì í¬ì°© Level 3"; CardDetail = "ì´ì•Œ ë°ë¯¸ì§€ 50% ì¦ê°€\nê³µê²©ì†ë„ 20% ì¦ê°€"; }
+                else if (weaknessCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "ì•½ì í¬ì°© Level 2"; CardDetail = "ì´ì•Œ ë°ë¯¸ì§€ 40% ì¦ê°€"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ì•½ì í¬ì°© Level 1"; CardDetail = "ì´ì•Œ ë°ë¯¸ì§€ 20% ì¦ê°€"; }
                 break;
             case 4:
-                if (nimblestepsCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "±â¹ÎÇÑ °ÉÀ½ Level 3"; CardDetail = "ÀÌµ¿¼Óµµ +3 Áõ°¡"; }
-                else if (nimblestepsCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "±â¹ÎÇÑ °ÉÀ½ Level 2"; CardDetail = "ÀÌµ¿¼Óµµ +2 Áõ°¡"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "±â¹ÎÇÑ °ÉÀ½ Level 1"; CardDetail = "ÀÌµ¿¼Óµµ +1 Áõ°¡"; }
+                if (nimblestepsCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "ê¸°ë¯¼í•œ ê±¸ìŒ Level 3"; CardDetail = "ì´ë™ì†ë„ +3 ì¦ê°€"; }
+                else if (nimblestepsCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "ê¸°ë¯¼í•œ ê±¸ìŒ Level 2"; CardDetail = "ì´ë™ì†ë„ +2 ì¦ê°€"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ê¸°ë¯¼í•œ ê±¸ìŒ Level 1"; CardDetail = "ì´ë™ì†ë„ +1 ì¦ê°€"; }
                 break;
             case 5:
-                if (QuickstepCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "Äü ½ºÅÜ Level 3"; CardDetail = "´ë½¬ ÄğÅ¸ÀÓ 3ÃÊ °¨¼Ò"; }
-                else if (QuickstepCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "Äü ½ºÅÜ Level 2"; CardDetail = "´ë½¬ ÄğÅ¸ÀÓ 2ÃÊ °¨¼Ò"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "Äü ½ºÅÜ Level 1"; CardDetail = "´ë½¬ ÄğÅ¸ÀÓ 1ÃÊ °¨¼Ò"; }
+                if (QuickstepCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "í€µ ìŠ¤í… Level 3"; CardDetail = "ëŒ€ì‰¬ ì¿¨íƒ€ì„ 3ì´ˆ ê°ì†Œ"; }
+                else if (QuickstepCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "í€µ ìŠ¤í… Level 2"; CardDetail = "ëŒ€ì‰¬ ì¿¨íƒ€ì„ 2ì´ˆ ê°ì†Œ"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "í€µ ìŠ¤í… Level 1"; CardDetail = "ëŒ€ì‰¬ ì¿¨íƒ€ì„ 1ì´ˆ ê°ì†Œ"; }
                 break;
             case 6:
-                if (fastdraw == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "ºü¸¥ ÀåÀü Level 3"; CardDetail = "Áï½Ã ÀçÀåÀü"; }
-                else if (fastdraw == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "ºü¸¥ ÀåÀü Level 2"; CardDetail = "ÀçÀåÀü½Ã ÀÔ·ÂÇØ¾ß ÇÒ ¼ö 2°³ °¨¼Ò"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ºü¸¥ ÀåÀü Level 1"; CardDetail = "ÀçÀåÀü½Ã ÀÔ·ÂÇØ¾ß ÇÒ ¼ö 1°³ °¨¼Ò"; }
+                if (fastdraw == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "ë¹ ë¥¸ ì¥ì „ Level 3"; CardDetail = "ì¦‰ì‹œ ì¬ì¥ì „"; }
+                else if (fastdraw == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "ë¹ ë¥¸ ì¥ì „ Level 2"; CardDetail = "ì¬ì¥ì „ì‹œ ì…ë ¥í•´ì•¼ í•  ìˆ˜ 2ê°œ ê°ì†Œ"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "ë¹ ë¥¸ ì¥ì „ Level 1"; CardDetail = "ì¬ì¥ì „ì‹œ ì…ë ¥í•´ì•¼ í•  ìˆ˜ 1ê°œ ê°ì†Œ"; }
                 break;
             default:
                 CardName = "";
@@ -145,17 +148,18 @@ public class Card : MonoBehaviour
         }
     }
 
-    int Sect1 = 0;      // SetCardobj0¹øÂ°
-    int Sect2 = 0;      // SetCardobj1¹øÂ°
-    int Sect3 = 0;      // SetCardobj2¹øÂ°
+    int Sect1 = 0;      // SetCardobj0ë²ˆì§¸
+    int Sect2 = 0;      // SetCardobj1ë²ˆì§¸
+    int Sect3 = 0;      // SetCardobj2ë²ˆì§¸
 
     List<int> Arraynum;
     public void cardbuff()
     {
-        if (PlayerCtrl.dead) return; //ÇÃ·¹ÀÌ¾î »ç¸Á½Ã Ä«µå ¾È¶ä
+        if (PlayerCtrl.dead) return; //í”Œë ˆì´ì–´ ì‚¬ë§ì‹œ ì¹´ë“œ ì•ˆëœ¸
         Time.timeScale = 0.0f;
-        card_cu_delay = card_delay; //µô·¹ÀÌ ³Ö±â
-        FindObjectOfType<Aim>().aim_ch("¸¶¿ì½º"); //¿¡ÀÓ ¸ğ¾ç º¯°æ
+        keyboard = true;
+        card_cu_delay = card_delay; //ë”œë ˆì´ ë„£ê¸°
+        FindObjectOfType<Aim>().aim_ch("ë§ˆìš°ìŠ¤"); //ì—ì„ ëª¨ì–‘ ë³€ê²½
         gameclick = true;
 
         Arraynum = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
@@ -174,14 +178,14 @@ public class Card : MonoBehaviour
             {
                 if (Arraynum.Count == 0)
                 {
-                    Debug.Log("´õ ÀÌ»ó ¼±ÅÃÇÒ Ä«µå ¾øÀ½");
+                    Debug.Log("ë” ì´ìƒ ì„ íƒí•  ì¹´ë“œ ì—†ìŒ");
                     NoSeeCard();
                     return;
                 }
 
                 int randIndex = Random.Range(0, Arraynum.Count);
                 int num = Arraynum[randIndex];
-                Arraynum.RemoveAt(randIndex);                                       // Áßº¹À¸·Î ³ª¿À´Â °Å ¹æÁö
+                Arraynum.RemoveAt(randIndex);                                       // ì¤‘ë³µìœ¼ë¡œ ë‚˜ì˜¤ëŠ” ê±° ë°©ì§€
 
                 Image cardDisplay = SetCardobj[i].GetComponent<Image>();
                 if (cardDisplay != null) cardDisplay.sprite = CardImage[num];
@@ -192,17 +196,17 @@ public class Card : MonoBehaviour
                 if (i == 0)
                 {
                     Sect1 = num;
-                    print("Sect1 : "+ Sect1);
+                    //print("Sect1 : "+ Sect1);
                 }
                 else if (i == 1)
                 {
                     Sect2 = num;
-                    print("Sect2 : " + Sect2);
+                    //print("Sect2 : " + Sect2);
                 }
                 else if (i == 2)
                 {
                     Sect3 = num;
-                    print("Sect3 : " + Sect3);
+                    //print("Sect3 : " + Sect3);
                 }
                 SetCardobj[i].SetActive(true);
                 ButtonBGCobj[i].SetActive(true);
@@ -210,7 +214,7 @@ public class Card : MonoBehaviour
         }
     }
 
-    // Ä«µå¸¦ ´­·¶À» ¶§ ÇØ´çÇÏ´Â Ä«µåÀÇ ´É·ÂÄ¡ ¿Ã¸®±â
+    // ì¹´ë“œë¥¼ ëˆŒë €ì„ ë•Œ í•´ë‹¹í•˜ëŠ” ì¹´ë“œì˜ ëŠ¥ë ¥ì¹˜ ì˜¬ë¦¬ê¸°
     public void SelectCard(int index)
     {
         if (card_cu_delay <= 0)
@@ -232,13 +236,13 @@ public class Card : MonoBehaviour
                 case 6: fastdraw++; CardColorobj[6].SetActive(true); break;
             }
             SoundManager.Instance.Player_SFX(4);
-            Debug.Log(cardType + " ¹ø Ä«µå °­È­!");
+            //Debug.Log(cardType + " ë²ˆ ì¹´ë“œ ê°•í™”!");
 
             NoSeeCard();
         }
     }
 
-    // Ä«µå º¸ÀÌÁö ¾Ê°Ô ÇÏ±â
+    // ì¹´ë“œ ë³´ì´ì§€ ì•Šê²Œ í•˜ê¸°
     void NoSeeCard()
     {
         for (int i = 0; i < 3; i++)
@@ -246,9 +250,10 @@ public class Card : MonoBehaviour
             SetCardobj[i].SetActive(false);
             ButtonBGCobj[i].SetActive(false);
         }
-        card_cu_delay = card_delay; //µô·¹ÀÌ ³Ö±â
-        FindObjectOfType<Aim>().aim_ch("ÀÏ¹İ"); //¿¡ÀÓ ¸ğ¾ç º¯°æ
+        card_cu_delay = card_delay; //ë”œë ˆì´ ë„£ê¸°
+        FindObjectOfType<Aim>().aim_ch("ì¼ë°˜"); //ì—ì„ ëª¨ì–‘ ë³€ê²½
         gameclick = false;
+        keyboard = false;
         Time.timeScale = 1.0f;
     }
 }
