@@ -35,10 +35,12 @@ public class Enemy_Skeleton : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public GameObject Hand; //손
     public GameObject Feet; //발
+    public GameObject tlcp; //시체
+    public Sprite[] ty_spr; //타입 스프라이트
+    public Sprite[] tlcp_spr; //시체 스프라이트
 
     public float dieAnimTime = 1.0f;
 
-    Animator anim;
     void Start()
     {
         if (data != null)
@@ -46,15 +48,14 @@ public class Enemy_Skeleton : MonoBehaviour
             EnemyHP = data.hp;
             EnemySpeed = data.speed;
         }
-        if (!player)
-            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (!player)  player = GameObject.FindGameObjectWithTag("Player")?.transform;
         if(spriteRenderer == null)
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             HandspriteRenderer = Hand.GetComponentInChildren<SpriteRenderer>();
             FeetspriteRenderer = Feet.GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer.sprite = ty_spr[Random.Range(0, ty_spr.Length)]; //정해둔 스프라이트 내에서 랜덤하게 결정
         }
-        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -166,15 +167,14 @@ public class Enemy_Skeleton : MonoBehaviour
         if (reviveCo != null) StopCoroutine(reviveCo);
 
         Debug.Log("[Skeleton] DEAD (destroy)");
-        if (anim != null) anim.SetBool("Die", true);
-        StartCoroutine(DieDestroyCoroutine());
-
-        IEnumerator DieDestroyCoroutine()
+        for (int i = 0; i < tlcp_spr.Length; i++)
         {
-            yield return new WaitForSeconds(dieAnimTime);
-            Destroy(gameObject);
+            GameObject debris = Instantiate(tlcp, transform.position, Quaternion.identity);
+            Enemy_Skeleton_tlcp debrisScript = debris.GetComponent<Enemy_Skeleton_tlcp>();
+            
+            debrisScript.SetDebrisSprites(tlcp_spr);
+            debrisScript.SetSpriteIndex(i);
         }
-        Destroy(Hand);
-        Destroy(Feet);
+        Destroy(gameObject);
     }
 }
