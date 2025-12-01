@@ -12,7 +12,7 @@ public class ShotGun : MonoBehaviour
 {
     //public Card card;                     // 카드 스크립트에 있는 변수를 얻어오기 위해 쓰임
     int fastdrawLevel;                      // 패스트 드로우 Level
-    int weaknessCardLevel;                  // 약점 포착 Level
+    int barrelCardLevel;                    // 총열개조 Level
 
     [Header("GameObject")]
     public PlayerCtrl playerCtrl;           // 플레이어
@@ -33,6 +33,9 @@ public class ShotGun : MonoBehaviour
     public int count = 0;                   // 탄 이미지를 위한 카운트
     public float ReloadTime = 3.0f;         // QTE가 진행되는 동안 재장전 시간
     public float WaitShoot = 1.0f;          // 다음 공격까지 걸리는 시간
+    public float WaitShootLevel1 = 0.2f;    // 총열개조 Level1일 때 감소 시간
+    public float WaitShootLevel2 = 0.4f;    // 총열개조 Level2일 때 감소 시간
+    public float WaitShootLevel3 = 0.6f;    // 총열개조 Level3일 때 감소 시간
     public float WaitEmptyBullet = 0.5f;    // 빈 탄 나오기까지 걸리는 시간
     bool WaitEmptySccess = false;
     bool isReloading = false;               // 재장전중인지
@@ -40,7 +43,6 @@ public class ShotGun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -63,14 +65,29 @@ public class ShotGun : MonoBehaviour
     public float EmptyBulletSpeed = 0.0f;
     void Conmand()
     {
-        if (weaknessCardLevel >= 3)
+        barrelCardLevel = Card.Instance.barrelCard;
+
+        float Delay;
+        switch (barrelCardLevel)
         {
-            float Delay = WaitShoot * 0.2f;
-            float WaitDelay = WaitShoot - Delay;
-            WaitDelay -= Time.deltaTime;
-            print("WaitDelay : " + WaitDelay);
+            case 1:
+                Delay = WaitShoot - WaitShootLevel1;
+                break;
+            case 2:
+                Delay = WaitShoot - WaitShootLevel2;
+                break;
+            case 3:
+                Delay = WaitShoot - WaitShootLevel3;
+                break;
+            default:
+                Delay = WaitShoot;
+                break;
         }
-        else { WaitShoot -= Time.deltaTime; }
+        print("Delay : " + Delay);
+        float WaitDelay = WaitShoot - Delay;
+        WaitDelay -= Time.deltaTime;
+        //print("WaitDelay : " + WaitDelay);y : " + WaitDelay);
+        WaitShoot -= Time.deltaTime;
 
         if (WaitEmptySccess)
         {
@@ -101,7 +118,6 @@ public class ShotGun : MonoBehaviour
         {
             //print(WaitShoot);
             int ShotGunCardLevel = Card.Instance.ShotGunCard;           // 샷건개조 Level
-            int barrelCardLevel = Card.Instance.barrelCard;             // 총열개조 Level
             //print("Left Click");
             if (NowBulletCount >= 1)
             {
@@ -123,32 +139,13 @@ public class ShotGun : MonoBehaviour
                 }
                 //print("후 : " + BulletNumber);
 
-
-                float decreasebullet = 0.0f;
-
-                switch (barrelCardLevel)
-                {
-                    case 1:
-                        decreasebullet = 15.0f - (0.2f * 15.0f);
-                        break;
-                    case 2:
-                        decreasebullet = 15.0f - (0.4f * 15.0f);
-                        break;
-                    case 3:
-                        decreasebullet = 15.0f - (0.6f * 15.0f);
-                        break;
-                    default:
-                        decreasebullet = 15.0f;
-                        break;
-                }
-
                 EffectManager.Instance.PlayAnimation("총염", FirePoint.position, 1f, 0.25f, 0.1f); // 이펙트 생성
                 EffectManager.Instance.PlayAnimation("총연기", transform.position + new Vector3(0,+0.5f,0), 1f, 0.5f, 0.25f); // 이펙트 생성
                 if (BulletPrefab != null)
                 {
                     for (int i = 0; i < BulletNumber; i++)
                     {
-                        float BulletSpread = Random.Range(-decreasebullet, decreasebullet);
+                        float BulletSpread = Random.Range(-15.0f, 15.0f);
                         Quaternion bulletRot = FirePoint.rotation * Quaternion.Euler(0, 0, BulletSpread);
 
                         GameObject Bullet = Instantiate(BulletPrefab[0], FirePoint.position, bulletRot);
