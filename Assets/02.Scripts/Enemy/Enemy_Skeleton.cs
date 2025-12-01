@@ -1,25 +1,25 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.XR;
 
 public class Enemy_Skeleton : MonoBehaviour
 {
-    [Header("µ¥ÀÌÅÍ")]
+    [Header("ë°ì´í„°")]
     public EnemyData data;
 
-    [Header("½ºÅÈ")]
-    public float EnemyHP = 1f;      // ÇöÀç HP
-    public float EnemySpeed = 1f;     // ÀÌµ¿ ¼Óµµ
+    [Header("ìŠ¤íƒ¯")]
+    public float EnemyHP = 1f;      // í˜„ì¬ HP
+    public float EnemySpeed = 1f;     // ì´ë™ ì†ë„
 
-    [Header("ÂüÁ¶")]
+    [Header("ì°¸ì¡°")]
     public Transform player;
 
-    [Header("´Ù¿î/ºÎÈ°")]
-    public float reviveDelay = 2f;    // ´Ù¿î À¯Áö ½Ã°£
-    public float reviveHp = 30f;    // ¡Ú ºÎÈ° ½Ã HP(Ç×»ó ¾ç¼ö·Î)
-    public float reviveFreeze = 1.0f; // ºÎÈ° Á÷ÈÄ °¡¸¸È÷ ÀÖÀ» ½Ã°£
+    [Header("ë‹¤ìš´/ë¶€í™œ")]
+    public float reviveDelay = 2f;    // ë‹¤ìš´ ìœ ì§€ ì‹œê°„
+    public float reviveHp = 30f;    // â˜… ë¶€í™œ ì‹œ HP(í•­ìƒ ì–‘ìˆ˜ë¡œ)
+    public float reviveFreeze = 1.0f; // ë¶€í™œ ì§í›„ ê°€ë§Œíˆ ìˆì„ ì‹œê°„
 
-    // ´Ù¿î Á÷ÈÄ Áßº¹ È÷Æ® ¹«½Ã(±×·¹ÀÌ½º)
+    // ë‹¤ìš´ ì§í›„ ì¤‘ë³µ íˆíŠ¸ ë¬´ì‹œ(ê·¸ë ˆì´ìŠ¤)
     public float downedGrace = 0.05f; // 50ms
     float downedAt = -999f;
 
@@ -33,12 +33,11 @@ public class Enemy_Skeleton : MonoBehaviour
     private SpriteRenderer HandspriteRenderer;
     private SpriteRenderer FeetspriteRenderer;
     SpriteRenderer spriteRenderer;
-    public GameObject Hand; //¼Õ
-    public GameObject Feet; //¹ß
-
+    public GameObject Hand; //ì†
+    public GameObject Feet; //ë°œ
+    public GameObject tlcp; //ì‹œì²´
+    public Sprite[] skeletonDebrisSprites;
     public float dieAnimTime = 1.0f;
-
-    Animator anim;
 
     public bool isDead = false;
     void Start()
@@ -56,14 +55,13 @@ public class Enemy_Skeleton : MonoBehaviour
             HandspriteRenderer = Hand.GetComponentInChildren<SpriteRenderer>();
             FeetspriteRenderer = Feet.GetComponentInChildren<SpriteRenderer>();
         }
-        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
         if (!player) return;
 
-        // ´Ù¿î/»ç¸Á ¶Ç´Â ºÎÈ° Á÷ÈÄ Á¤Áö Áß¿¡´Â ÀÌµ¿ ±İÁö
+        // ë‹¤ìš´/ì‚¬ë§ ë˜ëŠ” ë¶€í™œ ì§í›„ ì •ì§€ ì¤‘ì—ëŠ” ì´ë™ ê¸ˆì§€
         if (state != State.Alive) return;
         if (Time.time < freezeUntil) return;
 
@@ -74,7 +72,7 @@ public class Enemy_Skeleton : MonoBehaviour
 
         Vector3 handPosition = transform.position;
 
-        if (diffx > 0f) // ÇÃ·¹ÀÌ¾î°¡ ¿À¸¥ÂÊ¿¡ ÀÖÀ» ¶§ (¸ó½ºÅÍ°¡ ¿À¸¥ÂÊÀ» ¹Ù¶óº¼ ¶§)
+        if (diffx > 0f) // í”Œë ˆì´ì–´ê°€ ì˜¤ë¥¸ìª½ì— ìˆì„ ë•Œ (ëª¬ìŠ¤í„°ê°€ ì˜¤ë¥¸ìª½ì„ ë°”ë¼ë³¼ ë•Œ)
         {
             spriteRenderer.flipX = false;
 
@@ -82,10 +80,10 @@ public class Enemy_Skeleton : MonoBehaviour
             handPosition.y -= 0.2f;
             Hand.transform.position = handPosition;
 
-            HandspriteRenderer.flipY = false; // 90µµ µ¹¾Æ°¡ÀÖÀ½
+            HandspriteRenderer.flipY = false; // 90ë„ ëŒì•„ê°€ìˆìŒ
             FeetspriteRenderer.flipX = false;
         }
-        else if (diffx < 0f) // ÇÃ·¹ÀÌ¾î°¡ ¿ŞÂÊ¿¡ ÀÖÀ» ¶§ (¸ó½ºÅÍ°¡ ¿ŞÂÊÀ» ¹Ù¶óº¼ ¶§)
+        else if (diffx < 0f) // í”Œë ˆì´ì–´ê°€ ì™¼ìª½ì— ìˆì„ ë•Œ (ëª¬ìŠ¤í„°ê°€ ì™¼ìª½ì„ ë°”ë¼ë³¼ ë•Œ)
         {
             spriteRenderer.flipX = true;
 
@@ -93,32 +91,32 @@ public class Enemy_Skeleton : MonoBehaviour
             handPosition.y -= 0.2f;
             Hand.transform.position = handPosition;
 
-            HandspriteRenderer.flipY = true; // 90µµ µ¹¾Æ°¡ÀÖÀ½
+            HandspriteRenderer.flipY = true; // 90ë„ ëŒì•„ê°€ìˆìŒ
             FeetspriteRenderer.flipX = true;
         }
     }
 
-    // ÃÑ¾Ë/¹«±â¿¡¼­ ÀÌ µÑ Áß ÇÏ³ª È£ÃâÇØµµ µÊ
+    // ì´ì•Œ/ë¬´ê¸°ì—ì„œ ì´ ë‘˜ ì¤‘ í•˜ë‚˜ í˜¸ì¶œí•´ë„ ë¨
     public void TakeDamage(float dmg) => ApplyDamageInternal(dmg);
 
     void ApplyDamageInternal(float dmg)
     {
         if (state == State.Dead) return;
 
-        // ¡Ú ´Ù¿î Á÷ÈÄ ±×·¹ÀÌ½º: °°Àº ÇÁ·¹ÀÓ ¿¬¼Ó È÷Æ® ¹«½Ã
+        // â˜… ë‹¤ìš´ ì§í›„ ê·¸ë ˆì´ìŠ¤: ê°™ì€ í”„ë ˆì„ ì—°ì† íˆíŠ¸ ë¬´ì‹œ
         if (state == State.Downed && Time.time - downedAt < downedGrace) return;
 
-        // ´Ù¿î »óÅÂ¿¡¼­ ¸ÂÀ¸¸é 'ÁøÂ¥ »ç¸Á'(À¯ÀÏÇÑ »ç¸Á Á¶°Ç)
+        // ë‹¤ìš´ ìƒíƒœì—ì„œ ë§ìœ¼ë©´ 'ì§„ì§œ ì‚¬ë§'(ìœ ì¼í•œ ì‚¬ë§ ì¡°ê±´)
         if (state == State.Downed)
         {
             Die();
             return;
         }
 
-        // Æò¼Ò¿£ HP °¨¼Ò ¡æ 0¿¡ µµ´ŞÇÏ¸é ´Ù¿î
+        // í‰ì†Œì—” HP ê°ì†Œ â†’ 0ì— ë„ë‹¬í•˜ë©´ ë‹¤ìš´
         float prev = EnemyHP;
         EnemyHP = Mathf.Max(0f, EnemyHP - dmg);
-        if (prev > 0f && EnemyHP == 0f)  // "0¿¡ µµ´ŞÇÑ ¼ø°£"¸¸ ´Ù¿î
+        if (prev > 0f && EnemyHP == 0f)  // "0ì— ë„ë‹¬í•œ ìˆœê°„"ë§Œ ë‹¤ìš´
         {
             EnterDowned();
         }
@@ -130,7 +128,7 @@ public class Enemy_Skeleton : MonoBehaviour
 
         state = State.Downed;
         downPos = transform.position;
-        downedAt = Time.time;  // ¡Ú ±×·¹ÀÌ½º ½ÃÀÛ
+        downedAt = Time.time;  // â˜… ê·¸ë ˆì´ìŠ¤ ì‹œì‘
 
         Debug.Log($"[Skeleton] DOWNED at {downPos} (revive in {reviveDelay}s)");
 
@@ -142,18 +140,18 @@ public class Enemy_Skeleton : MonoBehaviour
     {
         yield return new WaitForSeconds(reviveDelay);
 
-        // ´Ù¿î À¯Áö ÁßÀÌ¶ó¸é ºÎÈ°(¸¶¹«¸® Å¸°İÀ» ¸ø ¹ŞÀº °æ¿ì)
+        // ë‹¤ìš´ ìœ ì§€ ì¤‘ì´ë¼ë©´ ë¶€í™œ(ë§ˆë¬´ë¦¬ íƒ€ê²©ì„ ëª» ë°›ì€ ê²½ìš°)
         if (state == State.Downed)
         {
             //transform.position = downPos;
 
-            // ¡Ú ºÎÈ° HP È®½ÇÈ÷ ¾ç¼ö·Î
+            // â˜… ë¶€í™œ HP í™•ì‹¤íˆ ì–‘ìˆ˜ë¡œ
             EnemyHP = Mathf.Max(1f, reviveHp);
 
             state = State.Alive;
             reviveCo = null;
 
-            // ¡Ú ºÎÈ° Á÷ÈÄ Àá±ñ ¸ØÃã
+            // â˜… ë¶€í™œ ì§í›„ ì ê¹ ë©ˆì¶¤
             freezeUntil = Time.time + reviveFreeze;
 
             Debug.Log($"[Skeleton] REVIVED at {downPos} with HP={EnemyHP} (freeze {reviveFreeze}s)");
@@ -165,25 +163,23 @@ public class Enemy_Skeleton : MonoBehaviour
         if (state == State.Dead) return;
         state = State.Dead;
 
-        if (isDead) return; // µÎ ¹ø ½ÇÇà ¹æÁö
+        if (isDead) return; // ë‘ ë²ˆ ì‹¤í–‰ ë°©ì§€
         isDead = true;
         if (reviveCo != null) StopCoroutine(reviveCo);
-
-        Debug.Log("[Skeleton] DEAD (destroy)");
-        if (anim != null) anim.SetBool("Die", true);
-        StartCoroutine(DieDestroyCoroutine());
-
-        IEnumerator DieDestroyCoroutine()
+        for (int i = 0; i < skeletonDebrisSprites.Length; i++)
         {
-            yield return new WaitForSeconds(dieAnimTime);
-            Destroy(gameObject);
+            GameObject debris = Instantiate(tlcp, transform.position, Quaternion.identity);
+            Enemy_Skeleton_tlcp debrisScript = debris.GetComponent<Enemy_Skeleton_tlcp>();
+            
+            debrisScript.SetDebrisSprites(skeletonDebrisSprites);
+            debrisScript.SetSpriteIndex(i);
         }
-        Destroy(Hand);
-        Destroy(Feet);
+        Destroy(gameObject);
+
     }
     void OnDestroy()
     {
-        if (!isDead) return; // ÀÌ¹Ì Die() Ã³¸®µÇ¾úÀ¸¸é ¹«½Ã
+        if (!isDead) return; // ì´ë¯¸ Die() ì²˜ë¦¬ë˜ì—ˆìœ¼ë©´ ë¬´ì‹œ
 
         if (EnemySpawn.Instance != null)
             EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);

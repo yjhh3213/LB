@@ -125,6 +125,29 @@ MonoBehaviour:
   downedGrace: 0.05
   Hand: {fileID: 8762064352583638796}
   Feet: {fileID: 4289121732194228277}
+  tlcp: {fileID: 820545882071805995, guid: 1e0ce23f97a83a949b3a6605b5a7912e, type: 3}
+  skeletonDebrisSprites:
+  - {fileID: 1864499808, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 285918576, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 1555933474, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 2140619242, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 770674047, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 124037737, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 1461304137, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: -2109251068, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: -1251502375, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 1138690663, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 585260468, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: -220909982, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: -1288297715, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: -1765737225, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 926797244, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 593207204, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: -1175703273, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 1252436339, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: -342260322, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: -1746810032, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
+  - {fileID: 1505783546, guid: ecbe6ee392b1b284b9dcdb51000b42a6, type: 3}
   dieAnimTime: 0.5
   isDead: 0
 --- !u!50 &-6956889091776205101
