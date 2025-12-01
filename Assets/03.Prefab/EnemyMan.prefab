@@ -70,7 +70,7 @@ MonoBehaviour:
   EnemySpeed: 0
   EnemyHP: 0
   isDead: 0
-  dieAnimTime: 10
+  dieAnimTime: 1
   poisonCloundPrefab: {fileID: 0}
   Hand: {fileID: 6951215236908377896}
   Feet: {fileID: 6951215236755274484}
