@@ -144,7 +144,7 @@ public class EnemyStat : MonoBehaviour
     void OnDestroy()
     {
         if (!isDead) return; // 이미 Die() 처리되었으면 무시
-
+        
         if (EnemySpawn.Instance != null)
             EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
     }
