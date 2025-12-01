@@ -120,7 +120,6 @@ public class EnemyStat : MonoBehaviour
         SoundManager.Instance.Player_SFX(5);
         GameManager gm = FindObjectOfType<GameManager>(); //킬카운트 증가
 
-        if (EnemySpawn.Instance != null)    EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
         if (rigidbody != null)              rigidbody.simulated = false; //리지드바디 비활성화
         if (poisonCloundPrefab != null)     Instantiate(poisonCloundPrefab, transform.position, Quaternion.identity);
         if (anim != null)                   anim.SetBool("Die" , true);
