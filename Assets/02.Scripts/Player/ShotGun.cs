@@ -12,6 +12,7 @@ public class ShotGun : MonoBehaviour
 {
     //public Card card;                     // 카드 스크립트에 있는 변수를 얻어오기 위해 쓰임
     int fastdrawLevel;                      // 패스트 드로우 Level
+    int weaknessCardLevel;                  // 약점 포착 Level
     int barrelCardLevel;                    // 총열개조 Level
 
     [Header("GameObject")]
@@ -40,6 +41,8 @@ public class ShotGun : MonoBehaviour
     bool WaitEmptySccess = false;
     bool isReloading = false;               // 재장전중인지
 
+    float Delay = 0.0f;
+    float WaitDelay;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,34 +63,17 @@ public class ShotGun : MonoBehaviour
                 count = 0;
             }
         }
+
+        if (WaitDelay > 0)
+        {
+            WaitDelay -= Time.deltaTime;
+        }
     }
 
     public float EmptyBulletSpeed = 0.0f;
     void Conmand()
     {
         barrelCardLevel = Card.Instance.barrelCard;
-
-        float Delay;
-        switch (barrelCardLevel)
-        {
-            case 1:
-                Delay = WaitShoot - WaitShootLevel1;
-                break;
-            case 2:
-                Delay = WaitShoot - WaitShootLevel2;
-                break;
-            case 3:
-                Delay = WaitShoot - WaitShootLevel3;
-                break;
-            default:
-                Delay = WaitShoot;
-                break;
-        }
-        print("Delay : " + Delay);
-        float WaitDelay = WaitShoot - Delay;
-        WaitDelay -= Time.deltaTime;
-        //print("WaitDelay : " + WaitDelay);y : " + WaitDelay);
-        WaitShoot -= Time.deltaTime;
 
         if (WaitEmptySccess)
         {
@@ -114,7 +100,7 @@ public class ShotGun : MonoBehaviour
             }
         }
         //탄약 발사
-        if (Input.GetMouseButtonDown(0) && Card.Instance.gameclick == false && WaitShoot <=0.0f)
+        if (Input.GetMouseButtonDown(0) && Card.Instance.gameclick == false && WaitDelay <= 0.0f)
         {
             //print(WaitShoot);
             int ShotGunCardLevel = Card.Instance.ShotGunCard;           // 샷건개조 Level
@@ -139,6 +125,14 @@ public class ShotGun : MonoBehaviour
                 }
                 //print("후 : " + BulletNumber);
 
+                float speedBonus = 0f;
+                switch (barrelCardLevel)
+                {
+                    case 1: speedBonus = WaitShootLevel1; break;
+                    case 2: speedBonus = WaitShootLevel2; break;
+                    case 3: speedBonus = WaitShootLevel3; break;
+                }
+                WaitDelay = WaitShoot - speedBonus;
                 EffectManager.Instance.PlayAnimation("총염", FirePoint.position, 1f, 0.25f, 0.1f); // 이펙트 생성
                 EffectManager.Instance.PlayAnimation("총연기", transform.position + new Vector3(0,+0.5f,0), 1f, 0.5f, 0.25f); // 이펙트 생성
                 if (BulletPrefab != null)
