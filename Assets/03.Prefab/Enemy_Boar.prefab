@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1016753157422458014}
   - component: {fileID: 1152008368769419823}
-  - component: {fileID: 1290367812754591943}
   - component: {fileID: 3406453499054704529}
   - component: {fileID: -7900386934056828785}
-  - component: {fileID: -7832510427506678718}
   - component: {fileID: 3302667063181240361}
   - component: {fileID: 7488762920419348811}
+  - component: {fileID: 1851970585431430942}
+  - component: {fileID: 4971333488489973240}
   m_Layer: 0
   m_Name: Enemy_Boar
   m_TagString: Enemy
@@ -90,27 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &1290367812754591943
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9181886357848115217}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bdcc56ba58172464fbd855ed5fc61c26, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!58 &3406453499054704529
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -148,23 +127,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-7832510427506678718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9181886357848115217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d1bef206473fac4881b238f2504b7ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: ccad9b6283be61b46bf5193eb5e0a83b, type: 2}
-  EnemySpeed: 0
-  EnemyHP: 0
-  dieAnimTime: 0.7
-  poisonCloundPrefab: {fileID: 0}
 --- !u!114 &3302667063181240361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,5 +152,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDistance: 3
-  chargeSpeed: 18
-  chargeDuration: 5
+  chargeSpeed: 3
+  chargeDuration: 0.5
+--- !u!95 &1851970585431430942
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9181886357848115217}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0410bc894e68c24419bd542d44d35c5b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4971333488489973240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9181886357848115217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42dca2207fe4aca4caacd28757b019f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 2f41304f117f3624ea4a4fbbd7dd5709, type: 2}
+  EnemySpeed: 0
+  EnemyHP: 0
+  isDead: 0
+  dieAnimTime: 10
+  poisonCloundPrefab: {fileID: 0}

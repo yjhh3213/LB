@@ -35,12 +35,12 @@ public class Enemy_Skeleton : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public GameObject Hand; //손
     public GameObject Feet; //발
-    public GameObject tlcp; //시체
-    public Sprite[] ty_spr; //타입 스프라이트
-    public Sprite[] tlcp_spr; //시체 스프라이트
 
     public float dieAnimTime = 1.0f;
 
+    Animator anim;
+
+    public bool isDead = false;
     void Start()
     {
         if (data != null)
@@ -48,14 +48,15 @@ public class Enemy_Skeleton : MonoBehaviour
             EnemyHP = data.hp;
             EnemySpeed = data.speed;
         }
-        if (!player)  player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (!player)
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
         if(spriteRenderer == null)
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             HandspriteRenderer = Hand.GetComponentInChildren<SpriteRenderer>();
             FeetspriteRenderer = Feet.GetComponentInChildren<SpriteRenderer>();
-            spriteRenderer.sprite = ty_spr[Random.Range(0, ty_spr.Length)]; //정해둔 스프라이트 내에서 랜덤하게 결정
         }
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -164,17 +165,27 @@ public class Enemy_Skeleton : MonoBehaviour
         if (state == State.Dead) return;
         state = State.Dead;
 
+        if (isDead) return; // 두 번 실행 방지
+        isDead = true;
         if (reviveCo != null) StopCoroutine(reviveCo);
 
         Debug.Log("[Skeleton] DEAD (destroy)");
-        for (int i = 0; i < tlcp_spr.Length; i++)
+        if (anim != null) anim.SetBool("Die", true);
+        StartCoroutine(DieDestroyCoroutine());
+
+        IEnumerator DieDestroyCoroutine()
         {
-            GameObject debris = Instantiate(tlcp, transform.position, Quaternion.identity);
-            Enemy_Skeleton_tlcp debrisScript = debris.GetComponent<Enemy_Skeleton_tlcp>();
-            
-            debrisScript.SetDebrisSprites(tlcp_spr);
-            debrisScript.SetSpriteIndex(i);
+            yield return new WaitForSeconds(dieAnimTime);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        Destroy(Hand);
+        Destroy(Feet);
+    }
+    void OnDestroy()
+    {
+        if (!isDead) return; // 이미 Die() 처리되었으면 무시
+
+        if (EnemySpawn.Instance != null)
+            EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
     }
 }
