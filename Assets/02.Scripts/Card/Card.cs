@@ -18,6 +18,7 @@ public class Card : MonoBehaviour
     public GameObject[] ButtonBGCobj;   // 카드테두리오브젝트
     public Image[] ButtonBGC;           // 버튼 뒤에 색깔 테두리
     public GameObject Player;           // 플레이어
+    public PlayerCtrl PlayerCtrl;       // 플레이어 코드
     public Image[] CardColor;           // 카드 테두리 색깔
     public GameObject[] CardColorobj;   // 카드 UI On/Off
     public Sprite[] CardImage;          // 카드 이미지
@@ -44,8 +45,11 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (card_cu_delay > 0) { card_cu_delay -= Time.unscaledDeltaTime; }
-        ChangeCardColor();
+        if (!PlayerCtrl.dead)
+        {
+            if (card_cu_delay > 0) { card_cu_delay -= Time.unscaledDeltaTime; }
+            ChangeCardColor();
+        }
     }
 
     private void Awake()
@@ -148,6 +152,7 @@ public class Card : MonoBehaviour
     List<int> Arraynum;
     public void cardbuff()
     {
+        if (PlayerCtrl.dead) return; //플레이어 사망시 카드 안뜸
         Time.timeScale = 0.0f;
         card_cu_delay = card_delay; //딜레이 넣기
         FindObjectOfType<Aim>().aim_ch("마우스"); //에임 모양 변경

@@ -24,11 +24,11 @@ public class GameManager : MonoBehaviour
 
     private bool isGameOver = false;
 
-    PlayerCtrl pc;
+    public PlayerCtrl pc;
 
     private void Start()
     {
-        pc = GetComponent<PlayerCtrl>();
+
     }
     void Update()
     {
