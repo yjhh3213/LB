@@ -480,10 +480,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefabA: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
-  monsterPrefabB: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
-  monsterPrefabC: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
-  monsterPrefabD: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
-  monsterPrefabE: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
+  monsterPrefabB: {fileID: 9181886357848115217, guid: eaa2560ed14378042abf629d06c13e1f, type: 3}
+  monsterPrefabC: {fileID: 0}
+  monsterPrefabD: {fileID: 3702106308257521989, guid: 35ba8adee701b624a84442a38e4494df, type: 3}
+  monsterPrefabE: {fileID: 7488878813770243369, guid: c35a141ea8651ab4188736ab4d2ef1f4, type: 3}
   spawnDelay: 0.2
   minWave: 1
   maxWave: 8
@@ -3363,7 +3363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 2028168386}
-  startTime: 5
+  startTime: 60
   timerText: {fileID: 302264755}
   waveText: {fileID: 786744223}
 --- !u!114 &1241308347
@@ -5818,6 +5818,7 @@ MonoBehaviour:
   - {fileID: 1732503659}
   - {fileID: 59303380}
   Player: {fileID: 572370093}
+  PlayerCtrl: {fileID: 572370095}
   CardColor:
   - {fileID: 455956977}
   - {fileID: 887799255}
@@ -5843,6 +5844,7 @@ MonoBehaviour:
   - {fileID: 1778373267, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   - {fileID: 1414616383, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   gameclick: 0
+  keyboard: 0
   ShotGunCard: 0
   BulletCard: 0
   barrelCard: 0
@@ -6083,6 +6085,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 12, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
+      propertyPath: playerCtrl
+      value: 
+      objectReference: {fileID: 572370095}
     - target: {fileID: 12, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: BulletCount.Array.data[0]
       value: 

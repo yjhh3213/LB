@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3418092605765334442}
   - component: {fileID: 2936024833511433592}
   - component: {fileID: 31591725224454885}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EnemyMan
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 6951215236755274485}
   - component: {fileID: 6951215236755274490}
   - component: {fileID: 4834303215606039772}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EnemyFoot1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6951215236908377897}
   - component: {fileID: 6951215236908377902}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EnemyHand1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 6951215236917918290}
   - component: {fileID: 6951215236917918291}
   - component: {fileID: 4780162556203093667}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -500,6 +500,10 @@ PrefabInstance:
     - target: {fileID: 4056657000106267468, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
       propertyPath: m_Name
       value: Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056657000106267468, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5273033623258339030}
   - component: {fileID: 1835924250263952401}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: "\uBCA0\uB188_1_\uD314"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 8411385986095244676}
   - component: {fileID: -3641334623597518974}
   - component: {fileID: 8016588099877180188}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: "\uBCA0\uB188_1"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 5361277466098687715}
   - component: {fileID: 5814650226146148114}
   - component: {fileID: 7178528607706649110}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: "\uBCA0\uB188_1_\uB2E4\uB9AC_0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056657000106267468, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
