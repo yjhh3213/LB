@@ -116,14 +116,14 @@ public class Card : MonoBehaviour
                 else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "총알개조 Level 1"; CardDetail = "적 한 명 관통"; }
                 break;
             case 2:
-                if (barrelCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "총열개조 Level 3"; CardDetail = "탄 퍼짐 60% 감소"; }
-                else if (barrelCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "총열개조 Level 2"; CardDetail = "탄 퍼짐 40% 감소"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "총열개조 Level 1"; CardDetail = "탄 퍼짐 20% 감소"; }
+                if (barrelCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "총열개조 Level 3"; CardDetail = "공격속도 60% 증가"; }
+                else if (barrelCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "총열개조 Level 2"; CardDetail = "공격속도 40% 증가"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "총열개조 Level 1"; CardDetail = "공격속도 20% 증가"; }
                 break;
             case 3:
-                if (weaknessCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "약점포착 Level 3"; CardDetail = "총알 데미지 50% 증가\n공격속도 20% 증가"; }
-                else if (weaknessCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "약점포착 Level 2"; CardDetail = "총알 데미지 40% 증가"; }
-                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "약점포착 Level 1"; CardDetail = "총알 데미지 20% 증가"; }
+                if (weaknessCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "약점포착 Level 3"; CardDetail = "총알 데미지 75% 증가"; }
+                else if (weaknessCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "약점포착 Level 2"; CardDetail = "총알 데미지 50% 증가"; }
+                else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "약점포착 Level 1"; CardDetail = "총알 데미지 25% 증가"; }
                 break;
             case 4:
                 if (nimblestepsCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "기민한 걸음 Level 3"; CardDetail = "이동속도 +3 증가"; }
