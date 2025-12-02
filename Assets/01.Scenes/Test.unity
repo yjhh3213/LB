@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1b6fb7a81ca394fb6a8da2fbe0dce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterPrefabA: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
+  monsterPrefabA: {fileID: 3702106308257521989, guid: 35ba8adee701b624a84442a38e4494df, type: 3}
   monsterPrefabB: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
   monsterPrefabC: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
   monsterPrefabD: {fileID: 6951215236074127801, guid: 4d569c16a6eda7248906de999230453d, type: 3}
@@ -487,8 +487,8 @@ MonoBehaviour:
   spawnDelay: 0.2
   minWave: 1
   maxWave: 8
-  A_startCount: 10
-  A_addPerWave: 20
+  A_startCount: 1
+  A_addPerWave: 1
   B_startWave: 3
   B_startCount: 5
   B_addper2Wave: 2
@@ -1393,6 +1393,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1662413100642505278, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
   m_PrefabInstance: {fileID: 1662413100231359381}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &572370095 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1662413100642505253, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
+  m_PrefabInstance: {fileID: 1662413100231359381}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572370093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 905200fcb0a382444b340447d320962c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &584398505
 GameObject:
   m_ObjectHideFlags: 0
@@ -2896,7 +2907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 2028168386}
-  startTime: 5
+  startTime: 60
   timerText: {fileID: 302264755}
   waveText: {fileID: 786744223}
 --- !u!114 &1241308347
@@ -3280,13 +3291,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameUI: {fileID: 851201625}
   gameOverPanel: {fileID: 344935796}
-  redFade: {fileID: 2084668399}
+  gameClearPanel: {fileID: 0}
   deadWaveText: {fileID: 286732438}
   playTimeText: {fileID: 679445959}
   killCountText: {fileID: 1904889997}
+  clearRecordText: {fileID: 0}
+  clearTimeText: {fileID: 0}
+  clearKillText: {fileID: 0}
   currentWave: 0
   killCount: 0
   playTime: 0
+  pc: {fileID: 0}
 --- !u!4 &1347577385
 Transform:
   m_ObjectHideFlags: 0
@@ -4809,6 +4824,7 @@ MonoBehaviour:
   - {fileID: 1732503659}
   - {fileID: 59303380}
   Player: {fileID: 572370093}
+  PlayerCtrl: {fileID: 572370095}
   CardColor:
   - {fileID: 455956977}
   - {fileID: 887799255}
@@ -4834,6 +4850,7 @@ MonoBehaviour:
   - {fileID: 1778373267, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   - {fileID: 1414616383, guid: 6a29db7650a8bcd4c98e857bbad441cd, type: 3}
   gameclick: 0
+  keyboard: 0
   ShotGunCard: 0
   BulletCard: 0
   barrelCard: 0
@@ -5015,6 +5032,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 12, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
+      propertyPath: playerCtrl
+      value: 
+      objectReference: {fileID: 572370095}
     - target: {fileID: 12, guid: e833d11cf115ebc4d8057692f386a38b, type: 3}
       propertyPath: BulletCount.Array.data[0]
       value: 
