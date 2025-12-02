@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6956889091776205101}
   - component: {fileID: -8214675336788031308}
   - component: {fileID: -5042381021668977383}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Skeleton
   m_TagString: Skeleton
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 511060656475309472}
   - component: {fileID: 2037271680900083073}
   - component: {fileID: 5570891828134066942}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: skeletonFoot_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4653640275172806554}
   - component: {fileID: 3157258699704420422}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: SkeletonHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4056657000106267468, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}

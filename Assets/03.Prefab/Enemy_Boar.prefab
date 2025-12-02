@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1851970585431430942}
   - component: {fileID: 4971333488489973240}
   - component: {fileID: 1244256756635538416}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Enemy_Boar
   m_TagString: Boar
   m_Icon: {fileID: 0}

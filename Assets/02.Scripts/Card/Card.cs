@@ -34,7 +34,7 @@ public class Card : MonoBehaviour
     public int QuickstepCard = 0;       // 퀵 스탭
     public int fastdraw = 0;            // 빠른 장전
 
-    
+
     string CardName;
     string CardDetail;
 
@@ -100,7 +100,7 @@ public class Card : MonoBehaviour
         else { CardColorobj[6].SetActive(false); }
     }
 
-  
+
     // 카드의 이름, 내용 소개
     void CardNameAndDetail(int num, int i)
     {
@@ -108,7 +108,7 @@ public class Card : MonoBehaviour
         {
             case 0:
                 if (ShotGunCard == 2) { ButtonBGC[i].color = new Color(200, 0, 248); CardName = "샷건개조 Level 3"; CardDetail = "기존 투사체에서 +4"; }
-                else if (ShotGunCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248);  CardName = "샷건개조 Level 2"; CardDetail = "기존 투사체에서 +2"; }
+                else if (ShotGunCard == 1) { ButtonBGC[i].color = new Color(0, 144, 248); CardName = "샷건개조 Level 2"; CardDetail = "기존 투사체에서 +2"; }
                 else { ButtonBGC[i].color = new Color(152, 248, 152); CardName = "샷건개조 Level 1"; CardDetail = "기존 투사체에서 +1"; }
                 break;
             case 1:
@@ -144,8 +144,8 @@ public class Card : MonoBehaviour
                 CardName = "";
                 CardDetail = "";
                 break;
-            
-                
+
+
         }
     }
 
@@ -175,7 +175,7 @@ public class Card : MonoBehaviour
 
         if (CardImage != null && SetCardobj != null)
         {
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 if (Arraynum.Count == 0)
                 {

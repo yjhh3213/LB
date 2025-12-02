@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     bool hasHit = false;
     public float Damage = 2.0f;                     // 약점포착 level 0
     float DamageIn1 = (2.0f * 0.25f) + 2.0f;         // 약점포착 level 1
-    float DamageIn2 = (2.0f * 0.50f) + 2.0f;         // 약점포착 level 2
+    float DamageIn2 = (2.0f * 0.5f) + 2.0f;         // 약점포착 level 2
     float DamageIn3 = (2.0f * 0.75f) + 2.0f;         // 약점포착 level 3
     int BulletCardLevel;                            // 총알개조 level
 
