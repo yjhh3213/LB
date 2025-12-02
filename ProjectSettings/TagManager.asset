@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - Enemy
   - Skeleton
+  - Boar
   layers:
   - Default
   - TransparentFX

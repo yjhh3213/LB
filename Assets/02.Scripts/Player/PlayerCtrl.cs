@@ -226,7 +226,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy") && !dead)
         {
-            EnemyStat enemy = collision.gameObject.GetComponent<EnemyStat>();            
+            EnemyStat enemy = collision.gameObject.GetComponent<EnemyStat>();    
             if (enemy.isDead) return;
                 dead = true;
             StartCoroutine(Dead());
@@ -236,7 +236,20 @@ public class PlayerCtrl : MonoBehaviour
             if (gm != null)
                 gm.GameOver();
         }
-        
+        if (collision.collider.CompareTag("Boar") && !dead)
+        {
+            Enemy_Boar enemy_Boar = collision.gameObject.GetComponent<Enemy_Boar>();
+            if (enemy_Boar.isDead) return;
+            dead = true;
+            StartCoroutine(Dead());
+
+            // GameManager의 GameOver() 실행
+            GameManager gm = FindObjectOfType<GameManager>();
+            if (gm != null)
+                gm.GameOver();
+        }
+
+
         if (collision.collider.CompareTag("Skeleton") && !dead) // 스켈레톤 2025 - 12 - 01
         {
             Enemy_Skeleton enemy_Skeleton = collision.gameObject.GetComponent<Enemy_Skeleton>();

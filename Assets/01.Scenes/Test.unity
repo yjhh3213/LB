@@ -3301,7 +3301,7 @@ MonoBehaviour:
   currentWave: 0
   killCount: 0
   playTime: 0
-  pc: {fileID: 0}
+  pc: {fileID: 572370095}
 --- !u!4 &1347577385
 Transform:
   m_ObjectHideFlags: 0

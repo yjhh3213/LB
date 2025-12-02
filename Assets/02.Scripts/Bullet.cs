@@ -33,7 +33,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy") && !collision.CompareTag("Skeleton")) return;
+        if (!collision.CompareTag("Enemy")) return;
+        if (!collision.CompareTag("Skeleton")) return;
+        if (!collision.CompareTag("Boar")) return;
 
         EnemyStat enemy = collision.GetComponent<EnemyStat>();
         Enemy_Skeleton enemy_Skeleton = collision.GetComponent<Enemy_Skeleton>();
@@ -58,7 +60,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("Enemy") && !collision.collider.CompareTag("Skeleton")) return;
+        if (!collision.collider.CompareTag("Enemy")) return;
+        if (!collision.collider.CompareTag("Skeleton")) return;
+        if (!collision.collider.CompareTag("Boar")) return;
 
         EnemyStat enemy = collision.collider.GetComponent<EnemyStat>();
         Enemy_Skeleton enemy_Skeleton= collision.collider.GetComponent<Enemy_Skeleton>();
