@@ -5818,7 +5818,7 @@ MonoBehaviour:
   - {fileID: 1732503659}
   - {fileID: 59303380}
   Player: {fileID: 572370093}
-  PlayerCtrl: {fileID: 0}
+  PlayerCtrl: {fileID: 572370095}
   CardColor:
   - {fileID: 455956977}
   - {fileID: 887799255}
@@ -5846,7 +5846,7 @@ MonoBehaviour:
   gameclick: 0
   keyboard: 0
   ShotGunCard: 0
-  BulletCard: 1
+  BulletCard: 0
   barrelCard: 0
   weaknessCard: 0
   nimblestepsCard: 0
