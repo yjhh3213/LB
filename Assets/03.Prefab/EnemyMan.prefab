@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6951215236074127806}
   - component: {fileID: 8555694971948710545}
   - component: {fileID: 3060583870581938943}
-  - component: {fileID: 5955337699383881436}
   - component: {fileID: -3418092605765334442}
   - component: {fileID: 2936024833511433592}
+  - component: {fileID: 31591725224454885}
   m_Layer: 0
   m_Name: EnemyMan
   m_TagString: Enemy
@@ -74,18 +74,6 @@ MonoBehaviour:
   poisonCloundPrefab: {fileID: 0}
   Hand: {fileID: 6951215236908377896}
   Feet: {fileID: 6951215236755274484}
---- !u!114 &5955337699383881436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951215236074127801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694f8dd2a6405994dae1aa2de31f84c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &-3418092605765334442
 Rigidbody2D:
   serializedVersion: 4
@@ -144,6 +132,18 @@ MonoBehaviour:
   - {fileID: 9100000, guid: b5d77511f501a0c40b61bb32bba736f1, type: 2}
   - {fileID: 9100000, guid: 182c764b7d194ea4fb9d7797b6d0855b, type: 2}
   - {fileID: 9100000, guid: ebc0dc6d074cd1c45bf54a21dfc3f1b1, type: 2}
+--- !u!114 &31591725224454885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951215236074127801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694f8dd2a6405994dae1aa2de31f84c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6951215236755274484
 GameObject:
   m_ObjectHideFlags: 0
