@@ -41,6 +41,7 @@ public class Card : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerCtrl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCtrl>();
         keyboard = false;
     }
 

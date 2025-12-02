@@ -16,7 +16,7 @@ public class ShotGun : MonoBehaviour
     int barrelCardLevel;                    // 총열개조 Level
 
     [Header("GameObject")]
-    public PlayerCtrl playerCtrl;           // 플레이어
+    private PlayerCtrl playerCtrl;           // 플레이어
     public GameObject ReloadImage;          // 재장전 이미지
     public TMP_Text qteText;
     public GameObject[] BulletPrefab;       // 탄
@@ -46,6 +46,7 @@ public class ShotGun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerCtrl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCtrl>();
     }
 
     // Update is called once per frame
