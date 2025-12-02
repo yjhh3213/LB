@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: -3418092605765334442}
   - component: {fileID: 2936024833511433592}
   - component: {fileID: 31591725224454885}
-  m_Layer: 0
+  - component: {fileID: -5285748214830089263}
+  m_Layer: 6
   m_Name: EnemyMan
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -144,6 +145,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694f8dd2a6405994dae1aa2de31f84c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5285748214830089263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951215236074127801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb69f3801c112a4ca9094dd6b68160c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PushRadius: 0.7
+  PushForce: 3
 --- !u!1 &6951215236755274484
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +170,7 @@ GameObject:
   - component: {fileID: 6951215236755274485}
   - component: {fileID: 6951215236755274490}
   - component: {fileID: 4834303215606039772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyFoot1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6951215236908377897}
   - component: {fileID: 6951215236908377902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyHand1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +360,7 @@ GameObject:
   - component: {fileID: 6951215236917918290}
   - component: {fileID: 6951215236917918291}
   - component: {fileID: 4780162556203093667}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -500,6 +515,10 @@ PrefabInstance:
     - target: {fileID: 4056657000106267468, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
       propertyPath: m_Name
       value: Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056657000106267468, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adcdd827c9f75a04cbb00a567fd970ff, type: 3}
