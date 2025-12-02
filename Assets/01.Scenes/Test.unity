@@ -5846,7 +5846,7 @@ MonoBehaviour:
   gameclick: 0
   keyboard: 0
   ShotGunCard: 0
-  BulletCard: 0
+  BulletCard: 1
   barrelCard: 0
   weaknessCard: 0
   nimblestepsCard: 0
