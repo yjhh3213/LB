@@ -28,7 +28,7 @@ public class EnemyPush : MonoBehaviour
 
         foreach(var hit in hits)
         {
-            if (ES == null) return;
+            if (ES || E_SK || E_B == null) return;
             if(ES || E_B || E_SK != null)
             {
                 if (!ES.isDead)
