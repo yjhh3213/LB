@@ -250,10 +250,11 @@ public class PlayerCtrl : MonoBehaviour
         }
 
 
-        if (collision.collider.CompareTag("Skeleton") && !dead) // 스켈레톤 2025 - 12 - 01
+        if (collision.collider.CompareTag("Skeleton") && !dead)
         {
             Enemy_Skeleton enemy_Skeleton = collision.gameObject.GetComponent<Enemy_Skeleton>();
             if (enemy_Skeleton.isDead) return;
+            if (enemy_Skeleton.state == Enemy_Skeleton.State.Downed) return; // 부활중이라면 피격 판정 없음
             dead = true;
             StartCoroutine(Dead());
 

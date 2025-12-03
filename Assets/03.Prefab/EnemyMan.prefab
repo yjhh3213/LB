@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb69f3801c112a4ca9094dd6b68160c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushRadius: 0.7
+  PushRadius: 0.5
   PushForce: 3
 --- !u!1 &6951215236755274484
 GameObject:
