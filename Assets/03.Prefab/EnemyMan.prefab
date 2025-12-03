@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6951215236074127806}
   - component: {fileID: 8555694971948710545}
-  - component: {fileID: 3060583870581938943}
   - component: {fileID: -3418092605765334442}
+  - component: {fileID: 3060583870581938943}
   - component: {fileID: 2936024833511433592}
   - component: {fileID: 31591725224454885}
   - component: {fileID: -5285748214830089263}
@@ -55,26 +55,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.33
---- !u!114 &3060583870581938943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6951215236074127801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d1bef206473fac4881b238f2504b7ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 08f4908e406c3e047a8770b956831d1a, type: 2}
-  EnemySpeed: 0
-  EnemyHP: 0
-  isDead: 0
-  dieAnimTime: 1
-  poisonCloundPrefab: {fileID: 0}
-  Hand: {fileID: 6951215236908377896}
-  Feet: {fileID: 6951215236755274484}
 --- !u!50 &-3418092605765334442
 Rigidbody2D:
   serializedVersion: 4
@@ -96,6 +76,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3060583870581938943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951215236074127801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1bef206473fac4881b238f2504b7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 08f4908e406c3e047a8770b956831d1a, type: 2}
+  EnemySpeed: 0
+  EnemyHP: 0
+  isDead: 0
+  dieAnimTime: 1
+  poisonCloundPrefab: {fileID: 0}
+  Hand: {fileID: 6951215236908377896}
+  Feet: {fileID: 6951215236755274484}
 --- !u!114 &2936024833511433592
 MonoBehaviour:
   m_ObjectHideFlags: 0

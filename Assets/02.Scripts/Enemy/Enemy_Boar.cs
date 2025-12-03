@@ -15,6 +15,10 @@ public class Enemy_Boar : MonoBehaviour
     public float dieAnimTime = 0.01f;
     public GameObject poisonCloundPrefab;
 
+    [Header("사망 효과")]
+    private float deathDelay = 6f;        // 사망 후 페이드 시작까지 대기 시간
+    private float fadeDuration = 3f;      // 페이드 아웃 지속 시간
+
     private void Start()
     {
         if (data == null)
@@ -103,16 +107,29 @@ public class Enemy_Boar : MonoBehaviour
         if (EnemySpawn.Instance != null) EnemySpawn.Instance.OnEnemyDied();
         if (back != null) back.StopKnockback();
         if (gm != null) gm.killCount++;
+        StartCoroutine(HandleDeath());
+    }
+    IEnumerator HandleDeath()
+    {
+        // 6초 대기
+        yield return new WaitForSeconds(deathDelay);
 
-        StartCoroutine(DieDestroyCoroutine());
+        // 3초에 걸쳐 페이드 아웃
+        float elapsed = 0f;
+        Color startColor = spriteRenderer.color;
 
-        IEnumerator DieDestroyCoroutine()
+        while (elapsed < fadeDuration)
         {
-            yield return new WaitForSeconds(dieAnimTime);
-            Destroy(gameObject);
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+            yield return null;
         }
 
+        // 투명도가 0이 되면 오브젝트 제거
+        Destroy(gameObject);
     }
+
 
     void OnDestroy()
     {

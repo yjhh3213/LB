@@ -21,6 +21,10 @@ public class EnemyStat : MonoBehaviour
     private SpriteRenderer FeetspriteRenderer;
     public GameObject Hand; //손
     public GameObject Feet; //발
+
+    [Header("사망 효과")]
+    private float deathDelay = 6f;        // 사망 후 페이드 시작까지 대기 시간
+    private float fadeDuration = 3f;      // 페이드 아웃 지속 시간
     private void Start()
     {
         if (data == null)
@@ -131,15 +135,29 @@ public class EnemyStat : MonoBehaviour
         Destroy(Hand);
         Destroy(Feet);
 
-        StartCoroutine(DieDestroyCoroutine());
-
-        IEnumerator DieDestroyCoroutine()
-        {
-            yield return new WaitForSeconds(dieAnimTime);
-            Destroy(gameObject);
-        }
-        
+        StartCoroutine(HandleDeath());
     }
+    IEnumerator HandleDeath()
+    {
+        // 6초 대기
+        yield return new WaitForSeconds(deathDelay);
+
+        // 3초에 걸쳐 페이드 아웃
+        float elapsed = 0f;
+        Color startColor = spriteRenderer.color;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+            yield return null;
+        }
+
+        // 투명도가 0이 되면 오브젝트 제거
+        Destroy(gameObject);
+    }
+
 
     void OnDestroy()
     {

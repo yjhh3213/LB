@@ -1,18 +1,19 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class EnemyDash : MonoBehaviour
 {
     private Transform player;
-    [Header("µ¹Áø Á¶°Ç/ÆÄ¶ó¹ÌÅÍ")]
-    public float triggerDistance = 8f;   // ÀÌ °Å¸® ¾È¿¡ µé¾î¿À¸é 1È¸ µ¹Áø
-    public float chargeSpeed = 18f;      // µ¹Áø ¼Óµµ
-    public float chargeDuration = 0.6f;  // µ¹Áø À¯Áö ½Ã°£
+    [Header("ëŒì§„ ì¡°ê±´/íŒŒë¼ë¯¸í„°")]
+    public float triggerDistance = 8f;   // ì´ ê±°ë¦¬ ì•ˆì— ë“¤ì–´ì˜¤ë©´ 1íšŒ ëŒì§„
+    public float chargeSpeed = 18f;      // ëŒì§„ ì†ë„
+    public float chargeDuration = 0.6f;  // ëŒì§„ ìœ ì§€ ì‹œê°„
 
     private bool isCharging = false;
-    private bool hasCharged = false;     // µ¹ÁøÀº µü 1¹ø¸¸
+    private bool hasCharged = false;     // ëŒì§„ì€ ë”± 1ë²ˆë§Œ
     SpriteRenderer spriteRenderer;
     Animator animator;
+    private bool isDead = false;
 
     private void Start()
     {
@@ -21,14 +22,15 @@ public class EnemyDash : MonoBehaviour
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-
+        isDead = GetComponent<Enemy_Boar>().isDead;
         animator = GetComponentInChildren<Animator>();
     }
     void Update()
     {
         if (player == null) return;
-
-        // ¾ÆÁ÷ µ¹Áø ÁßÀÌ ¾Æ´Ï¸é ±âº» ÀÌµ¿
+        isDead = GetComponent<Enemy_Boar>().isDead;
+        if (isDead) return;
+        // ì•„ì§ ëŒì§„ ì¤‘ì´ ì•„ë‹ˆë©´ ê¸°ë³¸ ì´ë™
         if (!isCharging && !hasCharged)
         {
             float dist = Vector3.Distance(transform.position, player.position);
@@ -38,7 +40,7 @@ public class EnemyDash : MonoBehaviour
             }
         }
 
-        // Æ®¸®°Å: ¾ÆÁ÷ µ¹Áø ¾È Çß°í, °Å¸® Á¶°Ç ¸¸Á· ½Ã 1È¸ µ¹Áø ½ÃÀÛ
+        // íŠ¸ë¦¬ê±°: ì•„ì§ ëŒì§„ ì•ˆ í–ˆê³ , ê±°ë¦¬ ì¡°ê±´ ë§Œì¡± ì‹œ 1íšŒ ëŒì§„ ì‹œì‘
         if (!hasCharged && !isCharging)
         {
             float dist = Vector3.Distance(transform.position, player.position);
@@ -62,35 +64,38 @@ public class EnemyDash : MonoBehaviour
 
     IEnumerator ChargeOnce()
     {
-        isCharging = true;
-        hasCharged = true;   // ´Ù½Ã´Â ChargeOnce ¾È µé¾î°¨, ´ë½Å ÃßÀû¸¸ °è¼Ó
-        if (animator != null)
+        if (!isDead)
         {
-            animator.SetBool("Attack", true);
-        }
-        Vector3 dir = player != null ? (player.position - transform.position) : transform.right;
-        if (dir.sqrMagnitude < 0.0001f) dir = transform.right;
-        dir.Normalize();
-        
+            isCharging = true;
+            hasCharged = true;   // ë‹¤ì‹œëŠ” ChargeOnce ì•ˆ ë“¤ì–´ê°, ëŒ€ì‹  ì¶”ì ë§Œ ê³„ì†
+            if (animator != null)
+            {
+                animator.SetBool("Attack", true);
+            }
+            Vector3 dir = player != null ? (player.position - transform.position) : transform.right;
+            if (dir.sqrMagnitude < 0.0001f) dir = transform.right;
+            dir.Normalize();
 
-        float t = 0f;
-        while (t < chargeDuration)
-        {
-            transform.position += dir * chargeSpeed * Time.deltaTime;
-            t += Time.deltaTime;    
-            yield return null;
-        }
 
-        isCharging = false;
-        
-        if(animator != null)
-        {
-            animator.SetBool("Attack", false);
+            float t = 0f;
+            while (t < chargeDuration)
+            {
+                transform.position += dir * chargeSpeed * Time.deltaTime;
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            isCharging = false;
+
+            if (animator != null)
+            {
+                animator.SetBool("Attack", false);
+            }
         }
     }
 
 #if UNITY_EDITOR
-    // ¿¡µğÅÍ¿¡¼­ Æ®¸®°Å °Å¸® È®ÀÎ¿ë(¼±ÅÃ)
+    // ì—ë””í„°ì—ì„œ íŠ¸ë¦¬ê±° ê±°ë¦¬ í™•ì¸ìš©(ì„ íƒ)
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
