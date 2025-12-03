@@ -13,8 +13,8 @@ public class Enemy_Skeleton_tlcp : MonoBehaviour
     [SerializeField] private int spriteIndex = 0;
 
     [Header("Motion Settings")]
-    [SerializeField] private float explosionTime = 0.5f; // 날아가는 시간
-    [SerializeField] private float returnTime = 1.5f; // 모이는 시간
+    [SerializeField] private float explosionTime = 1f; // 날아가는 시간
+    [SerializeField] private float returnTime = 3f; // 모이는 시간
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;

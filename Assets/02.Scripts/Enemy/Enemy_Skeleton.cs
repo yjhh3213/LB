@@ -16,7 +16,7 @@ public class Enemy_Skeleton : MonoBehaviour
     private Transform player;
 
     [Header("다운/부활")]
-    public float reviveDelay = 2f;    // 다운 유지 시간
+    public float reviveDelay = 3f;    // 다운 유지 시간
     public float reviveHp = 30f;    // ★ 부활 시 HP(항상 양수로)
     public float reviveFreeze = 1.0f; // 부활 직후 가만히 있을 시간
 
@@ -24,8 +24,8 @@ public class Enemy_Skeleton : MonoBehaviour
     public float downedGrace = 0.05f; // 50ms
     float downedAt = -999f;
 
-    enum State { Alive, Downed, Dead }
-    State state = State.Alive;
+    public enum State { Alive, Downed, Dead }
+    public State state = State.Alive;
 
     Vector3 downPos;
     Coroutine reviveCo;
