@@ -28,44 +28,23 @@ public class EnemyPush : MonoBehaviour
 
         foreach(var hit in hits)
         {
-            if (ES || E_SK || E_B == null) return;
-            if(ES || E_B || E_SK != null)
+            if (hit.gameObject == gameObject) continue;
+            if (ES != null && !ES.isDead && hit.CompareTag("Enemy"))
             {
-                if (!ES.isDead)
-                {
-                    if (hit.gameObject == gameObject) continue;
-                    if (!hit.CompareTag("Enemy")) continue;
+                Vector2 dir = (transform.position - hit.transform.position).normalized;
+                transform.position += (Vector3)(dir * PushForce * Time.deltaTime);
+            }
 
-                    // 방향 계산
-                    Vector2 dir = (transform.position - hit.transform.position).normalized;
+            if (E_SK != null && !E_SK.isDead && hit.CompareTag("Skeleton"))
+            {
+                Vector2 dir = (transform.position - hit.transform.position).normalized;
+                transform.position += (Vector3)(dir * PushForce * Time.deltaTime);
+            }
 
-                    // 밀어내기
-                    transform.position += (Vector3)(dir * PushForce * Time.deltaTime);
-                }
-
-                if (!E_SK.isDead)
-                {
-                    if (hit.gameObject == gameObject) continue;
-                    if (!hit.CompareTag("Skeleton")) continue;
-
-                    // 방향 계산
-                    Vector2 dir = (transform.position - hit.transform.position).normalized;
-
-                    // 밀어내기
-                    transform.position += (Vector3)(dir * PushForce * Time.deltaTime);
-                }
-
-                if (!E_B.isDead)
-                {
-                    if (hit.gameObject == gameObject) continue;
-                    if (!hit.CompareTag("Boar")) continue;
-
-                    // 방향 계산
-                    Vector2 dir = (transform.position - hit.transform.position).normalized;
-
-                    // 밀어내기
-                    transform.position += (Vector3)(dir * PushForce * Time.deltaTime);
-                }
+            if (E_B != null && !E_B.isDead && hit.CompareTag("Boar"))
+            {
+                Vector2 dir = (transform.position - hit.transform.position).normalized;
+                transform.position += (Vector3)(dir * PushForce * Time.deltaTime);
             }
         }
     }
