@@ -214,7 +214,7 @@ public class Enemy_Skeleton : MonoBehaviour
         isDead = true;
 
         if (reviveCo != null) StopCoroutine(reviveCo);
-
+        if (EnemySpawn.Instance != null) EnemySpawn.Instance.OnEnemyDied();
         // 모이는 중인 파편들 정지 후 중력으로 떨어뜨리기
         foreach (GameObject debris in activeDebris)
         {
@@ -236,7 +236,7 @@ public class Enemy_Skeleton : MonoBehaviour
     {
         if (!isDead) return; // 이미 Die() 처리되었으면 무시
 
-        if (EnemySpawn.Instance != null)
-            EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
+        //if (EnemySpawn.Instance != null)
+        //    EnemySpawn.Instance.FiledEnemy = Mathf.Max(EnemySpawn.Instance.FiledEnemy - 1, 0);
     }
 }
