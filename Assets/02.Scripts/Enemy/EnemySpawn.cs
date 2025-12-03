@@ -182,6 +182,15 @@ public class EnemySpawn : MonoBehaviour
             Debug.Log("필드 몬스터 전부 사망 → 웨이브 종료");
             countTimer.EndWaveByEnemies();
         }
+        if (countTimer.CurrentWave >= maxWave)
+        {
+            Debug.Log("== 모든 웨이브 클리어! GameClear 실행 ==");
+            GameManager gm = FindObjectOfType<GameManager>();
+            if (gm != null)
+            {
+                gm.GameClear();
+            }
+        }
     }
     // 카메라 경계 바깥의 랜덤한 위치를 반환하는 함수
     Vector3 GetRandomSpawnPosition(float width, float height)

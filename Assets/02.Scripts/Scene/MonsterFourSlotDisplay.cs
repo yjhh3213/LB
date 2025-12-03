@@ -1,29 +1,35 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterThreeSlotDisplay : MonoBehaviour
+public class MonsterFourSlotDisplay : MonoBehaviour
 {
     public Image slot1;
     public Image slot2;
     public Image slot3;
+    public Image slot4;  
 
     public GameObject prefab1;
     public GameObject prefab2;
     public GameObject prefab3;
+    public GameObject prefab4; 
 
     private GameObject ui1;
     private GameObject ui2;
     private GameObject ui3;
+    private GameObject ui4;   
 
     void Start()
     {
         CreateSlot(slot1, prefab1, ref ui1);
         CreateSlot(slot2, prefab2, ref ui2);
         CreateSlot(slot3, prefab3, ref ui3);
+        CreateSlot(slot4, prefab4, ref ui4); 
     }
 
     void CreateSlot(Image slot, GameObject prefab, ref GameObject uiObj)
     {
+        if (slot == null || prefab == null) return;
+
         if (uiObj != null)
             Destroy(uiObj);
 

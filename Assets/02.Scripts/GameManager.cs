@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public float playTime;
 
     private bool isGameOver = false;
-    private float bestRecord = 0f; // ★ 최단 클리어 시간 저장용
+    private float bestRecord = 0f; //최단 클리어 시간 저장용
 
     [Header("Player Reference")]
     public PlayerCtrl pc; // Inspector에서 연결
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(false);
         gameClearPanel.SetActive(true);
 
-        // ★ 최고 기록 갱신 (최단 클리어 시간)
+        // 최고 기록 갱신 (최단 클리어 시간)
         if (bestRecord == 0f || playTime < bestRecord)
         {
             bestRecord = playTime;

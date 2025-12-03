@@ -132,53 +132,83 @@ public class EffectManager : MonoBehaviour
 
     // 애니메이션 이펙트 처리 코루틴
     IEnumerator AnimationEffectRoutine(GameObject effect, SpriteRenderer spriteRenderer,
-        float destroyTime, float fadeStartTime)
+    float destroyTime, float fadeStartTime)
     {
         float fadeDuration = destroyTime - fadeStartTime;
 
         // 페이드 시작 전까지 대기
-        yield return new WaitForSeconds(fadeStartTime);
+        float elapsed = 0f;
+
+        while (elapsed < fadeStartTime)
+        {
+            if (effect == null || spriteRenderer == null)
+                yield break;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
 
         // 페이드 아웃
-        float elapsed = 0f;
+        elapsed = 0f;
         Color color = spriteRenderer.color;
 
         while (elapsed < fadeDuration)
         {
+            //코루틴 중 SpriteRenderer가 사라지면 즉시 종료
+            if (effect == null || spriteRenderer == null)
+                yield break;
+
             elapsed += Time.deltaTime;
+
             float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
             spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
+
             yield return null;
         }
 
-        // 제거
-        Destroy(effect);
+        if (effect != null)
+            Destroy(effect);
     }
+
 
     // 랜덤 이펙트 처리 코루틴
     IEnumerator RandomEffectRoutine(GameObject effect, SpriteRenderer spriteRenderer,
-        float destroyTime, float fadeStartTime)
+    float destroyTime, float fadeStartTime)
     {
         float fadeDuration = destroyTime - fadeStartTime;
 
-        // 페이드 시작 전까지 대기
-        yield return new WaitForSeconds(fadeStartTime);
-
-        // 페이드 아웃
+        // 페이드 시작 전 대기
         float elapsed = 0f;
-        Color color = spriteRenderer.color;
-
-        while (elapsed < fadeDuration)
+        while (elapsed < fadeStartTime)
         {
+            if (effect == null || spriteRenderer == null)
+                yield break;
+
             elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
-            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
             yield return null;
         }
 
-        // 제거
-        Destroy(effect);
+        // 페이드 아웃
+        elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            //이 부분이 핵심!
+            if (effect == null || spriteRenderer == null)
+                yield break;
+
+            elapsed += Time.deltaTime;
+
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            Color c = spriteRenderer.color;
+
+            spriteRenderer.color = new Color(c.r, c.g, c.b, alpha);
+            yield return null;
+        }
+
+        if (effect != null)
+            Destroy(effect);
     }
+
 }
 
 // 애니메이션 컨트롤러 그룹 (Inspector에서 설정)

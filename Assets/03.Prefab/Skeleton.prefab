@@ -120,7 +120,7 @@ MonoBehaviour:
   EnemyHP: 0
   EnemySpeed: 0
   reviveDelay: 2
-  reviveHp: 10
+  reviveHp: 5
   reviveFreeze: 1
   downedGrace: 0.05
   Hand: {fileID: 8762064352583638796}
