@@ -98,7 +98,7 @@ public class Enemy_Boar : MonoBehaviour
         isDead = true;
         EnemySpeed = 0;
         EnemyBack back = GetComponent<EnemyBack>(); // 뒤로 밀리다가 죽으면 멈추게 
-        SoundManager.Instance.Player_SFX(5);
+        SoundManager.Instance.Player_SFX(Random.Range(10,11)); //멧돼지 사망
         GameManager gm = FindObjectOfType<GameManager>(); //킬카운트 증가
 
         if (rigidbody != null) rigidbody.simulated = false; //리지드바디 비활성화
