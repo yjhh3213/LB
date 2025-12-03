@@ -193,7 +193,7 @@ public class Card : MonoBehaviour
                 CardNameAndDetail(num, i);
                 SetCardobj[i].transform.GetChild(0).GetComponent<Text>().text = CardName;
                 SetCardobj[i].transform.GetChild(1).GetComponent<Text>().text = CardDetail;
-
+                SoundManager.Instance.Player_SFX(8); //카드 등장
                 if (i == 0)
                 {
                     Sect1 = num;
