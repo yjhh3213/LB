@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
     public AudioSource audioSource;
-    public AudioClip[] Sound; // 0 »ç°İ, 1 ¹ß»çÀåÀü, 2 ÀåÀü, 3 ´ë½¬, 4 Ä«µå, 5 Á»ºñ, 6 ÃÑ¾Ë¾øÀ½, 7 ÅºÇÇ
+    public AudioClip[] Sound; // 0 ì‚¬ê²©, 1 ë°œì‚¬ì¥ì „, 2 ì¥ì „, 3 ëŒ€ì‰¬, 4 ì¹´ë“œ, 5 ì¢€ë¹„, 6 ì´ì•Œì—†ìŒ, 7 íƒ„í”¼
+    private int currentPlayingIndex = -1;
 
     void Awake()
     {
@@ -20,8 +21,23 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     public void Player_SFX(int num)
     {
-        audioSource.PlayOneShot(Sound[num]);
+        if (num == currentPlayingIndex) return;
+
+        currentPlayingIndex = num;
+
+        float volume = (num == 9) ? 0.5f : 1f;
+        audioSource.PlayOneShot(Sound[num], volume);
+
+        // PlayOneShot ê¸¸ì´ë§Œí¼ í›„ì— ì´ˆê¸°í™”
+        StartCoroutine(ResetPlayingIndex(Sound[num].length));
+    }
+
+    private IEnumerator ResetPlayingIndex(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        currentPlayingIndex = -1;
     }
 }
