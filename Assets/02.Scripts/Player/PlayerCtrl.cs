@@ -26,7 +26,7 @@ public class PlayerCtrl : MonoBehaviour
     Vector2 moveV;                              // 캐릭터 조작키
     Vector2 dashdir;
     Rigidbody2D rb;                             // 캐릭터 물리
-    bool DashUIOn = false;
+    bool DashUIOn = true;
 
     int nimblestepsCardLevel;                   // 기민한걸음
     int QuickstepCardLevel;                     // 퀵 스탭
@@ -44,7 +44,9 @@ public class PlayerCtrl : MonoBehaviour
         SetBounds();//카메라 못나가기 세팅
         bodyRenderer = transform.Find("body").GetComponent<SpriteRenderer>();
         bodyRenderer.sprite = IdleSprite;
+        dashTimer = dashCoolDown; // 대쉬 쿨타임을 꽉 찬 상태로 시작
 
+        //시작할때 게이지 채우고 시작
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         dead = false;
@@ -123,20 +125,16 @@ public class PlayerCtrl : MonoBehaviour
             {
                 target = 0.0f;
             }
-
             float newY = Mathf.SmoothDamp(current, target, ref smoothY, 0.1f);
-
-            //print(newY);
-
             DashGauge.localScale = new Vector3(0.4f, newY, 1.0f);
 
             // 위치 보정
             float originalHeight = 0.48f;
             float offset = (originalHeight - newY) / 2f;
-            //print(offset);
             DashGauge.localPosition = new Vector3(DashGauge.localPosition.x, -offset, DashGauge.localPosition.z);
         }
-        else {
+        else
+        {
             DashGauge.localScale = new Vector3(0.4f, 0.0f, 1.0f);
         }
     }
@@ -144,7 +142,7 @@ public class PlayerCtrl : MonoBehaviour
     /// <summary>
     /// 대쉬와 움직이기
     /// </summary>
-    
+
     void ObjMove()
     {
         if (!isDashing)
