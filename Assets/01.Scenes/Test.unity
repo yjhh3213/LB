@@ -488,18 +488,18 @@ MonoBehaviour:
   minWave: 1
   maxWave: 8
   A_startCount: 10
-  A_addPerWave: 20
+  A_addPerWave: 5
   B_startWave: 3
   B_startCount: 5
-  B_addper2Wave: 2
-  C_startWave: 4
-  C_startCount: 5
-  C_addperWave: 1
+  B_addper2Wave: 1
+  C_startWave: 0
+  C_startCount: 0
+  C_addperWave: 0
   D_startWave: 2
-  D_startCount: 5
-  D_addPerWave: 2
-  E_startWave: 3
-  E_startCount: 1
+  D_startCount: 3
+  D_addPerWave: 1
+  E_startWave: 4
+  E_startCount: 2
   E_addPerWave: 1
   countTimer: {fileID: 1241308346}
   FiledEnemy: 0
@@ -3367,7 +3367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 2028168386}
-  startTime: 60
+  startTime: 40
   timerText: {fileID: 302264755}
   waveText: {fileID: 786744223}
 --- !u!114 &1241308347
