@@ -14,7 +14,7 @@ public class EnemyStat : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator anim;
     Rigidbody2D rigidbody;
-    public float dieAnimTime = 0.01f;
+    public float dieAnimTime = 0.03f;
     public GameObject poisonCloundPrefab;
 
     private SpriteRenderer HandspriteRenderer;
@@ -25,6 +25,10 @@ public class EnemyStat : MonoBehaviour
     [Header("사망 효과")]
     private float deathDelay = 6f;        // 사망 후 페이드 시작까지 대기 시간
     private float fadeDuration = 3f;      // 페이드 아웃 지속 시간
+
+    // 몬스터 타입을 정의하는 enum 추가
+    public enum EnemyType { Zombie, Venom, None }
+    public EnemyType enemyType = EnemyType.None;
     private void Start()
     {
         if (data == null)
@@ -139,23 +143,33 @@ public class EnemyStat : MonoBehaviour
     }
     IEnumerator HandleDeath()
     {
-        // 6초 대기
-        yield return new WaitForSeconds(deathDelay);
-
-        // 3초에 걸쳐 페이드 아웃
-        float elapsed = 0f;
-        Color startColor = spriteRenderer.color;
-
-        while (elapsed < fadeDuration)
+        // 몬스터 타입에 따라 사망 처리 분기
+        if (enemyType == EnemyType.Venom)
         {
-            elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
-            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
-            yield return null;
+            // 베놈 타입: dieAnimTime 대기 (사망 애니메이션 시간)
+            yield return new WaitForSeconds(dieAnimTime);
+            Destroy(gameObject);
         }
+        else // Zombie, None 등 (페이드 아웃 처리)
+        {
+            // 6초 대기 (애니메이션이 재생될 충분한 시간을 줍니다)
+            yield return new WaitForSeconds(dieAnimTime + deathDelay); // dieAnimTime도 고려
 
-        // 투명도가 0이 되면 오브젝트 제거
-        Destroy(gameObject);
+            // 3초에 걸쳐 페이드 아웃
+            float elapsed = 0f;
+            Color startColor = spriteRenderer.color;
+
+            while (elapsed < fadeDuration)
+            {
+                elapsed += Time.deltaTime;
+                float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+                spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+                yield return null;
+            }
+
+            // 투명도가 0이 되면 오브젝트 제거
+            Destroy(gameObject);
+        }
     }
 
 

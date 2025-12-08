@@ -231,6 +231,7 @@ MonoBehaviour:
   poisonCloundPrefab: {fileID: 5106049017308997068, guid: 778884b080e2bb74784c12608885fc2b, type: 3}
   Hand: {fileID: 1855610808851009104}
   Feet: {fileID: 8922424709833186952}
+  enemyType: 1
 --- !u!58 &-2461403312372574792
 CircleCollider2D:
   m_ObjectHideFlags: 0
