@@ -96,6 +96,7 @@ MonoBehaviour:
   poisonCloundPrefab: {fileID: 0}
   Hand: {fileID: 6951215236908377896}
   Feet: {fileID: 6951215236755274484}
+  enemyType: 0
 --- !u!114 &2936024833511433592
 MonoBehaviour:
   m_ObjectHideFlags: 0

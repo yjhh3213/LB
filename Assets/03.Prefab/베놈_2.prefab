@@ -272,9 +272,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 8a4422bf3d6f58e4588800bd18ed149d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6ebb4cf5c7e69240a172feea499eebc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.96, y: 0.96}
@@ -324,6 +324,7 @@ MonoBehaviour:
   poisonCloundPrefab: {fileID: 5106049017308997068, guid: 778884b080e2bb74784c12608885fc2b, type: 3}
   Hand: {fileID: 5410233388633769164}
   Feet: {fileID: 290973823087230453}
+  enemyType: 1
 --- !u!58 &8860789870629798506
 CircleCollider2D:
   m_ObjectHideFlags: 0
