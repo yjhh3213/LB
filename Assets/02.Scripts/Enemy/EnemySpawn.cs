@@ -182,7 +182,7 @@ public class EnemySpawn : MonoBehaviour
             Debug.Log("필드 몬스터 전부 사망 → 웨이브 종료");
             countTimer.EndWaveByEnemies();
         }
-        if (countTimer.CurrentWave >= maxWave)
+        if (countTimer.CurrentWave > maxWave)
         {
             Debug.Log("== 모든 웨이브 클리어! GameClear 실행 ==");
             GameManager gm = FindObjectOfType<GameManager>();
